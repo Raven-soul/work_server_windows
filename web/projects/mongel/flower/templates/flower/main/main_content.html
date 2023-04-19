@@ -1,0 +1,53 @@
+{% include '../header.html' %}
+{% load static %}
+<!-- ########## ОБЛАСТЬ ДЛЯ МОДУЛЯ МАГАЗИНА ########## -->
+<div id="ant029_shop" class="ant029_shop_container">
+    <div class="container">
+        <!-- Name Area -->
+        <div class="row row-data-centering section-data-row">
+            <div class="col-auto">
+                <div class="row-2">
+                    <div class="col shop-section-name"><span>Комнатные растения</span></div>
+                    <div class="col shop-section-city"><span>В Краснодаре</span></div>
+                </div>
+            </div>
+        </div>
+        <!-- End Name Area -->
+        <div class="row row-data-centering">
+            <!-- Blog Area -->
+            <main class="col-9 ant029_shop-studio_shop_area">
+                <div class="row">
+                    {% for  product in products %}
+                    <div class="col-md-4 col-sm-6 catalog-row__col">
+                        <div class="ant029_shop-single_shop rb-product-card">
+                            <div class="image-area-border my-3">
+                                <a href="{% url 'buket' %}" class="wow fadeIn" data-wow-delay=".2s">
+                                    {% if product.photo %}
+                                        <img src="{{ product.photo.url }}" alt="" style='border-radius: 13px;'> 
+                                    {% endif %}
+                                </a>
+                            </div>
+                            <a href="{% url 'buket' %}" class="name-and-price-link">
+                                <h3>
+                                    <div class="name-and-price-item item-data-name" style='text-align: center;'>{{ product.title }}</div>
+                                    <div class="name-and-price-item item-data-price">{{ product.price }}</div> 
+                                </h3>
+                            </a>
+                        </div>
+                        {% if product.new_product %}
+                            <div class="ant029_shop-label">
+                                <h4>new</h4>
+                            </div>
+                        {% endif %}
+                    </div>
+                    {% endfor %}
+                </div>
+            </main>
+            <!--/ Blog Area -->
+
+        </div>
+    </div>
+    <!-- Container /- -->
+</div>
+<!-- ########## КОНЕЦ ОБЛАСТЬ ДЛЯ МОДУЛЯ МАГАЗИНА ########## -->
+{% include '../footer.html' %}

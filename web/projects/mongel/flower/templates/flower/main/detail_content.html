@@ -1,0 +1,305 @@
+{% load static %}
+{% include '../header.html' %}
+<!-- ########## ОБЛАСТЬ ДЛЯ МОДУЛЯ МАГАЗИНА ########## -->
+
+    <!-- ant029_shop -->
+    <div id="ant029_shop">
+        <div class="container">
+            
+            <div class="row product-title-name-and-rating">
+                <div class="col">
+                    <div class="name-shop-item">Композиция в шляпной коробке "Искорка радости"</div>
+                    <div class="rating-after-name">
+                        <ul>
+                            <li id="1"><i class="fa fa-star-half-o"></i></li>
+                            <li id="2"><i class="fa-regular fa-star"></i></li>
+                            <li id="3"><i class="fa-regular fa-star"></i></li>
+                            <li id="4"><i class="fa-regular fa-star"></i></li>
+                            <li id="5"><i class="fa-regular fa-star"></i></li>
+                        </ul>
+                    </div>
+                    <div class="number-ratings">
+                        <span class="value">100</span> отзывов
+                    </div>
+                </div>
+            </div>
+            <div class="row justify-content-between">
+                <div class="col-sm-5">
+                    <div class="ant029_shop-s_detail">
+                        <div class="ant029_shop-shop_detail_img"
+                            style="background-image:url({% static 'flower/images/index_2_temp/ant029_shop/shop_img1.jpg' %})">
+                        </div>
+                    </div>
+                </div>
+                <!-- column End -->
+                <div class="col-sm-6">
+                    <div class="row-5 detail-text-data">
+                        <div class="col product-price p-0">
+                            <span class="value">6900</span>
+                            <span class="currency">₽</span>
+                        </div>
+                        <div class="col detail-size-price-block p-0">
+                            <div class="row-2">
+                                <div class="col p-0 js_product_size product-size-stile">
+                                    <i class="fa fa-maximize detail-text-data-icon" aria-hidden="true"></i>
+                                    Размер:
+                                    <span class="js_product__size-width" title="Ширина">30</span>
+                                    ×
+                                    <span class="js_product__size-height" title="Высота">35</span>
+                                    см 
+                                </div>
+                                <div class="col p-0 js_product-delivery-price product-delivery-price-stile">
+                                    <i class="fa-solid fa-car detail-text-data-icon"></i>
+                                    <span id="js_product-delivery-price__address" data-trans="Доставка по адресу">Доставка в г. <span class="product-delivery-price_city">Краснодар</span>:</span>
+                                    <span class="js_product-delivery-price_tooltip" aria-expanded="false">
+                                        <span id="js_product-delivery-price__sum">Бесплатно</span>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col p-o buy-button-group">
+                            <div class="row">
+                                <div class="col-5 p-0 buy-button-item-div">
+                                    <button type="submit" class="buy-button-common buy-button w-100" onclick="eventAddToCart()">
+                                        <i class="fa-regular fa-calendar"></i>
+                                        Заказать
+                                    </button>
+                                </div>
+                                <div class="col-5 p-0 buy-button-item-div">
+                                    <button type="button" class="buy-button-common buy-button-one-click w-100" onclick="quickorderForm(this)">Купить в 1 клик </button>
+                                </div>
+                                <div class="col-1 p-0 buy-button-item-div">
+                                    <button type="button" class="buy-button-common buy-button-favorite" onclick="addToFavorite(this, 3029, 0, true)">
+                                        <i class="fa-regular fa-heart"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col p-0 detail-interactive-block">
+                            <div class="row-5">
+                                <div class="col p-0">
+                                    <div class="delivery">
+                                        <div class="delivery-main-area detail-interactive-main">
+                                            <a class="delivery-main-area-button detail-interactive-button w-100 h-100" aria-expanded="false" aria-controls="delivery_collapsed_area_id" onclick="collapsElement(this)">
+                                                <div class="name">Доставка</div>
+                                                <i class="fa-solid fa-chevron-down"></i>
+                                            </a>
+                                            <div class="delivery-collapsed-area detail-collapsed-area" id="delivery_collapsed_area_id" style="display: none;">
+                                                Здесь будут данные о близжайших точках доставки к вам
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col p-0">
+                                    <div class="reviews">
+                                        <div class="reviews-main-area detail-interactive-main">
+                                            <a class="reviews-main-area-button detail-interactive-button w-100 h-100" aria-expanded="false" aria-controls="reviews_collapsed_area_id" onclick="collapsElement(this)">
+                                                <div class="name">Отзывы</div>
+                                                <i class="fa-solid fa-chevron-down"></i>
+                                            </a>
+                                            <div class="reviews-collapsed-area detail-collapsed-area" id="reviews_collapsed_area_id" style="display: none;">
+                                                Здесь будут данные об отзывах покупателей данного товара
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col p-0">
+                                    <div class="compound">
+                                        <div class="compound-main-area detail-interactive-main">
+                                            <a class="compound-main-area-button detail-interactive-button w-100 h-100" aria-expanded="true" aria-controls="compound_collapsed_area_id" onclick="collapsElement(this)">
+                                                <div class="name">Состав</div>
+                                                <i class="fa-solid fa-chevron-down"></i>
+                                            </a>
+                                            <div class="compound-collapsed-area detail-collapsed-area" id="compound_collapsed_area_id">
+                                                <div class="row compound-data">
+                                                    <div class="col">
+                                                        <div class="row-2">
+                                                            <div class="col compound-column-item">данные о цветке</div>
+                                                            <div class="col compound-column-item">данные о цветке</div>
+                                                            <div class="col compound-column-item">данные о цветке</div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col">
+                                                        <div class="row-2">
+                                                            <div class="col compound-column-header">Упаковка</div>
+                                                            <div class="col compound-column-item">данные об упаковке</div>
+                                                            <div class="col compound-column-item">данные об упаковке</div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col p-0">
+                                    <div class="payment">
+                                        <div class="payment-main-area detail-interactive-main">
+                                            <a class="payment-main-area-button detail-interactive-button w-100 h-100" aria-expanded="false" aria-controls="payment_collapsed_area_id" onclick="collapsElement(this)">
+                                                <div class="name">Оплата</div>
+                                                <i class="fa-solid fa-chevron-down"></i>
+                                            </a>
+                                            <div class="payment-collapsed-area detail-collapsed-area" id="payment_collapsed_area_id" style="display: none;">
+                                                Здесь будут данные о виде оплаты
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col p-0">
+                                    <div class="bonuses">
+                                        <div class="bonuses-main-area detail-interactive-main">
+                                            <a class="bonuses-main-area-button detail-interactive-button w-100 h-100" aria-expanded="false" aria-controls="bonuses_collapsed_area_id" onclick="collapsElement(this)">
+                                                <div class="name">Бонусы</div>
+                                                <i class="fa-solid fa-chevron-down"></i>
+                                            </a>
+                                            <div class="bonuses-collapsed-area detail-collapsed-area" id="bonuses_collapsed_area_id" style="display: none;">
+                                                Здесь будут данные об активных бонусах на данный товар
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col p-0">
+                                    <div class="return-policy">
+                                        <div class="return-policy-main-area detail-interactive-main">
+                                            <a class="return-policy-main-area-button detail-interactive-button w-100 h-100" aria-expanded="false" aria-controls="return-policy_collapsed_area_id" onclick="collapsElement(this)">
+                                                <div class="name">Правила возврата</div>
+                                                <i class="fa-solid fa-chevron-down"></i>
+                                            </a>
+                                            <div class="return-policy-collapsed-area detail-collapsed-area" id="return-policy_collapsed_area_id" style="display: none;">
+                                                Здесь будут данные о правилах возврата купленного товара
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- row end -->
+        </div>
+        <!-- container end -->
+        <!-- item end-->
+    </div>
+
+    <div class="may-like-area">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-auto may-like-area-title">
+                    <h3>Вам может понравиться</h3>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-3 similar-product-card-column">
+                    <div class="similar-product-card-border-data">
+                        <a href="#" class="similar-product-card" data-wow-delay=".2s">
+                            <div class="similar-product-image py-3">
+                                <img src="{% static 'flower/images/index_2_temp/ant029_shop/shop_img1.jpg' %}" alt="">
+                            </div>
+                            <div class="similar-product-card-name-block">
+                                <div href="#shop-detail.html">
+                                    <div class="price"><span class="value">6999</span><span class="currency">₽</span></div>
+                                    <div class="name">Букет роз</div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <!-- column End -->
+                <div class="col-sm-3 similar-product-card-column">
+                    <div class="similar-product-card-border-data">
+                        <a href="#" class="similar-product-card" data-wow-delay=".2s">
+                            <div class="similar-product-image py-3">
+                                <img src="{% static 'flower/images/index_2_temp/ant029_shop/shop_img1.jpg' %}" alt="">
+                            </div>
+                            <div class="similar-product-card-name-block">
+                                <div href="#shop-detail.html">
+                                    <div class="price"><span class="value">6999</span><span class="currency">₽</span></div>
+                                    <div class="name">Букет роз</div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <!-- column End -->
+                <div class="col-sm-3 similar-product-card-column">
+                    <div class="similar-product-card-border-data">
+                        <a href="#" class="similar-product-card" data-wow-delay=".2s">
+                            <div class="similar-product-image py-3">
+                                <img src="{% static 'flower/images/index_2_temp/ant029_shop/shop_img1.jpg' %}" alt="">
+                            </div>
+                            <div class="similar-product-card-name-block">
+                                <div href="#shop-detail.html">
+                                    <div class="price"><span class="value">6999</span><span class="currency">₽</span></div>
+                                    <div class="name">Букет роз</div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <!-- column End -->
+
+                <div class="col-sm-3 similar-product-card-column">
+                    <div class="similar-product-card-border-data">
+                        <a href="#" class="similar-product-card" data-wow-delay=".2s">
+                            <div class="similar-product-image py-3">
+                                <img src="{% static 'flower/images/index_2_temp/ant029_shop/shop_img1.jpg' %}" alt="">
+                            </div>
+                            <div class="ant029_shop-label">
+                                <h4>50 % off</h4>
+                            </div>
+                            <div class="similar-product-card-name-block">
+                                <div href="#shop-detail.html">
+                                    <div class="price"><span class="value">6999</span><span class="currency">₽</span></div>
+                                    <div class="name">Букет роз</div>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <!-- column End -->
+            </div>
+            <!-- row End -->
+        </div>
+        <!-- container End -->
+    </div>
+
+    <div class="product-description-area">
+        <div class="container p-0">
+            <div class="row">
+                <div class="col p-0">
+                    <div class="product-description-text-border">
+                        <div class="product-description_text">
+                            <h3>Описание</h3>
+                            <p>Необычные, смелые и в то же время такие нежные, эти разноцветные гипсофилы готовы дарить радость всем окружающим! Преподнесите этот цветочный фейерверк близкому человеку, чтобы наполнить его жизнь яркими красками.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col offset-md-1 p-0">
+                    <div class="product-additionaliinfo">
+                        <h3>Дополнительная информация</h3>
+                        <ul class="product-characteristics md-0 p-0">
+                            <li>
+                                <div class="product-characteristic-title">Тип</div>
+                                <span class="value">Композиция</span>
+                            </li>
+                            <li>
+                                <div class="product-characteristic-title">Повод</div>
+                                <span class="value">День рождения</span>
+                            </li>
+                            <li>
+                                <div class="product-characteristic-title">Ширина</div>
+                                <span class="value">35</span> см
+                            </li>
+                            <li>
+                                <div class="product-characteristic-title">Высота</div>
+                                <span class="value">35</span> см
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ########## КОНЕЦ ОБЛАСТЬ ДЛЯ МОДУЛЯ МАГАЗИНА ########## -->
+{% include '../footer.html' %}

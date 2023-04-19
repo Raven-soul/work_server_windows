@@ -1,0 +1,16 @@
+bash /home/crow/work_server/web/init.sh
+
+curl http://127.0.0.1/hello/?a=bcd
+curl http://127.0.0.1:8080/?a=bcd
+
+sudo tail -f /var/log/nginx/error.log
+
+sudo ln -sf /home/crow/work_server/web/etc/gunicorn-django.conf /etc/gunicorn.d/test-django
+sudo /etc/init.d/gunicorn restart
+
+cd /home/crow/work_server/web/projects/
+gunicorn -c /home/crow/work_server/web/etc/gunicorn.config.py mongel.wsgi:application
+
+sudo /home/crow/.local/bin/gunicorn restart
+
+bash /home/crow/work_server/web/init.sh

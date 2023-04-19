@@ -1,0 +1,209 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="{% static 'flower/images/pro/ico_gladiolus.png'%}">
+    
+    <title>{{ header.title }}</title>
+
+    <!-- ########## ОБЩИЕ СТИЛИ ШАБЛОНА ########## -->
+    <link rel="stylesheet" href="{% static 'flower/css/bootstrap.min.css'%}">
+    <!-- ########## КОНЕЦ ОБЩИХ СТИЛЕЙ ########## -->
+
+    <!-- ########## СТИЛИ МОДУЛЯ ########## -->
+    <link rel="stylesheet" href="{% static 'flower/css/common.css'%}">
+    <link rel="stylesheet" href="{% static 'flower/css/header.css'%}">
+    <link rel="stylesheet" href="{% static 'flower/css/footer.css'%}">
+    <link rel="stylesheet" href="{% static 'flower/css/breadcrumbs.css'%}">
+    <link rel="stylesheet" href="{% static header.content_style_path %}">
+    <!-- ########## КОНЕЦ СТИЛЕЙ МОДУЛЯ ########## -->
+</head>
+<body onload="awake({{header.onload_function}})">
+    <!-- ########## ОБЛАСТЬ ДЛЯ ШАПКИ САЙТА ########## -->
+    <header>
+        <div class="container">
+            <div class="row justify-content-between border-bottom align-items-center">
+                <div class="col-auto">
+                    <div class="row">
+                        {% for link in header.topLinks %}
+                            <div class="col-auto"><a href="{% url link.url_name %}" class="page-top-link">{{link.title}}</a></div>
+                        {% endfor %}
+                    </div>
+                </div>
+                <div class="col-auto">
+                    <div class="row border-left">
+                        <div class="col-auto align-self-center">
+                            <div class="dropdown">
+                                <a class="dropdown-toggle p-0 currency-button" href="#" data-bs-toggle="dropdown" aria-expanded="false">₽</a>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="#">$ доллар</a></li>
+                                    <li><a class="dropdown-item" href="#">€ евро</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-auto border-left align-self-center p-2">
+                            <div class="dropdown">
+                                <a class="dropdown-toggle p-0 country-button" href="#" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <img src="{% static 'flower/images/temp/flag.png'%}" alt="flag">
+                                </a>
+                                <ul class="dropdown-menu">
+                                  <li><a class="dropdown-item" href="#">English</a></li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="col-auto border-left p-0">
+                            <a href="{% url header.userLoginUrl_name %}">
+                                <div class="user-button"></div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container my-1">
+            <div class="row justify-content-center">
+                <div class="col-md-9">
+                    <div class="row justify-content-between">
+                        <div class="col-auto"><a href="{% url 'home' %}"><img class="header-logo" src="{% static 'flower/images/pro/logo.png'%}" alt="logo"></a></div>
+                        <div class="col-auto">
+                            <div class="row">
+                                <div class="col-auto p-0">
+                                    <div class="row-2 justify-content-center">
+                                        <div class="col-auto header-address-city-name">Город доставки</div>
+                                        <div class="col-auto header-address-city-value">
+                                            <a href="#" class="header-address-city-value">Сочи</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-auto p-0">
+                                    <div class="row-2 justify-content-center">
+                                        <div class="col-auto header-address-number-name">Бесплатно Круглосуточно</div>
+                                        <div class="col-auto header-address-number-value">8-888-888-88-88</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-auto align-self-center">
+                            <a href="{% url header.basketUrl_name %}"><img class="header-basket" src="{% static 'flower/images/pro/basket.png'%}" alt="basket"></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container-fluid">
+            <div class="row justify-content-center header-row-3">
+                <div class="col-auto">
+                    <div class="row header-row-3-height">
+                        {% for category in header.product_category %}
+                            {% if category.is_published %}
+                                {% if header.cat_selected.section == 1 and header.cat_selected.order == category.pk %}
+                                    <div class="col-auto p-0 d-flex">
+                                        <div class="header-row-3-link-selected d-flex align-items-center">    
+                                            <div class="link-data-content">{{ category.name }}</div>
+                                        </div>
+                                    </div>
+                                {% else %}
+                                    <div class="col-auto p-0 d-flex">
+                                        <a href="{{ category.get_absolute_url }}" class="header-row-3-link d-flex align-items-center">
+                                            <div class="link-data-content">{{ category.name }}</div>
+                                        </a>
+                                    </div>
+                                {% endif %}
+                            {% endif %}
+                        {% endfor %}
+
+                        <div class="col-auto p-0 d-flex">
+                            {% if header.cat_selected.section == 0 %}
+                                <div class="header-row-3-link-selected d-flex align-items-center">    
+                                    <div class="link-data-content">Цветы</div>
+                                </div>
+                            {% else %}
+                                <a href="{% url 'home'%}" class="header-row-3-link d-flex align-items-center">
+                                    <div class="link-data-content">Цветы</div>
+                                </a>
+                            {% endif %}
+                        </div>
+
+                        {% for occasion in header.product_occasion %}
+                            {% if occasion.is_published %}
+                                {% if header.cat_selected.section == 2 and header.cat_selected.order == occasion.pk %}
+                                    <div class="col-auto p-0 d-flex">
+                                        <div class="header-row-3-link-selected d-flex align-items-center">    
+                                            <div class="link-data-content">{{ occasion.name }}</div>
+                                        </div>
+                                    </div>
+                                {% else %}
+                                    <div class="col-auto p-0 d-flex">
+                                        <a href="{{ occasion.get_absolute_url }}" class="header-row-3-link d-flex align-items-center">
+                                            <div class="link-data-content">{{ occasion.name }}</div>
+                                        </a>
+                                    </div>
+                                {% endif %}
+                            {% endif %}
+                        {% endfor %}
+                        {% for season in header.product_season %}
+                            {% if season.is_published %}
+                                {% if header.cat_selected.section == 3 and header.cat_selected.order == season.pk %}
+                                    <div class="col-auto p-0 d-flex">
+                                        <div class="header-row-3-link-selected d-flex align-items-center">    
+                                            <div class="link-data-content">{{ season.name }}</div>
+                                        </div>
+                                    </div>
+                                {% else %}
+                                    <div class="col-auto p-0 d-flex">
+                                        <a href="{{ season.get_absolute_url }}" class="header-row-3-link d-flex align-items-center">
+                                            <div class="link-data-content">{{ season.name }}</div>
+                                        </a>
+                                    </div>
+                                {% endif %}
+                            {% endif %}
+                        {% endfor %}
+                        {% for type in header.product_type %}
+                            {% if type.is_published %}
+                                {% if header.cat_selected.section == 4 and header.cat_selected.order == type.pk %}
+                                    <div class="col-auto p-0 d-flex">
+                                        <div class="header-row-3-link-selected d-flex align-items-center">    
+                                            <div class="link-data-content">{{ type.name }}</div>
+                                        </div>
+                                    </div>
+                                {% else %}
+                                    <div class="col-auto p-0 d-flex">
+                                        <a href="{{ type.get_absolute_url }}" class="header-row-3-link d-flex align-items-center">
+                                            <div class="link-data-content">{{ type.name }}</div>
+                                        </a>
+                                    </div>
+                                {% endif %}
+                            {% endif %}
+                        {% endfor %}
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- ########## КОНЕЦ ОБЛАСТЬ ДЛЯ ШАПКИ САЙТА ########## -->
+
+    <!-- ########## ОБЛАСТЬ ДЛЯ ХЛЕБНЫХ КРОШЕК ########## -->
+<section class="breadcrumbs-section">
+    <div class="breadcrumbs-block">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="breadcrumbs-block-elements">
+                        <div>
+                            <a href="#">Главная</a>
+                            <i class="fas fa-angle-right"></i>
+                            <a href="#">Самая лучшая страница</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- ########## КОНЕЦ ОБЛАСТЬ ДЛЯ ХЛЕБНЫХ КРОШЕК ########## -->

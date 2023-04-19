@@ -1,0 +1,16 @@
+html {
+    font-family: sans-serif;
+}
+
+footer {
+    background-color: #030224;
+}
+
+img {
+    max-width: 100%;
+}
+
+.gx-0 {
+    padding-left: 0%;
+    padding-right: 0%;
+}

@@ -1,0 +1,291 @@
+{% load static %}
+{% include '../header.html' %}
+<div class="container" style="margin-bottom:50px;">
+    <div class="row justify-content-center basket-state-title-block">
+        <div class="col-auto">
+            <div class="basket-state-title">
+                <h3>Корзина</h3>
+            </div>
+        </div>
+    </div>
+    <div class="row basket-state-block justify-content-between">
+        <div class="col-auto">
+            <div class="basket-state-stage-selected">
+                <h4>Корзина</h4>
+            </div>
+        </div>
+        <div class="col-auto">
+            <div class="basket-state-stage">
+                <h4>Оформление заказа</h4>
+            </div>
+        </div>
+        <div class="col-auto">
+            <div class="basket-state-stage">
+                <h4>Оплата</h4>
+            </div>
+        </div>
+    </div>
+    <div class="row-2 receipt-list-block" id="common-data" product-max-rows="3" previous-price-area="total-products-price" delivery-price-area="total-delivery-price" total-price-area="total-receipt-price">
+        <div class="col-lg-10 offset-1" id="product-item-1" price="3740" priduct-id="product-id_1000101">
+            <div class="row table-data-basket-row">
+                <div class="col table-data-basket table-data-image">
+                    <div class="table-data-image-area">
+                        <img src="{% static 'flower/images/index_2_temp/ant029_shop/shop_img1.jpg'%}" alt="flower" class="w-100 h-100">
+                    </div>
+                </div>
+                <div class="col table-data-basket d-flex">
+                    <div class="save-area d-flex align-items-center w-100">
+                        <div class="table-product-name-data">Букет раскошных роз обычный букет в клоуне</div>
+                    </div>
+                </div>
+                <div class="col table-data-basket table-data-basket-size d-flex justify-content-center p-0">
+                    <div class="row d-flex align-content-center">
+                        <div class="col-auto px-2">
+                            <div class="row-2">
+                                <div class="col">
+                                    <div class="horisontal-size-product  d-inline">
+                                        <span class="value">33</span> <span class="measure">см</span>
+                                    </div>
+                                </div>
+                                <div class="col"><i class="fa-solid fa-arrows-left-right"></i></div>
+                            </div>
+                        </div>
+                        <div class="col-auto px-2">
+                            <i class="fa-solid fa-arrows-up-down  d-inline"></i>
+                            <div class="vertical-size-product d-inline">
+                                <span class="value">33</span> <span class="measure">см</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+                <div class="col-auto table-data-basket d-flex justify-content-center p-0">
+                    <div class="save-area d-flex align-items-center">
+                        <a class="delete-button" onclick="deleteRowButton(this, 'common-data', 'product-item-')" product-id="product-item-1">
+                            <div class="table-product-delete-data">
+                                <i class="fa-regular fa-trash-can"></i>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="col table-data-basket d-flex justify-content-center p-0">
+                    <div class="save-area d-flex align-items-center">
+                        <div class="table-product-number-data">
+                            <div class="order-container">
+                                <a onclick="counterIncrease(this, 4, -1, 'common-data', 'product-item-')" aria-controls="product-id_1000101-qty-container" product-id="product-item-1">
+                                    <div class="strength-button d-inline">
+                                        -
+                                    </div>
+                                </a>
+                                <div class="qty-container d-inline mx-2">
+                                    <input id="product-id_1000101-qty-container" class="qty-container-panel" style="outline:none;" value="1" size="3" maxlength="3" min="1">
+                                </div>
+                                <a onclick="counterIncrease(this, 4, 1, 'common-data', 'product-item-')" aria-controls="product-id_1000101-qty-container" product-id="product-item-1">
+                                    <div class="strength-button d-inline">
+                                        +
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col table-data-basket d-flex justify-content-center p-0">
+                    <div class="save-area d-flex align-items-center">
+                        <div class="table-product-cost-data">
+                            <span class="uc-price" id="product-id_1000101-price">3740</span><span class="rur"> ₽</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-10 offset-1" id="product-item-2" price="3740" priduct-id="product-id_1000102">
+            <div class="row table-data-basket-row">
+                <div class="col table-data-basket table-data-image">
+                    <div class="table-data-image-area">
+                        <img src="{% static 'flower/images/index_2_temp/ant029_shop/shop_img1.jpg'%}" alt="flower" class="w-100 h-100">
+                    </div>
+                </div>
+                <div class="col table-data-basket d-flex">
+                    <div class="save-area d-flex align-items-center w-100">
+                        <div class="table-product-name-data">Букет раскошных роз с пони в подарок</div>
+                    </div>
+                </div>
+                <div class="col table-data-basket table-data-basket-size d-flex justify-content-center p-0">
+                    <div class="row d-flex align-content-center">
+                        <div class="col-auto px-2">
+                            <div class="row-2">
+                                <div class="col">
+                                    <div class="horisontal-size-product  d-inline">
+                                        <span class="value">33</span> <span class="measure">см</span>
+                                    </div>
+                                </div>
+                                <div class="col"><i class="fa-solid fa-arrows-left-right"></i></div>
+                            </div>
+                        </div>
+                        <div class="col-auto px-2">
+                            <i class="fa-solid fa-arrows-up-down  d-inline"></i>
+                            <div class="vertical-size-product d-inline">
+                                <span class="value">33</span> <span class="measure">см</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+                <div class="col-auto table-data-basket d-flex justify-content-center p-0">
+                    <div class="save-area d-flex align-items-center">
+                        <a class="delete-button" onclick="deleteRowButton(this, 'common-data', 'product-item-')" product-id="product-item-2">
+                            <div class="table-product-delete-data">
+                                <i class="fa-regular fa-trash-can"></i>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="col table-data-basket d-flex justify-content-center p-0">
+                    <div class="save-area d-flex align-items-center">
+                        <div class="table-product-number-data">
+                            <div class="order-container">
+                                <a onclick="counterIncrease(this, 4, -1, 'common-data', 'product-item-')" aria-controls="product-id_1000102-qty-container" product-id="product-item-2">
+                                    <div class="strength-button d-inline">
+                                        -
+                                    </div>
+                                </a>
+                                <div class="qty-container d-inline mx-2">
+                                    <input id="product-id_1000102-qty-container" class="qty-container-panel" style="outline:none;" value="1" size="3" maxlength="3" min="1">
+                                </div>
+                                <a onclick="counterIncrease(this, 4, 1, 'common-data', 'product-item-')" aria-controls="product-id_1000102-qty-container" product-id="product-item-2">
+                                    <div class="strength-button d-inline">
+                                        +
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col table-data-basket d-flex justify-content-center p-0">
+                    <div class="save-area d-flex align-items-center">
+                        <div class="table-product-cost-data">
+                            <span class="uc-price" id="product-id_1000102-price">3740</span><span class="rur"> ₽</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-10 offset-1" id="product-item-3" price="3740" priduct-id="product-id_1000103">
+            <div class="row table-data-basket-row">
+                <div class="col table-data-basket table-data-image">
+                    <div class="table-data-image-area">
+                        <img src="{% static 'flower/images/index_2_temp/ant029_shop/shop_img1.jpg'%}" alt="flower" class="w-100 h-100">
+                    </div>
+                </div>
+                <div class="col table-data-basket d-flex">
+                    <div class="save-area d-flex align-items-center w-100">
+                        <div class="table-product-name-data">Букет раскошных роз С бантиком в обмотке</div>
+                    </div>
+                </div>
+                <div class="col table-data-basket table-data-basket-size d-flex justify-content-center p-0">
+                    <div class="row d-flex align-content-center">
+                        <div class="col-auto px-2">
+                            <div class="row-2">
+                                <div class="col">
+                                    <div class="horisontal-size-product  d-inline">
+                                        <span class="value">33</span> <span class="measure">см</span>
+                                    </div>
+                                </div>
+                                <div class="col"><i class="fa-solid fa-arrows-left-right"></i></div>
+                            </div>
+                        </div>
+                        <div class="col-auto px-2">
+                            <i class="fa-solid fa-arrows-up-down  d-inline"></i>
+                            <div class="vertical-size-product d-inline">
+                                <span class="value">33</span> <span class="measure">см</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                </div>
+                <div class="col-auto table-data-basket d-flex justify-content-center p-0">
+                    <div class="save-area d-flex align-items-center">
+                        <a class="delete-button" onclick="deleteRowButton(this, 'common-data', 'product-item-')" product-id="product-item-3">
+                            <div class="table-product-delete-data">
+                                <i class="fa-regular fa-trash-can"></i>
+                            </div>
+                        </a>
+                    </div>
+                </div>
+                <div class="col table-data-basket d-flex justify-content-center p-0">
+                    <div class="save-area d-flex align-items-center">
+                        <div class="table-product-number-data">
+                            <div class="order-container">
+                                <a onclick="counterIncrease(this, 4, -1, 'common-data', 'product-item-')" aria-controls="product-id_1000103-qty-container" product-id="product-item-3">
+                                    <div class="strength-button d-inline">
+                                        -
+                                    </div>
+                                </a>
+                                <div class="qty-container d-inline mx-2">
+                                    <input id="product-id_1000103-qty-container" class="qty-container-panel" style="outline:none;" value="1" size="3" maxlength="3" min="1">
+                                </div>
+                                <a onclick="counterIncrease(this, 4, 1, 'common-data', 'product-item-')" aria-controls="product-id_1000103-qty-container" product-id="product-item-3">
+                                    <div class="strength-button d-inline">
+                                        +
+                                    </div>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col table-data-basket d-flex justify-content-center p-0">
+                    <div class="save-area d-flex align-items-center">
+                        <div class="table-product-cost-data">
+                            <span class="uc-price" id="product-id_1000103-price">3740</span><span class="rur"> ₽</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row d-block">
+        <div class="col-lg-10 offset-1">
+            <div class="row">
+                <div class="col stock-block p-0">
+                    <div class="row-2">
+                        <div class="col" style="margin-bottom: 10px;">
+                            <span style="color: brown;">Бонусы</span>
+                        </div>
+                        <div class="col">
+                            <span style="font-size: 20px; font-weight: 600;">Сейчас не действуют никакие бонусы</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col total-block p-0" total-items="3">
+                    <div class="row-3">
+                        <div class="col total-block-cell py-2">
+                            <div class="row d-flex justify-content-between">
+                                <div class="col total-previously-price-name">Итого по позициям:</div>
+                                <div class="col-auto total-price-value">
+                                    <span class="price" id="total-products-price" currency-area="total-products-price-currency">100</span> <span class="currency" id="total-products-price-currency">₽</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col total-block-cell py-2">
+                            <div class="row d-flex justify-content-between">
+                                <div class="col delivery-price-name">Доставка <b class="city">г.Краснодар</b></div>
+                                <div class="col-auto delivery-price-value" >
+                                    <span class="price" id="total-delivery-price" currency-area="total-delivery-price-currency" delivery-cost="0">бесплатно</span> <span class="currency" id="total-delivery-price-currency">₽</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col total-block-cell py-2">
+                            <div class="row d-flex justify-content-between">
+                                <div class="col total-price-name">Итого:</div>
+                                <div class="col-auto total-price-value">
+                                    <span class="price" id="total-receipt-price" currency-area="total-receipt-price-currency">100</span> <span class="currency" id="total-receipt-price-currency">₽</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% include '../footer.html' %}
