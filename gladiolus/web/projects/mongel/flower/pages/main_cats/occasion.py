@@ -1,7 +1,8 @@
 from ...models import * #база данных
 
 from django.shortcuts import render, redirect
-from ..common_data.common import Header, Footer
+from ..common_data.footer import Footer
+from ..common_data.header import Header
 
 class Main_occasion_page(object):    
     def __init__(self, occ_id):
@@ -20,7 +21,7 @@ class Main_occasion_page(object):
     def startBuilder(self):
         self.header = Header()
         self.footer = Footer()
-        self.products = Flower.objects.filter(categ=self.occ_id)
+        self.products = Flower.objects.filter(reason_data=self.occ_id)
 
     def getDict(self):
         return self.context

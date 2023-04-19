@@ -1,7 +1,8 @@
 from ..models import * #база данных
 
 from django.shortcuts import render, redirect
-from .common_data.common import Header, Footer
+from .common_data.footer import Footer
+from .common_data.header import Header
 
 class Main_page(object):    
     def __init__(self):

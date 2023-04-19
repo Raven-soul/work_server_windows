@@ -14,7 +14,7 @@ from .pages.main_cats.type import *
 
 from .models import * #база данных
 
-#--------------- main_pages --------------------------
+#------------------ main_pages --------------------------
 
 def index(request):
     data = Main_page().getDict()
@@ -50,7 +50,7 @@ def show_type(request, typ_id):
     data = Main_type_page(typ_id).getDict()
     return render(request, 'flower/main/main_content.html', context=data)
 
-#--------------- info_pages --------------------------
+#---------------- info_pages --------------------------
 
 def about_info(request):
     data = About_page().getDict()
@@ -80,6 +80,8 @@ def help_info(request):
     data = Help_page().getDict()
     return render(request, 'flower/main/index_shop_page.html', context=data)
 
+
+#----------------------------------- 404 ----------------------------------------
 
 def pageNotFound(request, exception):
     return HttpResponseNotFound('<h1>Страница не найдена</h1>')
