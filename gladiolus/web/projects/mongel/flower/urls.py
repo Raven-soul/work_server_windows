@@ -13,7 +13,6 @@ urlpatterns = [
     path('payment/', payment_info, name='payment_info'),
     path('guarantees/', guarantees_info, name='guarantees_info'),
     path('return/', return_info, name='return_info'),
-    path('corporation/', corporation_info, name='corporation_info'),
     path('contacts/', contacts_info, name='contacts_info'),
     path('help/', help_info, name='help_info'),
     path('category/<int:cat_id>', show_category, name='category'),

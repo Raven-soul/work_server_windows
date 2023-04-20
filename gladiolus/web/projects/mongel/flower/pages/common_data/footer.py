@@ -6,8 +6,7 @@ class Footer(object):
         first_column = [{'title':'О нас', 'url_name':'about_info'},
                         {'title':'Оплата', 'url_name':'payment_info'},
                         {'title':'Гарантии', 'url_name':'guarantees_info'},
-                        {'title':'Возврат', 'url_name':'return_info'},
-                        {'title':'Корп. клиентам', 'url_name':'corporation_info'}]
+                        {'title':'Возврат', 'url_name':'return_info'}]
         
         second_column = [{'title':'Контакты', 'url_name':'contacts_info'},
                         {'title':'Помощь', 'url_name':'help_info'}]

@@ -14,3 +14,14 @@ gunicorn -c /home/crow/work_server/web/etc/gunicorn.config.py mongel.wsgi:applic
 sudo /home/crow/.local/bin/gunicorn restart
 
 bash /home/crow/work_server/web/init.sh
+
+//windows
+
+venv:
+& g:/work_server_windows/venv/Scripts/Activate.ps1
+
+manage.py:
+cd gladiolus/web/projects/mongel
+
+runserver:
+python manage.py runserver

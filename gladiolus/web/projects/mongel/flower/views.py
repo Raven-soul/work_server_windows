@@ -54,31 +54,27 @@ def show_type(request, typ_id):
 
 def about_info(request):
     data = About_page().getDict()
-    return render(request, 'flower/main/index_shop_page.html', context=data)
+    return render(request, 'flower/info_pages/about.html', context=data)
 
 def payment_info(request):
     data = Payment_page().getDict()
-    return render(request, 'flower/main/index_shop_page.html', context=data)
+    return render(request, 'flower/info_pages/payment.html', context=data)
 
 def guarantees_info(request):
     data = Guarantees_page().getDict()
-    return render(request, 'flower/main/index_shop_page.html', context=data)
+    return render(request, 'flower/info_pages/guarantees.html', context=data)
 
 def return_info(request):
     data = Return_page().getDict()
-    return render(request, 'flower/main/index_shop_page.html', context=data)
-
-def corporation_info(request):
-    data = Corporation_page().getDict()
-    return render(request, 'flower/main/index_shop_page.html', context=data)
+    return render(request, 'flower/info_pages/return.html', context=data)
 
 def contacts_info(request):
     data = Contacts_page().getDict()
-    return render(request, 'flower/main/index_shop_page.html', context=data)
+    return render(request, 'flower/info_pages/contacts.html', context=data)
 
 def help_info(request):
     data = Help_page().getDict()
-    return render(request, 'flower/main/index_shop_page.html', context=data)
+    return render(request, 'flower/info_pages/help.html', context=data)
 
 
 #----------------------------------- 404 ----------------------------------------

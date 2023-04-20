@@ -29,7 +29,6 @@ class Header(object):
                         {'title':'Оплата', 'url_name':'payment_info'},
                         {'title':'Гарантии', 'url_name':'guarantees_info'},
                         {'title':'Возврат', 'url_name':'return_info'},
-                        {'title':'Корп. клиентам', 'url_name':'corporation_info'},
                         {'title':'Контакты', 'url_name':'contacts_info'},
                         {'title':'Помощь', 'url_name':'help_info'}
                         ]
