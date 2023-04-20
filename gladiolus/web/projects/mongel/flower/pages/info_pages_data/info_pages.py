@@ -1,7 +1,7 @@
-from ..models import * #база данных
+from ...models import * #база данных
 from django.shortcuts import render, redirect
-from .common_data.footer import Footer
-from .common_data.header import Header
+from ..common_data.footer import Footer
+from ..common_data.header import Header
 
 class Set_start_properties():
     def __init__(self):

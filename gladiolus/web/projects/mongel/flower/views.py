@@ -3,7 +3,7 @@ from django.http import HttpResponse, HttpResponseNotFound, Http404 #перех�
 
 #-------------главные страницы сайта --------------------------
 from .pages.main import Main_page
-from .pages.info_pages import *
+from .pages.info_pages_data.info_pages import *
 from .pages.login import Login_page
 from .pages.detail import Detail_page
 from .pages.basket import Basket_page

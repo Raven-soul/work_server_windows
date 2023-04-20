@@ -136,6 +136,3 @@ class Wrapping(models.Model):
         verbose_name = 'Состав упаковки'
         verbose_name_plural = 'Состав упаковки'
         ordering = ['flower',]
-
-    class new_table_data(models.Model):
-        data = models.CharField(max_length=255, verbose_name='1 часть упаковки')

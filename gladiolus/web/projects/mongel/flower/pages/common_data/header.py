@@ -1,5 +1,6 @@
 from ...models import * #база данных
 from django.shortcuts import render, redirect
+from ..info_pages_data.info_pages_set import *
 
 class Header(object):
     def __init__(self):
@@ -25,13 +26,7 @@ class Header(object):
         self.season = Season.objects.all()
         self.type = Type.objects.all()
 
-        self.topPageLinks = [{'title':'О нас', 'url_name':'about_info'},
-                        {'title':'Оплата', 'url_name':'payment_info'},
-                        {'title':'Гарантии', 'url_name':'guarantees_info'},
-                        {'title':'Возврат', 'url_name':'return_info'},
-                        {'title':'Контакты', 'url_name':'contacts_info'},
-                        {'title':'Помощь', 'url_name':'help_info'}
-                        ]
+        self.topPageLinks = InfoDataSet().getContext()
 
     def setData(self, name='title', value='Гладиолус, магазин доставки цветов'):
         self.context[name] = value
