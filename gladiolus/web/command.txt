@@ -25,3 +25,7 @@ cd gladiolus/web/projects/mongel
 
 runserver:
 python manage.py runserver
+
+makemigrations:
+python manage.py makemigrations
+python manage.py migrate
