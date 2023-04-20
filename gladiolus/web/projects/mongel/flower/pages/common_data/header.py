@@ -1,6 +1,5 @@
 from ...models import * #база данных
 from django.shortcuts import render, redirect
-from ..info_pages_data.info_pages_set import *
 
 class Header(object):
     def __init__(self):
@@ -26,7 +25,7 @@ class Header(object):
         self.season = Season.objects.all()
         self.type = Type.objects.all()
 
-        self.topPageLinks = InfoDataSet().getContext()
+        self.topPageLinks = InfoPages.objects.all()
 
     def setData(self, name='title', value='Гладиолус, магазин доставки цветов'):
         self.context[name] = value

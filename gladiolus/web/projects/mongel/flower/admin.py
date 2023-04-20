@@ -26,6 +26,11 @@ class FlowerAdmin(admin.ModelAdmin):
     list_display_links = ('id', 'title')
     search_fields = ('title', 'description_content')
 
+class InfoPagesAdmin(admin.ModelAdmin):
+    list_display = ('id', 'name', 'path', 'order')
+    list_display_links = ('id', 'name')
+    search_fields = ('id', 'name')
+
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(Occasion, OccasionAdmin)
 admin.site.register(Season, SeasonAdmin)
@@ -34,3 +39,4 @@ admin.site.register(Flower, FlowerAdmin)
 admin.site.register(Review)
 admin.site.register(Composition)
 admin.site.register(Wrapping)
+admin.site.register(InfoPages, InfoPagesAdmin)

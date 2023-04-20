@@ -30,7 +30,7 @@
                 <div class="col-auto">
                     <div class="row">
                         {% for link in header.topLinks %}
-                            <div class="col-auto"><a href="{% url link.url_name %}" class="page-top-link">{{link.title}}</a></div>
+                            <div class="col-auto"><a href="{% url link.path %}" class="page-top-link">{{link.name}}</a></div>
                         {% endfor %}
                     </div>
                 </div>

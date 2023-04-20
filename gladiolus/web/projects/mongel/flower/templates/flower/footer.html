@@ -1,6 +1,4 @@
 {% load static %}
-{% block footer %}
-{% endblock footer %}
 <!-- ########## ОБЛАСТЬ ДЛЯ ФУТЕРА САЙТА ########## -->
 <footer>
     <div class="container">
@@ -10,8 +8,8 @@
                     <div class="col-6 col-md-2 mb-3">
                     <h5 class="footer-column-section">{{column.column_title}}</h5>
                     <ul class="nav flex-column footer-column-link">
-                        {% for row in column.column_links %}
-                            <li class="nav-item mb-2"><a href="{% url row.url_name %}" class="nav-link p-0 text-body-secondary">{{row.title}}</a></li>
+                        {% for link in header.topLinks %}
+                            <li class="nav-item mb-2"><a href="{% url link.path %}" class="nav-link p-0 text-body-secondary">{{link.name}}</a></li>
                         {% endfor %}
                     </ul>
                     </div>
