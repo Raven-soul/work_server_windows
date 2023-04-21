@@ -137,15 +137,27 @@ class Wrapping(models.Model):
         verbose_name_plural = 'Состав упаковки'
         ordering = ['flower',]
 
-class InfoPages(models.Model):
-    name = models.CharField(max_length=255, verbose_name='Название страницы')
-    path = models.CharField(max_length=255, verbose_name='Путь страницы')
-    order = models.IntegerField(verbose_name='Очередь столбца')
+class InfoClass(models.Model):
+    name = models.CharField(max_length=255, verbose_name='Название группы')
 
     def __str__(self):
         return self.name
     
     class Meta:
-        verbose_name = 'Инфо. страница'
-        verbose_name_plural = 'Инфо. страницы'
+        verbose_name = 'Класс инфо-страницы'
+        verbose_name_plural = 'Класс инфо-страниц'
+        ordering = ['id',]
+
+class InfoPages(models.Model):
+    name = models.CharField(max_length=255, verbose_name='Название страницы')
+    path = models.CharField(max_length=255, verbose_name='Путь страницы')
+    order = models.IntegerField(verbose_name='Очередь столбца')
+    classificate = models.ForeignKey(InfoClass, on_delete=models.CASCADE, null=True, verbose_name='Класс')
+
+    def __str__(self):
+        return self.name
+    
+    class Meta:
+        verbose_name = 'Инфо-страница'
+        verbose_name_plural = 'Инфо-страницы'
         ordering = ['id',]

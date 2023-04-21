@@ -8,21 +8,18 @@ class Footer(object):
         
         self.context = {
             'columnLinks': self.columnLinks,
-            'script_list': self.script_list
-        }
+            'script_list': self.script_list,
+            'info_classes': self.info_pages_cl}
 
     def startBuilder(self):
-        self.third_column = [{'title':'Цветы', 'url_name':'home'},
-                        {'title':'Цветы', 'url_name':'home'},
-                        {'title':'Цветы', 'url_name':'home'},
-                        {'title':'Цветы', 'url_name':'home'},
-                        {'title':'Цветы', 'url_name':'home'},
-                        {'title':'Цветы', 'url_name':'home'}]
+        self.info_pages_cl = InfoClass.objects.all()
 
-        self.columnLinks = [{'column_title':'О нас'},
-                       {'column_title':'Клиентам'},
-                       {'column_title':'Популярное', 'column_links': self.third_column}
-                        ]
+        self.columnLinks = [{'name':'Цветы', 'path':'home'},
+                        {'name':'Цветы', 'path':'home'},
+                        {'name':'Цветы', 'path':'home'},
+                        {'name':'Цветы', 'path':'home'},
+                        {'name':'Цветы', 'path':'home'},
+                        {'name':'Цветы', 'path':'home'}]
         
         self.script_list = []
 
