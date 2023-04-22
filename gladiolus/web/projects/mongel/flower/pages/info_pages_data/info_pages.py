@@ -17,7 +17,7 @@ class Set_start_properties():
         return self.header;
 
     def getFooter(self):
-        return self.header;
+        return self.footer;
     
 
 class About_page(object):
