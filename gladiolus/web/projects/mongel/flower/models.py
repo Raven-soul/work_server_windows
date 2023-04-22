@@ -139,6 +139,7 @@ class Wrapping(models.Model):
 
 class InfoClass(models.Model):
     name = models.CharField(max_length=255, verbose_name='Название группы')
+    name_code = models.CharField(max_length=255, verbose_name='Код группы')
 
     def __str__(self):
         return self.name

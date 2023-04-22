@@ -4,21 +4,15 @@
     <div class="container">
         <footer class="py-5">
             <div class="row footer-column">
-                {% for data in footer.info_classes  %}
+                {% for column in footer.info_pages_columns  %}
                     <div class="col-6 col-md-2 mb-3">
-                        <h5 class="footer-column-section">{{data.name}}</h5>
+                        <h5 class="footer-column-section">{{column.column_title}}</h5>
                         <ul class="nav flex-column footer-column-link">
-                            {% if class.pk < 2   %}
-                                {% for link in header.topLinks %}
-                                    {% if class.pk == link.order %}  
-                                        <li class="nav-item mb-2"><a href="{% url link.path %}" class="nav-link p-0 text-body-secondary">{{link.name}}</a></li>
-                                    {% endif %}   
-                                {% endfor %}
-                            {% elif class.pk == 2 %}
-                                {% for link in footer.columnLinks %}
+                            {% for link in column.info_pages_links %}
+                                {% if class.pk is link.order %}  
                                     <li class="nav-item mb-2"><a href="{% url link.path %}" class="nav-link p-0 text-body-secondary">{{link.name}}</a></li>
-                                {% endfor %}
-                            {% endif %}
+                                {% endif %}   
+                            {% endfor %}
                         </ul>
                     </div>  
                 {% endfor %}    
