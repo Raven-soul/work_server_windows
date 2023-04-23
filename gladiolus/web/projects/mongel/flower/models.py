@@ -97,18 +97,18 @@ class Flower(models.Model):
         ordering = ['time_create', 'title']
     
 class Review(models.Model):
-    mark = models.IntegerField(verbose_name='Оценка товара')
-    review_description = models.TextField(blank=True, verbose_name='Описание отзыва')
+    grade = models.IntegerField(verbose_name='Оценка товара')
+    description = models.TextField(blank=True, verbose_name='Описание отзыва')
     time_create = models.DateTimeField(auto_now_add=True, verbose_name='Время создания')
     flower = models.ForeignKey(Flower, on_delete=models.CASCADE, verbose_name='Товар')
 
     def __str__(self):
-        return str(self.mark)
+        return str(self.grade)
     
     class Meta:
         verbose_name = 'Отзыв'
         verbose_name_plural = 'Отзывы'
-        ordering = ['time_create', 'mark']
+        ordering = ['time_create', 'grade']
     
 class Composition(models.Model):
     flower_part_1 = models.CharField(max_length=255, verbose_name='1 часть товара')

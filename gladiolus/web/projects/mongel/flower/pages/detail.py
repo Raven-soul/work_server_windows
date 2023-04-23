@@ -48,11 +48,23 @@ class Detail_page(object):
             
     def getReviews(self, productItem):
         reviews = Review.objects.all()
-        temp_result = []
+        temp_result = {'global_grade': 0, 'reviews': ''}
+        temp_reviews = []
+        grades = []
+
+        #temp_result.append({'global_grade': 0, 'reviews': [{'grade': 0, 'description': 'data'},]})
 
         for item in reviews:
-            temp_result.append({'grade': 0, 'description': 'data'})
+            if item.flower.pk == productItem.pk:
+                temp_reviews.append({'grade': item.grade, 'description': item.description})
+                grades.append(item.grade)
         
+        if temp_reviews == []:
+            temp_result['reviews'] = 'none'    
+        else:
+            temp_result['global_grade'] = sum(grades)/len(grades)
+            temp_result['reviews'] = temp_reviews
+
         return temp_result
     
     def compositionFormer(self, productItem):
