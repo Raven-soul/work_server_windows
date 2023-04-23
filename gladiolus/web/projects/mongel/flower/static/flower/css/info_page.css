@@ -35,6 +35,12 @@
     color: black;
 }
 
+.links-area-row-selected {
+    padding: 10px 10px;
+    width: 100%;
+    background-color: rgb(201, 201, 201);;
+}
+
 /* about block */
 
 .post-content-area {

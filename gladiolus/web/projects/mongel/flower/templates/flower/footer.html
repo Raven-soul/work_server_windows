@@ -8,10 +8,8 @@
                     <div class="col-6 col-md-2 mb-3">
                         <h5 class="footer-column-section">{{column.column_title}}</h5>
                         <ul class="nav flex-column footer-column-link">
-                            {% for link in column.info_pages_links %}
-                                {% if class.pk is link.order %}  
-                                    <li class="nav-item mb-2"><a href="{% url link.path %}" class="nav-link p-0 text-body-secondary">{{link.name}}</a></li>
-                                {% endif %}   
+                            {% for link in column.info_pages_links %}                                
+                                <li class="nav-item mb-2"><a href="{% if column.name_code == 'popular' %}{{ link.path }}{% else %}{% url link.path %}{% endif %}" class="nav-link p-0 text-body-secondary">{{link.name}}</a></li>
                             {% endfor %}
                         </ul>
                     </div>  

@@ -5,41 +5,25 @@
             <div class="col-4 category-info-area">
                 <div class="links-area">
                    <div class="row-2">
-                        <div class="col p-0">
-                            <a href="#" class="category-info-link">
-                                <div class="links-area-row">
-                                    Японское командование берегло
+                        {% for link in header.topLinks %}
+                            {% if link.pk == inf_selected %}
+                            <div class="col p-0">
+                                <div class="category-info-link">
+                                    <div class="links-area-row-selected">
+                                        {{ link.name }}
+                                    </div>
                                 </div>
-                            </a>
-                        </div>
-                        <div class="col p-0">
-                            <a href="#" class="category-info-link">
-                                <div class="links-area-row">
-                                    Японское командование берегло
-                                </div>
-                            </a>
-                        </div>
-                        <div class="col p-0">
-                            <a href="#" class="category-info-link">
-                                <div class="links-area-row">
-                                    Японское командование берегло
-                                </div>
-                            </a>
-                        </div>
-                        <div class="col p-0">
-                            <a href="#" class="category-info-link">
-                                <div class="links-area-row">
-                                    Японское командование берегло
-                                </div>
-                            </a>
-                        </div>
-                        <div class="col p-0">
-                            <a href="#" class="category-info-link">
-                                <div class="links-area-row">
-                                    Японское командование берегло
-                                </div>
-                            </a>
-                        </div>
+                            </div>
+                            {% else %}
+                            <div class="col p-0">
+                                <a href="{% url link.path %}" class="category-info-link">
+                                    <div class="links-area-row">
+                                        {{ link.name }}
+                                    </div>
+                                </a>
+                            </div>
+                            {% endif %}
+                        {% endfor %}
                     </div> 
                 </div>
             </div>

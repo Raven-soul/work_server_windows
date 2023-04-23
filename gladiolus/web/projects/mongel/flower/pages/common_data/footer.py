@@ -12,14 +12,14 @@ class Footer(object):
             'info_pages_columns': self.info_pages_data}
 
     def startBuilder(self):
+        self.category = Category.objects.all()
+        self.occasion = Occasion.objects.all()
+        self.season = Season.objects.all()
+        self.type = Type.objects.all()
+
         self.info_pages_cl = InfoClass.objects.all()
         self.info_pages = InfoPages.objects.all()
-        self.columnLinks = [{'name':'Цветы', 'path':'home'},
-                        {'name':'Цветы', 'path':'home'},
-                        {'name':'Цветы', 'path':'home'},
-                        {'name':'Цветы', 'path':'home'},
-                        {'name':'Цветы', 'path':'home'},
-                        {'name':'Цветы', 'path':'home'}]
+        self.columnLinks = self.popularFormation(self.category, self.occasion, self.season, self.type)
         
         self.info_pages_data = self.vocabularyFormation(self.info_pages_cl, self.info_pages, self.columnLinks)
         
@@ -41,8 +41,28 @@ class Footer(object):
                     temp.append({'name': page.name, 'path': page.path})
                 
             if cl_item.name_code == 'popular':
-                result_dict.append({'column_title': cl_item.name, 'info_pages_links': pop_pages})
+                result_dict.append({'column_title': cl_item.name, 'name_code': cl_item.name_code, 'info_pages_links': pop_pages})
             else:
-                result_dict.append({'column_title': cl_item.name, 'info_pages_links': temp})            
+                result_dict.append({'column_title': cl_item.name, 'name_code': cl_item.name_code, 'info_pages_links': temp})            
 
         return result_dict
+    
+    def popularFormation(self, category, occasion, season, type):
+        temp_result = []
+        for item in category:
+            if item.is_published:
+                temp_result.append({'name': item.name, 'path': item.get_absolute_url})
+        
+        for item in occasion:
+            if item.is_published:
+                temp_result.append({'name': item.name, 'path': item.get_absolute_url})
+                
+        for item in season:
+            if item.is_published:
+                temp_result.append({'name': item.name, 'path': item.get_absolute_url})
+
+        for item in type:
+            if item.is_published:
+                temp_result.append({'name': item.name, 'path': item.get_absolute_url})
+
+        return temp_result

@@ -27,7 +27,7 @@ class About_page(object):
         self.context = {
             'header': self.contextData.getHeader().getData(),
             'footer': self.contextData.getFooter().getData(),
-            'content_data': 'информация о магазине'
+            'inf_selected': 1
         }
 
     def startBuilder(self):
@@ -44,7 +44,7 @@ class Payment_page(object):
         self.context = {
             'header': self.contextData.getHeader().getData(),
             'footer': self.contextData.getFooter().getData(),
-            'content_data': 'информация об оплате'
+            'inf_selected': 2
         }
 
     def startBuilder(self):
@@ -61,7 +61,7 @@ class Guarantees_page(object):
         self.context = {
             'header': self.contextData.getHeader().getData(),
             'footer': self.contextData.getFooter().getData(),
-            'content_data': 'информация о гарантиях'
+            'inf_selected': 3
         }
 
     def startBuilder(self):
@@ -78,7 +78,7 @@ class Return_page(object):
         self.context = {
             'header': self.contextData.getHeader().getData(),
             'footer': self.contextData.getFooter().getData(),
-            'content_data': 'информация о возврате товара'
+            'inf_selected': 4
         }
 
     def startBuilder(self):
@@ -95,7 +95,7 @@ class Contacts_page(object):
         self.context = {
             'header': self.contextData.getHeader().getData(),
             'footer': self.contextData.getFooter().getData(),
-            'content_data': 'информация о наших контактах'
+            'inf_selected': 5
         }
 
     def startBuilder(self):
@@ -112,7 +112,7 @@ class Help_page(object):
         self.context = {
             'header': self.contextData.getHeader().getData(),
             'footer': self.contextData.getFooter().getData(),
-            'content_data': 'информация'
+            'inf_selected': 6
         }
 
     def startBuilder(self):
