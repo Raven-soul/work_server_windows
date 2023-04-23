@@ -20,8 +20,8 @@ def index(request):
     data = Main_page().getDict()
     return render(request, 'flower/main/main_content.html', context=data)
 
-def buket(request):
-    data = Detail_page().getDict()
+def product_details(request, prod_id):
+    data = Detail_page(prod_id).getDict()
     return render(request, 'flower/main/detail_content.html', context=data)
 
 def basket(request):

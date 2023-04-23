@@ -21,13 +21,13 @@
                     <div class="col-md-4 col-sm-6 catalog-row__col">
                         <div class="ant029_shop-single_shop rb-product-card">
                             <div class="image-area-border my-3">
-                                <a href="{% url 'buket' %}" class="wow fadeIn" data-wow-delay=".2s">
+                                <a href="{{ product.get_absolute_url }}" class="wow fadeIn" data-wow-delay=".2s">
                                     {% if product.photo %}
                                         <img src="{{ product.photo.url }}" alt="" style='border-radius: 13px;'> 
                                     {% endif %}
                                 </a>
                             </div>
-                            <a href="{% url 'buket' %}" class="name-and-price-link">
+                            <a href="{{ product.get_absolute_url }}" class="name-and-price-link">
                                 <h3>
                                     <div class="name-and-price-item item-data-name" style='text-align: center;'>{{ product.title }}</div>
                                     <div class="name-and-price-item item-data-price">{{ product.price }}</div> 

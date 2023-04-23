@@ -8,6 +8,8 @@ class Main_page(object):
     def __init__(self):
         self.startBuilder()
         
+        self.header.setData(name='cat_selected', value= {'section': 0, 'order': 0})
+        
         self.context = {
             'header': self.header.getData(),
             'footer': self.footer.getData(),
@@ -18,6 +20,7 @@ class Main_page(object):
         self.header = Header()
         self.footer = Footer()
         self.products = Flower.objects.all()
+        
 
     def getDict(self):
         return self.context

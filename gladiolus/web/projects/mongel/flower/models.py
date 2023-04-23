@@ -85,10 +85,11 @@ class Flower(models.Model):
     maturation_data = models.ForeignKey(Season, on_delete=models.CASCADE, null=True, verbose_name='Время созревания')
     type_data =  models.ForeignKey(Type, on_delete=models.CASCADE, null=True, verbose_name='Тип')
     
-    
-
     def __str__(self):
         return self.title
+    
+    def get_absolute_url(self):
+        return reverse("product", kwargs={"prod_id": self.pk})
     
     class Meta:
         verbose_name = 'Товар'

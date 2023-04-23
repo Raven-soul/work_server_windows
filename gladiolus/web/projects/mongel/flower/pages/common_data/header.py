@@ -16,7 +16,7 @@ class Header(object):
             'product_occasion': self.occasion,
             'product_season': self.season,
             'product_type': self.type,
-            'cat_selected': {'section': 0, 'order': 0}
+            'cat_selected': {'section': -1, 'order': 0}
         }
 
     def startBuilder(self):
