@@ -1,11 +1,8 @@
 {% load static %}
 {% include '../header.html' %}
 <!-- ########## ОБЛАСТЬ ДЛЯ МОДУЛЯ МАГАЗИНА ########## -->
-
-    <!-- ant029_shop -->
-    <div id="ant029_shop">
+    <div>
         <div class="container">
-            
             <div class="row product-title-name-and-rating">
                 <div class="col">
                     <div class="name-shop-item">{{ product.name }}</div>
@@ -25,9 +22,9 @@
             </div>
             <div class="row justify-content-between">
                 <div class="col-sm-5">
-                    <div class="ant029_shop-s_detail">
-                        <div class="ant029_shop-shop_detail_img"
-                            style="background-image:url({% static product.photo.url %})">
+                    <div class="shop-s_detail">
+                        <div class="shop_detail_img">
+                            <img src="{{ product.photo.url }}" class="product-image" alt="prod">
                         </div>
                     </div>
                 </div>
@@ -43,9 +40,9 @@
                                 <div class="col p-0 js_product_size product-size-stile">
                                     <i class="fa fa-maximize detail-text-data-icon" aria-hidden="true"></i>
                                     Размер:
-                                    <span class="js_product__size-width" title="Ширина">30</span>
+                                    <span class="js_product__size-width" title="Ширина">{{ product.size.width }}</span>
                                     ×
-                                    <span class="js_product__size-height" title="Высота">35</span>
+                                    <span class="js_product__size-height" title="Высота">{{ product.size.height }}</span>
                                     см 
                                 </div>
                                 <div class="col p-0 js_product-delivery-price product-delivery-price-stile">
@@ -98,7 +95,7 @@
                                                 <i class="fa-solid fa-chevron-down"></i>
                                             </a>
                                             <div class="reviews-collapsed-area detail-collapsed-area" id="reviews_collapsed_area_id" style="display: none;">
-                                                Здесь будут данные об отзывах покупателей данного товара
+                                                <p>Data</p>                                                
                                             </div>
                                         </div>
                                     </div>
@@ -114,16 +111,28 @@
                                                 <div class="row compound-data">
                                                     <div class="col">
                                                         <div class="row-2">
-                                                            <div class="col compound-column-item">данные о цветке</div>
-                                                            <div class="col compound-column-item">данные о цветке</div>
-                                                            <div class="col compound-column-item">данные о цветке</div>
+                                                            {% if product.composition.product == 'none' %}
+                                                                <div class="col compound-column-item">данные о цветке</div>
+                                                                <div class="col compound-column-item">данные о цветке</div>
+                                                                <div class="col compound-column-item">данные о цветке</div>
+                                                            {% else %}
+                                                                <div class="col compound-column-item">{{product.composition.product.part_1}}</div>
+                                                                <div class="col compound-column-item">{{product.composition.product.part_2}}</div>
+                                                                <div class="col compound-column-item">{{product.composition.product.part_3}}</div>
+                                                            {% endif %}
                                                         </div>
                                                     </div>
                                                     <div class="col">
                                                         <div class="row-2">
-                                                            <div class="col compound-column-header">Упаковка</div>
-                                                            <div class="col compound-column-item">данные об упаковке</div>
-                                                            <div class="col compound-column-item">данные об упаковке</div>
+                                                            {% if product.composition.wrapping == 'none' %}
+                                                                <div class="col compound-column-header">Упаковка</div>
+                                                                <div class="col compound-column-item">данные об упаковке</div>
+                                                                <div class="col compound-column-item">данные об упаковке</div>
+                                                            {% else %}
+                                                                <div class="col compound-column-header">Упаковка</div>
+                                                                <div class="col compound-column-item">{{product.composition.wrapping.part_1}}</div>
+                                                                <div class="col compound-column-item">{{product.composition.wrapping.part_2}}</div>
+                                                            {% endif %}
                                                         </div>
                                                     </div>
                                                 </div>
@@ -189,74 +198,23 @@
                 </div>
             </div>
             <div class="row">
+                {% for product_item in like_block %}
                 <div class="col-sm-3 similar-product-card-column">
                     <div class="similar-product-card-border-data">
-                        <a href="#" class="similar-product-card" data-wow-delay=".2s">
+                        <a href="{{ product_item.path }}" class="similar-product-card" data-wow-delay=".2s">
                             <div class="similar-product-image py-3">
-                                <img src="{% static 'flower/images/index_2_temp/ant029_shop/shop_img1.jpg' %}" alt="">
+                                <img src="{{ product_item.photo.url }}" alt="">
                             </div>
                             <div class="similar-product-card-name-block">
                                 <div href="#shop-detail.html">
-                                    <div class="price"><span class="value">6999</span><span class="currency">₽</span></div>
-                                    <div class="name">Букет роз</div>
+                                    <div class="price"><span class="value">{{ product_item.price }}</span><span class="currency">₽</span></div>
+                                    <div class="name">{{ product_item.name }}</div>
                                 </div>
                             </div>
                         </a>
                     </div>
                 </div>
-                <!-- column End -->
-                <div class="col-sm-3 similar-product-card-column">
-                    <div class="similar-product-card-border-data">
-                        <a href="#" class="similar-product-card" data-wow-delay=".2s">
-                            <div class="similar-product-image py-3">
-                                <img src="{% static 'flower/images/index_2_temp/ant029_shop/shop_img1.jpg' %}" alt="">
-                            </div>
-                            <div class="similar-product-card-name-block">
-                                <div href="#shop-detail.html">
-                                    <div class="price"><span class="value">6999</span><span class="currency">₽</span></div>
-                                    <div class="name">Букет роз</div>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                <!-- column End -->
-                <div class="col-sm-3 similar-product-card-column">
-                    <div class="similar-product-card-border-data">
-                        <a href="#" class="similar-product-card" data-wow-delay=".2s">
-                            <div class="similar-product-image py-3">
-                                <img src="{% static 'flower/images/index_2_temp/ant029_shop/shop_img1.jpg' %}" alt="">
-                            </div>
-                            <div class="similar-product-card-name-block">
-                                <div href="#shop-detail.html">
-                                    <div class="price"><span class="value">6999</span><span class="currency">₽</span></div>
-                                    <div class="name">Букет роз</div>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                <!-- column End -->
-
-                <div class="col-sm-3 similar-product-card-column">
-                    <div class="similar-product-card-border-data">
-                        <a href="#" class="similar-product-card" data-wow-delay=".2s">
-                            <div class="similar-product-image py-3">
-                                <img src="{% static 'flower/images/index_2_temp/ant029_shop/shop_img1.jpg' %}" alt="">
-                            </div>
-                            <div class="ant029_shop-label">
-                                <h4>50 % off</h4>
-                            </div>
-                            <div class="similar-product-card-name-block">
-                                <div href="#shop-detail.html">
-                                    <div class="price"><span class="value">6999</span><span class="currency">₽</span></div>
-                                    <div class="name">Букет роз</div>
-                                </div>
-                            </div>
-                        </a>
-                    </div>
-                </div>
-                <!-- column End -->
+                {% endfor %}
             </div>
             <!-- row End -->
         </div>
@@ -270,7 +228,7 @@
                     <div class="product-description-text-border">
                         <div class="product-description_text">
                             <h3>Описание</h3>
-                            <p>Необычные, смелые и в то же время такие нежные, эти разноцветные гипсофилы готовы дарить радость всем окружающим! Преподнесите этот цветочный фейерверк близкому человеку, чтобы наполнить его жизнь яркими красками.</p>
+                            <p>{{ product.description }}</p>
                         </div>
                     </div>
                 </div>
@@ -280,19 +238,19 @@
                         <ul class="product-characteristics md-0 p-0">
                             <li>
                                 <div class="product-characteristic-title">Тип</div>
-                                <span class="value">Композиция</span>
+                                <span class="value">{{product.type}}</span>
                             </li>
                             <li>
                                 <div class="product-characteristic-title">Повод</div>
-                                <span class="value">День рождения</span>
+                                <span class="value">{{product.reason}}</span>
                             </li>
                             <li>
                                 <div class="product-characteristic-title">Ширина</div>
-                                <span class="value">35</span> см
+                                <span class="value">{{product.size.width}}</span> см
                             </li>
                             <li>
                                 <div class="product-characteristic-title">Высота</div>
-                                <span class="value">35</span> см
+                                <span class="value">{{product.size.height}}</span> см
                             </li>
                         </ul>
                     </div>
