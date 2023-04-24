@@ -48,24 +48,26 @@ class Detail_page(object):
             
     def getReviews(self, productItem):
         reviews = Review.objects.all()
-        temp_result = {'global_grade': 0, 'stars': '', 'few_reviews': ''}
+        temp_result = {'global_grade': 0, 'global_stars': '', 'number_all_reviews' : 0, 'few_reviews': ''}
         temp_reviews = []
         grades = []
 
         for item in reviews:
             if item.flower.pk == productItem.pk:
-                temp_reviews.append({'grade': item.grade, 'stars':{'fill': item.grade, 'less': 5-item.grade}, 'author': item.author, 'description': item.description})
+                temp_reviews.append({'grade': item.grade, 'stars':{'fill': [0 for i in range(item.grade)], 'less': [0 for i in range(5-item.grade)]}, 'author': item.author, 'description': item.description})
                 grades.append(item.grade)
         
+        
         if temp_reviews == []:
-            temp_result['few_reviews'] = 'none'  
-            temp_result['global_stars'] = {'fill': 0, 'less': 5}  
+            temp_result['few_reviews'] = ''  
+            temp_result['global_stars'] = {'fill': [], 'less': [0 for i in range(5)]}  
         else:
             average = sum(grades)/len(grades)
             temp_result['global_grade'] = average
-            temp_result['few_reviews'] = temp_reviews
-            temp_result['global_stars'] = {'fill': round(average), 'less': 5-round(average)}
-
+            temp_result['global_stars'] = {'fill': [0 for i in range(round(average))], 'less': [0 for i in range(5-round(average))]}
+            temp_result['number_all_reviews'] = len(temp_reviews)
+            temp_result['few_reviews'] = temp_reviews # TODO нужно сократить выгрузку до 3-4 отзывов
+            
 
         return temp_result
     

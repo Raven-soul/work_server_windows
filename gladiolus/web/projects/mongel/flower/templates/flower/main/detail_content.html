@@ -98,16 +98,16 @@
                                                 <div class="row-2">
                                                     <div class="col global-data">
                                                         <div class="row reviews-global-data">
-                                                            <div class="col-auto reviews-global-grade">4</div>
+                                                            <div class="col-auto reviews-global-grade">{{ product.reviews.global_grade }}</div>
                                                             <div class="col">
                                                                 <div class="row-2">
                                                                     <div class="col">
                                                                         <div class="rating-after-name">
                                                                             <ul>
-                                                                                {% for fill_star in global_stars(reviews.stars.fill) %}
+                                                                                {% for i in product.reviews.global_stars.fill %}
                                                                                     <li><i class="fa-solid fa-star"></i></li>
                                                                                 {% endfor %}
-                                                                                {% for less_star in global_stars(reviews.stars.less) %}
+                                                                                {% for i in product.reviews.global_stars.less %}
                                                                                     <li><i class="fa-regular fa-star"></i></li>
                                                                                 {% endfor %}
                                                                             </ul>
@@ -115,15 +115,15 @@
                                                                     </div>
                                                                     <div class="col">
                                                                         <div class="row">
-                                                                            <div class="col-auto">№ Оценок</div>
-                                                                            <div class="col-auto">№ Отзывов</div>
+                                                                            <div class="col-auto">{{ product.reviews.number_all_reviews }}  Оценок</div>
+                                                                            <div class="col-auto">{{ product.reviews.number_all_reviews }}  Отзывов</div>
                                                                         </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    {% for review in reviews.few_reviews %}
+                                                    {% for review in product.reviews.few_reviews %}
                                                         <div class="col rewiew-local-data">
                                                             <div class="row-2">
                                                                 <div class="col rewiew-local-data-stroke">
@@ -131,92 +131,23 @@
                                                                         <div class="col-auto">
                                                                             <div class="rating-after-name">
                                                                                 <ul>
-                                                                                    {% for fill_star in range(review.stars.fill) %}
+                                                                                    {% for i in review.stars.fill %}
                                                                                         <li><i class="fa-solid fa-star"></i></li>
                                                                                     {% endfor %}
-                                                                                    {% for less_star in range(review.stars.less) %}
+                                                                                    {% for i in review.stars.less %}
                                                                                         <li><i class="fa-regular fa-star"></i></li>
                                                                                     {% endfor %}
                                                                                 </ul>
                                                                             </div>
                                                                         </div>
-                                                                        <div class="col-auto reviews-local-grade">4</div>
+                                                                        <div class="col-auto reviews-local-grade">{{ review.grade }}</div>
                                                                     </div>
                                                                 </div>
-                                                                <div class="col reviews-local-author rewiew-local-data-stroke">Джон Рональд Руэл Толкин</div>
+                                                                <div class="col reviews-local-author rewiew-local-data-stroke">{{ review.author }}</div>
                                                                 <div class="col reviews-local-description">{{ review.description }}</div> 
                                                             </div>
                                                         </div>
                                                     {% endfor %}
-
-                                                    <div class="col rewiew-local-data">
-                                                        <div class="row-2">
-                                                            <div class="col rewiew-local-data-stroke">
-                                                                <div class="row">
-                                                                    <div class="col-auto">
-                                                                        <div class="rating-after-name">
-                                                                            <ul>
-                                                                                <li id="1"><i class="fa fa-star-half-o"></i></li>
-                                                                                <li id="2"><i class="fa-regular fa-star"></i></li>
-                                                                                <li id="3"><i class="fa-regular fa-star"></i></li>
-                                                                                <li id="4"><i class="fa-regular fa-star"></i></li>
-                                                                                <li id="5"><i class="fa-regular fa-star"></i></li>
-                                                                            </ul>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="col-auto reviews-local-grade">4</div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col reviews-local-author rewiew-local-data-stroke">Джон Рональд Руэл Толкин</div>
-                                                            <div class="col reviews-local-description">В качестве флагмана Объединённого флота «Ямато» формально участвовал в сражении у атолла Мидуэй 4-6 июня 1942 года, но фактически не имел столкновений с противником, так как находился на 300 миль позади японских авианосцев. 28 мая 1942 года «Ямато» перебазировался на остров Трук, где провёл около года, выполняя роль плавучего штаба Объединённого флота. 25 декабря 1943 г. находившийся к северу от острова Трук «Ямато»</div> 
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="col rewiew-local-data">
-                                                        <div class="row-2">
-                                                            <div class="col rewiew-local-data-stroke">
-                                                                <div class="row">
-                                                                    <div class="col-auto">
-                                                                        <div class="rating-after-name">
-                                                                            <ul>
-                                                                                <li id="1"><i class="fa fa-star-half-o"></i></li>
-                                                                                <li id="2"><i class="fa-regular fa-star"></i></li>
-                                                                                <li id="3"><i class="fa-regular fa-star"></i></li>
-                                                                                <li id="4"><i class="fa-regular fa-star"></i></li>
-                                                                                <li id="5"><i class="fa-regular fa-star"></i></li>
-                                                                            </ul>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="col-auto reviews-local-grade">4</div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col reviews-local-author rewiew-local-data-stroke">Джон Рональд Руэл Толкин</div>
-                                                            <div class="col reviews-local-description">В качестве флагмана Объединённого флота «Ямато» формально участвовал в сражении у атолла Мидуэй 4-6 июня 1942 года, но фактически не имел столкновений с противником, так как находился на 300 миль позади японских авианосцев. 28 мая 1942 года «Ямато» перебазировался на остров Трук, где провёл около года, выполняя роль плавучего штаба Объединённого флота. 25 декабря 1943 г. находившийся к северу от острова Трук «Ямато»</div> 
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="col rewiew-local-data">
-                                                        <div class="row-2">
-                                                            <div class="col rewiew-local-data-stroke">
-                                                                <div class="row">
-                                                                    <div class="col-auto">
-                                                                        <div class="rating-after-name">
-                                                                            <ul>
-                                                                                <li id="1"><i class="fa fa-star-half-o"></i></li>
-                                                                                <li id="2"><i class="fa-regular fa-star"></i></li>
-                                                                                <li id="3"><i class="fa-regular fa-star"></i></li>
-                                                                                <li id="4"><i class="fa-regular fa-star"></i></li>
-                                                                                <li id="5"><i class="fa-regular fa-star"></i></li>
-                                                                            </ul>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="col-auto reviews-local-grade">4</div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="col reviews-local-author rewiew-local-data-stroke">Джон Рональд Руэл Толкин</div>
-                                                            <div class="col reviews-local-description">В качестве флагмана Объединённого флота «Ямато» формально участвовал в сражении у атолла Мидуэй 4-6 июня 1942 года, но фактически не имел столкновений с противником, так как находился на 300 миль позади японских авианосцев. 28 мая 1942 года «Ямато» перебазировался на остров Трук, где провёл около года, выполняя роль плавучего штаба Объединённого флота. 25 декабря 1943 г. находившийся к северу от острова Трук «Ямато»</div> 
-                                                        </div>
-                                                    </div>
                                                 </div>                                                
                                             </div>
                                         </div>
