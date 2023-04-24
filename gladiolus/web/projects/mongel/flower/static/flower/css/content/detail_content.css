@@ -212,6 +212,37 @@ dl, ol, ul {
     padding: 0 8px 16px 8px;
 }
 
+.global-data {
+    margin-bottom: 15px;
+}
+
+.reviews-global-grade{
+    font-size: 40px;
+}
+
+.rewiew-local-data {
+    background-color: #e7e7e7;
+    border-radius: 13px;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.rewiew-local-data-stroke {
+    margin-bottom: 5px;
+}
+
+.reviews-local-grade{
+    font-size: 22px;
+}
+
+.reviews-local-author {
+    color: #939393;
+}
+
+.reviews-local-description {
+    text-decoration: none;
+}
+
 .compound-column-item {
     color: #c2c2c2;
 }

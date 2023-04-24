@@ -99,6 +99,7 @@ class Flower(models.Model):
 class Review(models.Model):
     grade = models.IntegerField(verbose_name='Оценка товара')
     description = models.TextField(blank=True, verbose_name='Описание отзыва')
+    author = models.CharField(max_length=255, null=True, verbose_name='Автор отзыва')
     time_create = models.DateTimeField(auto_now_add=True, verbose_name='Время создания')
     flower = models.ForeignKey(Flower, on_delete=models.CASCADE, verbose_name='Товар')
 

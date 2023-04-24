@@ -48,22 +48,24 @@ class Detail_page(object):
             
     def getReviews(self, productItem):
         reviews = Review.objects.all()
-        temp_result = {'global_grade': 0, 'reviews': ''}
+        temp_result = {'global_grade': 0, 'stars': '', 'few_reviews': ''}
         temp_reviews = []
         grades = []
 
-        #temp_result.append({'global_grade': 0, 'reviews': [{'grade': 0, 'description': 'data'},]})
-
         for item in reviews:
             if item.flower.pk == productItem.pk:
-                temp_reviews.append({'grade': item.grade, 'description': item.description})
+                temp_reviews.append({'grade': item.grade, 'stars':{'fill': item.grade, 'less': 5-item.grade}, 'author': item.author, 'description': item.description})
                 grades.append(item.grade)
         
         if temp_reviews == []:
-            temp_result['reviews'] = 'none'    
+            temp_result['few_reviews'] = 'none'  
+            temp_result['global_stars'] = {'fill': 0, 'less': 5}  
         else:
-            temp_result['global_grade'] = sum(grades)/len(grades)
-            temp_result['reviews'] = temp_reviews
+            average = sum(grades)/len(grades)
+            temp_result['global_grade'] = average
+            temp_result['few_reviews'] = temp_reviews
+            temp_result['global_stars'] = {'fill': round(average), 'less': 5-round(average)}
+
 
         return temp_result
     

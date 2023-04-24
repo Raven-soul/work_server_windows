@@ -27,7 +27,12 @@ runserver:
 python manage.py runserver
 
 makemigrations:
-python manage.py migrate --fake-initial
+python manage.py migrate --fake my-app zero
+python manage.py migrate my_app --fake-initial
+
+https://stackoverflow.com/questions/33549772/django-migration-no-migrations-to-apply
+
+(python manage.py migrate --fake-initial)
 
 python manage.py makemigrations
 python manage.py migrate
