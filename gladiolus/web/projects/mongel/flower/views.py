@@ -29,8 +29,8 @@ def basket(request):
     return render(request, 'flower/main/basket_content.html', context=data)
 
 def login(request):
-    data = Login_page().getDict()
-    return render(request, 'flower/main/index_shop_page.html', context=data)
+    data = Login_page(request).getDict()
+    return render(request, 'flower/form_pages/login.html', context=data)
 
 #--------------- main_cats_pages --------------------------
 

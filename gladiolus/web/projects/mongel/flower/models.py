@@ -12,8 +12,8 @@ class Category(models.Model):
         return reverse("category", kwargs={"cat_id": self.pk})
     
     class Meta:
-        verbose_name = 'Категория'
-        verbose_name_plural = 'Категории'
+        verbose_name = '1. Категория'
+        verbose_name_plural = '1. Категории'
         ordering = ['name',]
 
 class Occasion(models.Model):
@@ -27,8 +27,8 @@ class Occasion(models.Model):
         return reverse("occasion", kwargs={"occ_id": self.pk})
     
     class Meta:
-        verbose_name = 'Повод'
-        verbose_name_plural = 'Поводы'
+        verbose_name = '1. Повод'
+        verbose_name_plural = '1. Поводы'
         ordering = ['name',]
 
 class Season(models.Model):
@@ -42,8 +42,8 @@ class Season(models.Model):
         return reverse("season", kwargs={"sea_id": self.pk})
     
     class Meta:
-        verbose_name = 'Время года'
-        verbose_name_plural = 'Времена года'
+        verbose_name = '1. Время года'
+        verbose_name_plural = '1. Времена года'
         ordering = ['name',]
 
 class Type(models.Model):
@@ -57,8 +57,8 @@ class Type(models.Model):
         return reverse("type", kwargs={"typ_id": self.pk})
     
     class Meta:
-        verbose_name = 'Тип товара'
-        verbose_name_plural = 'Типы товаров'
+        verbose_name = '1. Тип товара'
+        verbose_name_plural = '1. Типы товаров'
         ordering = ['name',]
         
 
@@ -92,8 +92,8 @@ class Flower(models.Model):
         return reverse("product", kwargs={"prod_id": self.pk})
     
     class Meta:
-        verbose_name = 'Товар'
-        verbose_name_plural = 'Товары'
+        verbose_name = '1. Товар'
+        verbose_name_plural = '1. Товары'
         ordering = ['time_create', 'title']
     
 class Review(models.Model):
@@ -107,8 +107,8 @@ class Review(models.Model):
         return str(self.grade)
     
     class Meta:
-        verbose_name = 'Отзыв'
-        verbose_name_plural = 'Отзывы'
+        verbose_name = '2. Отзыв'
+        verbose_name_plural = '2. Отзывы'
         ordering = ['time_create', 'grade']
     
 class Composition(models.Model):
@@ -121,8 +121,8 @@ class Composition(models.Model):
         return self.flower_part_1
     
     class Meta:
-        verbose_name = 'Состав букета'
-        verbose_name_plural = 'Состав букета'
+        verbose_name = '2. Состав букета'
+        verbose_name_plural = '2. Состав букета'
         ordering = ['flower',]
     
 class Wrapping(models.Model):
@@ -134,8 +134,8 @@ class Wrapping(models.Model):
         return self.wrapping_part_1
     
     class Meta:
-        verbose_name = 'Состав упаковки'
-        verbose_name_plural = 'Состав упаковки'
+        verbose_name = '2. Состав упаковки'
+        verbose_name_plural = '2. Состав упаковки'
         ordering = ['flower',]
 
 class InfoClass(models.Model):
@@ -146,8 +146,8 @@ class InfoClass(models.Model):
         return self.name
     
     class Meta:
-        verbose_name = 'Класс инфо-страницы'
-        verbose_name_plural = 'Класс инфо-страниц'
+        verbose_name = '3. Класс инфо-страницы'
+        verbose_name_plural = '3. Класс инфо-страниц'
         ordering = ['id',]
 
 class InfoPages(models.Model):
@@ -160,6 +160,19 @@ class InfoPages(models.Model):
         return self.name
     
     class Meta:
-        verbose_name = 'Инфо-страница'
-        verbose_name_plural = 'Инфо-страницы'
+        verbose_name = '3. Инфо-страница'
+        verbose_name_plural = '3. Инфо-страницы'
+        ordering = ['id',]
+
+class Users(models.Model):
+    name = models.CharField(max_length=255, verbose_name='Имя')
+    email = models.CharField(max_length=255, verbose_name='Логин')
+    password = models.CharField(max_length=255, verbose_name='Пароль')
+
+    def __str__(self):
+        return self.name
+    
+    class Meta:
+        verbose_name = '4. Пользователь'
+        verbose_name_plural = '4. Пользователи'
         ordering = ['id',]
