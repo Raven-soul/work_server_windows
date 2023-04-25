@@ -3,12 +3,12 @@
     <div class="container">
         <div class="row">
             <div class="col d-flex justify-content-center">
-                <form action="{% url 'login' %}" method="post">
+                <form action="{% url action_page %}" method="post">
                     {% csrf_token %}
                     {{ form.as_div }}
                     <div class="row form-button-row">
-                        <div class="col p-0"><button type="submit" class="form-button button-submit">Войти</button></div>
-                        <div class="col p-0"><a href="{% url 'registration' %}" class="form-button button-redirect">Регистрация</a></div>
+                        <div class="col p-0"><button type="submit" class="form-button button-submit">{{ button_submit }}</button></div>
+                        <div class="col p-0"><a href="{% url href_page %}" class="form-button button-redirect">{{ button_redirect }}</a></div>
                     </div>
                 </form>
             </div>

@@ -27,7 +27,7 @@ class RegistrationPostForm (forms.ModelForm):
             'password_second': forms.TextInput(attrs={'type': 'password' })
         }
 
-    def clean_password(self):
+    def clean(self):
         password_1 = self.cleaned_data['password_first']
         password_2 = self.cleaned_data['password_second']
         if len(password_1) < 5:
@@ -36,3 +36,12 @@ class RegistrationPostForm (forms.ModelForm):
             raise ValidationError('Пароли должны совпадать')
     
         return password_1
+    
+    def clean_email(self):
+        email = self.cleaned_data['email']
+        users = User.objects.all()
+        for user in users:
+            if email == user.email:
+                raise ValidationError('Пользователь с таким email уже зарегестрирован')
+            
+        return email

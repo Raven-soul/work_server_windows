@@ -14,7 +14,11 @@ class Login_page(object):
         self.context = {
             'header': self.header.getData(),
             'footer': self.footer.getData(),
-            'form': self.form
+            'form': self.form, 
+            'button_submit': 'Войти',
+            'button_redirect': 'Регистрация',
+            'action_page': 'login',
+            'href_page': 'registration'
         }
 
     def startBuilder(self, request):
@@ -27,7 +31,7 @@ class Login_page(object):
     
     def formValidation(self, request):
         if request.method == 'POST':
-            form = RegistrationPostForm(request.POST)
+            form = AuthorizationPostForm(request.POST)
             if form.is_valid():
                 print(form.cleaned_data)
         else:

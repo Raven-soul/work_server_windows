@@ -14,7 +14,11 @@ class Registration_page(object):
         self.context = {
             'header': self.header.getData(),
             'footer': self.footer.getData(),
-            'form': self.form
+            'form': self.form,
+            'button_submit': 'Зарегистрировать',
+            'button_redirect': 'Авторизация',
+            'action_page': 'registration',
+            'href_page': 'login'
         }
 
     def startBuilder(self, request):
