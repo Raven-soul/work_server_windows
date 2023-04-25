@@ -4,7 +4,8 @@ from django.http import HttpResponse, HttpResponseNotFound, Http404 #перех�
 #-------------главные страницы сайта --------------------------
 from .pages.main import Main_page
 from .pages.info_pages_data.info_pages import *
-from .pages.login import Login_page
+from .pages.forms.login import Login_page
+from .pages.forms.registration import Registration_page
 from .pages.detail import Detail_page
 from .pages.basket import Basket_page
 from .pages.main_cats.category import *
@@ -30,6 +31,10 @@ def basket(request):
 
 def login(request):
     data = Login_page(request).getDict()
+    return render(request, 'flower/form_pages/login.html', context=data)
+
+def registration(request):
+    data = Registration_page(request).getDict()
     return render(request, 'flower/form_pages/login.html', context=data)
 
 #--------------- main_cats_pages --------------------------

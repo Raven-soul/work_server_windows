@@ -9,7 +9,8 @@ urlpatterns = [
     path('basket/', basket, name='basket'),
 
     # ----------------------- main form pages -------------------------------
-    path('login_user/', login, name='login'),
+    path('login/', login, name='login'),
+    path('registration/', registration, name='registration'),
 
     # ----------------------- information pages -------------------------------
     path('about/', about_info, name='about_info'),

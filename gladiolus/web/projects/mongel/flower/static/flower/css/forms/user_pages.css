@@ -1,0 +1,60 @@
+form div {
+    margin-bottom: 10px;
+}
+
+form input {
+    width: 100%;
+}
+
+form ul {
+    padding: 0;
+}
+
+form li {
+    text-align: left;
+    display: block;
+    list-style-type: none;
+    list-style-image: none;
+    margin: 0;
+    color: brown;
+}
+
+.form-button-row {
+    margin-top: 80px;
+    margin-bottom: 40px;
+}
+
+.form-button {
+    width: 100%;
+    height: 100%;
+    padding: 10px;
+    border: none;
+    
+    text-decoration: none;
+    display: block;
+    text-align: center;
+} 
+
+.form-button:hover {
+    text-decoration: none;
+}
+
+.button-submit {
+    color: white;
+    background-color: rgb(174,132,188);
+}
+
+.button-submit:hover {
+    color: white;
+    background-color: rgb(139,86,157);
+}
+
+.button-redirect {
+    color: black;
+    background-color: rgb(235, 235, 235);
+}
+
+.button-redirect:hover {
+    color: black;
+    background-color: rgb(202, 207, 255);
+}

@@ -164,9 +164,9 @@ class InfoPages(models.Model):
         verbose_name_plural = '3. Инфо-страницы'
         ordering = ['id',]
 
-class Users(models.Model):
+class User(models.Model):
     name = models.CharField(max_length=255, verbose_name='Имя')
-    email = models.CharField(max_length=255, verbose_name='Логин')
+    email = models.CharField(unique=True, max_length=255, verbose_name='Логин')
     password = models.CharField(max_length=255, verbose_name='Пароль')
 
     def __str__(self):
@@ -175,4 +175,18 @@ class Users(models.Model):
     class Meta:
         verbose_name = '4. Пользователь'
         verbose_name_plural = '4. Пользователи'
+        ordering = ['id',]
+
+class Register_form(models.Model):
+    name = models.CharField(max_length=255, verbose_name='Имя')
+    email = models.CharField(unique=True, max_length=255, verbose_name='Логин')
+    password_first = models.CharField(max_length=255, verbose_name='Пароль')
+    password_second = models.CharField(max_length=255, verbose_name='Повтор пароля')
+
+    def __str__(self):
+        return self.name
+    
+    class Meta:
+        verbose_name = '4. Форма регистрации'
+        verbose_name_plural = '4. Форма регистрации'
         ordering = ['id',]

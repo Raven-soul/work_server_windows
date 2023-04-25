@@ -1,14 +1,15 @@
-from ..models import * #база данных
+from ...models import * #база данных
 from django.shortcuts import render, redirect
-from .common_data.footer import Footer
-from .common_data.header import Header
-from ..forms import *
+from ..common_data.footer import Footer
+from ..common_data.header import Header
+from ...forms import *
 
-class Login_page(object):
+class Registration_page(object):
     def __init__(self, request):
         self.startBuilder(request)
         
-        self.header.setData(value = 'Авторизация пользователя')
+        self.header.setData(name = 'content_style_path', value = 'flower/css/forms/user_pages.css')
+        self.header.setData(value = 'Регистрация пользователя')
         
         self.context = {
             'header': self.header.getData(),

@@ -7,8 +7,8 @@
                     {% csrf_token %}
                     {{ form.as_div }}
                     <div class="row form-button-row">
-                        <div class="col p-0"><button type="submit" class="form-button button-submit">Войти</button></div>
-                        <div class="col p-0"><a href="{% url 'registration' %}" class="form-button button-redirect">Регистрация</a></div>
+                        <div class="col p-0"><button type="submit" class="form-button button-submit">Зарегистрироваться</button></div>
+                        <div class="col p-0"><a href="{% url 'login' %}" class="form-button button-redirect">Авторизация</a></div>
                     </div>
                 </form>
             </div>
