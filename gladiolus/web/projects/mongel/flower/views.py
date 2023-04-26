@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseNotFound, Http404 #перехват исключения
+from .forms import *
 
 #-------------главные страницы сайта --------------------------
 from .pages.main import Main_page
@@ -28,14 +29,6 @@ def product_details(request, prod_id):
 def basket(request):
     data = Basket_page().getDict()
     return render(request, 'flower/main/basket_content.html', context=data)
-
-def login(request):
-    data = Login_page(request).getDict()
-    return render(request, 'flower/form_pages/login.html', context=data)
-
-def registration(request):
-    data = Registration_page(request).getDict()
-    return render(request, 'flower/form_pages/login.html', context=data)
 
 #--------------- main_cats_pages --------------------------
 
@@ -81,8 +74,30 @@ def help_info(request):
     data = Help_page().getDict()
     return render(request, 'flower/info_pages/help.html', context=data)
 
+#-------------------------------- form pages ---------------------------
+
+def login(request):
+    data = Login_page(request).getDict()
+    return render(request, 'flower/form_pages/login.html', context=data)
+
+def registration(request):
+    data = Registration_page(request).getDict()
+
+    if request.method == 'POST':
+        form = RegistrationPostForm(request.POST)
+        if form.is_valid():
+            #User.objects.create(name=form.cleaned_data['name'], email=form.cleaned_data['email'], password=form.cleaned_data['password_first'])
+            return redirect('home')
+    else:
+        form = RegistrationPostForm()
+
+    data['form'] = form
+    return render(request, 'flower/form_pages/login.html', context=data)
+
 
 #----------------------------------- 404 ----------------------------------------
 
 def pageNotFound(request, exception):
     return HttpResponseNotFound('<h1>Страница не найдена</h1>')
+
+#---------------------------- additional material ----------------------------------------

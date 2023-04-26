@@ -1,4 +1,5 @@
 from ...models import * #база данных
+from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
 from ..common_data.footer import Footer
 from ..common_data.header import Header
@@ -14,7 +15,7 @@ class Registration_page(object):
         self.context = {
             'header': self.header.getData(),
             'footer': self.footer.getData(),
-            'form': self.form,
+            'form': '',
             'button_submit': 'Зарегистрировать',
             'button_redirect': 'Авторизация',
             'action_page': 'registration',
@@ -24,18 +25,7 @@ class Registration_page(object):
     def startBuilder(self, request):
         self.header = Header()
         self.footer = Footer()
-        self.form = self.formValidation(request)
 
     def getDict(self):
         return self.context
-    
-    def formValidation(self, request):
-        if request.method == 'POST':
-            form = RegistrationPostForm(request.POST)
-            if form.is_valid():
-                User.objects.create(name=form.cleaned_data['name'], email=form.cleaned_data['email'], password=form.cleaned_data['password_first'])
-                return redirect('/', permanent=True) #TODO
-        else:
-            form = RegistrationPostForm()
 
-        return form
