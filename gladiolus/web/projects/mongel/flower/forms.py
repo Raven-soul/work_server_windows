@@ -3,7 +3,7 @@ from .models import *
 
 from django.core.exceptions import ValidationError
 
-class AuthorizationPostForm (forms.ModelForm):
+class User_form (forms.ModelForm):
     class Meta:
         model = User
         fields = ['name', 'email', 'password']
@@ -35,11 +35,10 @@ class RegistrationPostForm (forms.ModelForm):
         if password_1 != password_2:
             raise ValidationError('Пароли должны совпадать')
     
-        return password_1
-    
     def clean_email(self):
         email = self.cleaned_data['email']
         users = User.objects.all()
+        
         for user in users:
             if email == user.email:
                 raise ValidationError('Пользователь с таким email уже зарегестрирован')

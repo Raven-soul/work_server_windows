@@ -31,10 +31,10 @@ class Login_page(object):
     
     def formValidation(self, request):
         if request.method == 'POST':
-            form = AuthorizationPostForm(request.POST)
+            form = User_form(request.POST)
             if form.is_valid():
                 print(form.cleaned_data)
         else:
-            form = AuthorizationPostForm()
+            form = User_form()
 
         return form

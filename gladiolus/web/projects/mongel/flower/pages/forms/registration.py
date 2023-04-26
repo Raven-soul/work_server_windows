@@ -33,7 +33,8 @@ class Registration_page(object):
         if request.method == 'POST':
             form = RegistrationPostForm(request.POST)
             if form.is_valid():
-                print(form.cleaned_data)
+                User.objects.create(name=form.cleaned_data['name'], email=form.cleaned_data['email'], password=form.cleaned_data['password_first'])
+                return redirect('/', permanent=True) #TODO
         else:
             form = RegistrationPostForm()
 

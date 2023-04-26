@@ -31,6 +31,11 @@ class InfoPagesAdmin(admin.ModelAdmin):
     list_display_links = ('id', 'name')
     search_fields = ('id', 'name')
 
+class UserAdmin(admin.ModelAdmin):
+    list_display = ('id', 'name', 'email', 'password')
+    list_display_links = ('id', 'name')
+    search_fields = ('id', 'name')
+
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(Occasion, OccasionAdmin)
 admin.site.register(Season, SeasonAdmin)
@@ -41,3 +46,5 @@ admin.site.register(Composition)
 admin.site.register(Wrapping)
 admin.site.register(InfoPages, InfoPagesAdmin)
 admin.site.register(InfoClass)
+admin.site.register(User, UserAdmin)
+admin.site.register(Register_form)
