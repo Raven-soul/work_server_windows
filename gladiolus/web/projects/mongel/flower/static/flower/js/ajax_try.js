@@ -3,11 +3,14 @@ function data_click() {
 }
 
 $("document").ready(function() {
+    csrf_token = $('input[name="csrfmiddlewaretoken"]').val();
+
     $.ajax({
         url: 'js_start/',
         method: 'post',
         dataType: 'html',
-        data: {text: 'Текст'},
+        data: {text: 'Текст',
+              csrfmiddlewaretoken: csrf_token},
         success: function(data){
         alert(data);
         }
