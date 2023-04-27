@@ -68,6 +68,7 @@ class Flower(models.Model):
     price = models.DecimalField(max_digits=10, decimal_places=2, verbose_name='Стоимость')
     currency = models.CharField(max_length=255, verbose_name='Валюта')
     photo = models.ImageField(upload_to="photos/%Y/%m/%d/", verbose_name='Фото')
+    count = models.IntegerField(verbose_name='Кол-во товара на складе')
     
     #---------------------------description-------------------------------------- (may none)
     size_height = models.DecimalField(max_digits=5, decimal_places=2, null=True, verbose_name='Высота товара')
@@ -84,6 +85,7 @@ class Flower(models.Model):
     reason_data = models.ForeignKey(Occasion, on_delete=models.CASCADE, null=True, verbose_name='Повод')
     maturation_data = models.ForeignKey(Season, on_delete=models.CASCADE, null=True, verbose_name='Время созревания')
     type_data =  models.ForeignKey(Type, on_delete=models.CASCADE, null=True, verbose_name='Тип')
+    
     
     def __str__(self):
         return self.title
@@ -189,4 +191,18 @@ class Register_form(models.Model):
     class Meta:
         verbose_name = '4. Форма регистрации'
         verbose_name_plural = '4. Форма регистрации'
+        ordering = ['id',]
+
+class SelectedProducts(models.Model):
+    sesseion_id = models.CharField(max_length=255, verbose_name='Код сессии') 
+    count = models.IntegerField(verbose_name='Количество товара')
+    user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='Пользователь')
+    product = models.ForeignKey(Flower, on_delete=models.CASCADE, verbose_name='Товар')
+
+    def __str__(self):
+        return self.sesseion_id
+    
+    class Meta:
+        verbose_name = '5. Список выбранных товаров'
+        verbose_name_plural = '5. Список выбранных товаров'
         ordering = ['id',]

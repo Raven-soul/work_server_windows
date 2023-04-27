@@ -22,7 +22,7 @@ class TypeAdmin(admin.ModelAdmin):
     search_fields = ('name',)
 
 class FlowerAdmin(admin.ModelAdmin):
-    list_display = ('id', 'title', 'price', 'currency', 'categ', 'photo', 'time_create')
+    list_display = ('id', 'title', 'price', 'currency', 'categ', 'photo', 'time_create', 'count')
     list_display_links = ('id', 'title')
     search_fields = ('title', 'description_content')
 
@@ -36,6 +36,11 @@ class UserAdmin(admin.ModelAdmin):
     list_display_links = ('id', 'name')
     search_fields = ('id', 'name')
 
+class SelectedProductsAdmin(admin.ModelAdmin):
+    list_display = ('id', 'sesseion_id', 'count', 'user', 'product')
+    list_display_links = ('id', 'sesseion_id', 'user', 'product')
+    search_fields = ('id', 'sesseion_id', 'user')
+
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(Occasion, OccasionAdmin)
 admin.site.register(Season, SeasonAdmin)
@@ -48,3 +53,4 @@ admin.site.register(InfoPages, InfoPagesAdmin)
 admin.site.register(InfoClass)
 admin.site.register(User, UserAdmin)
 admin.site.register(Register_form)
+admin.site.register(SelectedProducts, SelectedProductsAdmin)
