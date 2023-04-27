@@ -15,13 +15,11 @@ class DataMixin:
         self.context['footer'] = footer.getData()
         return self.context
     
-
-    
-    # def setContextData(self, context_data, diction=[{'name': '', 'value': ''},]):
-    #     context = context_data
-    #     for  elem in diction:
-    #         if elem['name'] != '':
-    #             name = elem['name']
-    #             value = elem['value']
-    #             context[name] = value 
-    #     return context
+    def setContextData(self, context_data, diction=[{'name': '', 'value': ''},]):
+        context = context_data
+        for  elem in diction:
+            if elem['name'] != '':
+                name = elem['name']
+                value = elem['value']
+                context[name] = value 
+        return context

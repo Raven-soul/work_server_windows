@@ -5,16 +5,11 @@ from .forms import *
 from .utils import *
 
 #------------- главные страницы сайта --------------------------
-from .pages.main import Main_page
 from .pages.info_pages_data.info_pages import *
 from .pages.forms.login import Login_page
 from .pages.forms.registration import Registration_page
 from .pages.detail import Detail_page
 from .pages.basket import Basket_page
-from .pages.main_cats.category import *
-from .pages.main_cats.occasion import *
-from .pages.main_cats.season import *
-from .pages.main_cats.type import *
 
 from .models import * #база данных
 
@@ -28,14 +23,9 @@ class FlowerHome(DataMixin, ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         c_def = self.get_user_data()
-        print('--------------------------------------------', c_def['header'])
-        # c_def.context['header'] = self.setContextData(c_def.context['header'], diction=[{'name':'cat_selected', 'value':{'section': 0, 'order': 0}},])
+        c_def['header'] = self.setContextData(c_def['header'], diction=[{'name':'cat_selected', 'value':{'section': 0, 'order': 0}},])
         context = dict(list(context.items()) + list(c_def.items()))
         return context
-
-# def index(request):
-#     data = Main_page().getDict()
-#     return render(request, 'flower/main/main_content.html', context=data)
 
 def product_details(request, prod_id):
     data = Detail_page(prod_id).getDict()
@@ -47,21 +37,65 @@ def basket(request):
 
 #--------------- main_cats_pages --------------------------
 
-def show_category(request, cat_id):
-    data = Main_category_page(cat_id).getDict()
-    return render(request, 'flower/main/main_content.html', context=data)
+class FlowerShowCategory(DataMixin, ListView):
+    model = Flower
+    template_name = 'flower/main/main_content.html'
+    context_object_name = 'products'
 
-def show_occasion(request, occ_id):
-    data = Main_occasion_page(occ_id).getDict()
-    return render(request, 'flower/main/main_content.html', context=data)
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        c_def = self.get_user_data()
+        c_def['header'] = self.setContextData(c_def['header'], diction=[{'name':'cat_selected', 'value':{'section': 1, 'order': self.kwargs['cat_id']}},])
+        context = dict(list(context.items()) + list(c_def.items()))
+        return context
+    
+    def get_queryset(self):
+        return Flower.objects.filter(categ__pk=self.kwargs['cat_id'])
 
-def show_season(request, sea_id):
-    data = Main_season_page(sea_id).getDict()
-    return render(request, 'flower/main/main_content.html', context=data)
+class FlowerShowOccasion(DataMixin, ListView):
+    model = Flower
+    template_name = 'flower/main/main_content.html'
+    context_object_name = 'products'
 
-def show_type(request, typ_id):
-    data = Main_type_page(typ_id).getDict()
-    return render(request, 'flower/main/main_content.html', context=data)
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        c_def = self.get_user_data()
+        c_def['header'] = self.setContextData(c_def['header'], diction=[{'name':'cat_selected', 'value':{'section': 2, 'order': self.kwargs['occ_id']}},])
+        context = dict(list(context.items()) + list(c_def.items()))
+        return context
+    
+    def get_queryset(self):
+        return Flower.objects.filter(reason_data__pk=self.kwargs['occ_id'])
+
+class FlowerShowSeason(DataMixin, ListView):
+    model = Flower
+    template_name = 'flower/main/main_content.html'
+    context_object_name = 'products'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        c_def = self.get_user_data()
+        c_def['header'] = self.setContextData(c_def['header'], diction=[{'name':'cat_selected', 'value':{'section': 3, 'order': self.kwargs['sea_id']}},])
+        context = dict(list(context.items()) + list(c_def.items()))
+        return context
+    
+    def get_queryset(self):
+        return Flower.objects.filter(maturation_data__pk=self.kwargs['sea_id'])
+
+class FlowerShowType(DataMixin, ListView):
+    model = Flower
+    template_name = 'flower/main/main_content.html'
+    context_object_name = 'products'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        c_def = self.get_user_data()
+        c_def['header'] = self.setContextData(c_def['header'], diction=[{'name':'cat_selected', 'value':{'section': 4, 'order': self.kwargs['typ_id']}},])
+        context = dict(list(context.items()) + list(c_def.items()))
+        return context
+    
+    def get_queryset(self):
+        return Flower.objects.filter(type_data__pk=self.kwargs['typ_id'])
 
 #---------------- info_pages --------------------------
 

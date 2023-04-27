@@ -21,8 +21,8 @@ urlpatterns = [
     path('help/', help_info, name='help_info'),
 
     # ----------------------- main filter pages -------------------------------
-    path('category/<int:cat_id>', show_category, name='category'),
-    path('occasion/<int:occ_id>', show_occasion, name='occasion'),
-    path('season/<int:sea_id>', show_season, name='season'),
-    path('type/<int:typ_id>', show_type, name='type'),
+    path('category/<int:cat_id>', FlowerShowCategory.as_view(), name='category'),
+    path('occasion/<int:occ_id>', FlowerShowOccasion.as_view(), name='occasion'),
+    path('season/<int:sea_id>', FlowerShowSeason.as_view(), name='season'),
+    path('type/<int:typ_id>', FlowerShowType.as_view(), name='type'),
 ]
