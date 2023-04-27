@@ -194,10 +194,10 @@ class Register_form(models.Model):
         ordering = ['id',]
 
 class SelectedProducts(models.Model):
-    sesseion_id = models.CharField(max_length=255, verbose_name='Код сессии') 
+    product = models.ForeignKey(Flower, on_delete=models.CASCADE, verbose_name='Товар')
     count = models.IntegerField(verbose_name='Количество товара')
     user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='Пользователь')
-    product = models.ForeignKey(Flower, on_delete=models.CASCADE, verbose_name='Товар')
+    time_create = models.DateTimeField(auto_now_add=True,verbose_name='Время создания')
 
     def __str__(self):
         return self.sesseion_id
@@ -205,4 +205,18 @@ class SelectedProducts(models.Model):
     class Meta:
         verbose_name = '5. Список выбранных товаров'
         verbose_name_plural = '5. Список выбранных товаров'
+        ordering = ['id',]
+
+class purchasedProducts(models.Model):
+    product = models.ForeignKey(Flower, on_delete=models.CASCADE, verbose_name='Товар')
+    count = models.IntegerField(verbose_name='Количество товара')
+    user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='Пользователь')
+    time_create = models.DateTimeField(auto_now_add=True,verbose_name='Время создания')
+
+    def __str__(self):
+        return self.sesseion_id
+    
+    class Meta:
+        verbose_name = '5. Список купленных товаров'
+        verbose_name_plural = '5. Список купленных товаров'
         ordering = ['id',]

@@ -2,5 +2,8 @@
 {% block content %}
 {% csrf_token %}
 <p>{{ content_data }}</p>
+<button onclick="{{ onclick_function }}">
+    Data
+</button>
 {% endblock content %}
 {% include '../footer.html' %}

@@ -37,9 +37,9 @@ class UserAdmin(admin.ModelAdmin):
     search_fields = ('id', 'name')
 
 class SelectedProductsAdmin(admin.ModelAdmin):
-    list_display = ('id', 'sesseion_id', 'count', 'user', 'product')
-    list_display_links = ('id', 'sesseion_id', 'user', 'product')
-    search_fields = ('id', 'sesseion_id', 'user')
+    list_display = ('id', 'count', 'user', 'product', 'time_create')
+    list_display_links = ('id', 'user', 'product')
+    search_fields = ('id', 'user')
 
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(Occasion, OccasionAdmin)

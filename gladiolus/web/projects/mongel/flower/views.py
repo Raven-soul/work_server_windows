@@ -150,3 +150,24 @@ def pageNotFound(request, exception):
     return HttpResponseNotFound('<h1>Страница не найдена</h1>')
 
 #---------------------------- additional material ----------------------------------------
+def js_data(request):
+    script_list = [{'script_url':'flower/js/ajax_try.js'}]
+
+    header = Header()
+    footer = Footer()
+
+    footer.setData(name='script_list', value=script_list)
+
+    context = {'header': header.getData(),
+               'footer': footer.getData(),
+               'content_data': 'проверяем аджакс', 
+               'onclick_function': 'data_click()'}
+    return render(request, 'flower/main/index_shop_page_button.html', context=context)
+
+def js_start_data(request):
+    print('-----------------------------------------------------------------')
+    context = {'header': Header().getData(),
+               'footer': Footer().getData(),
+               'content_data': 'js - is ready'}
+    print('----------------------------------------------------------------- end')
+    return render(request, 'flower/main/index_shop_page.html', context=context)

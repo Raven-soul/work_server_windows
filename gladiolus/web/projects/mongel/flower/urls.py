@@ -25,4 +25,8 @@ urlpatterns = [
     path('occasion/<int:occ_id>', FlowerShowOccasion.as_view(), name='occasion'),
     path('season/<int:sea_id>', FlowerShowSeason.as_view(), name='season'),
     path('type/<int:typ_id>', FlowerShowType.as_view(), name='type'),
+
+    # ----------------------- other pages -------------------------------
+    path('js/js_start/', js_start_data, name='js_start'),
+    path('js/', js_data, name='js'),
 ]
