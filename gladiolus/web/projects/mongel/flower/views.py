@@ -1,8 +1,10 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseNotFound, Http404 #перехват исключения
+from django.views.generic import ListView
 from .forms import *
+from .utils import *
 
-#-------------главные страницы сайта --------------------------
+#------------- главные страницы сайта --------------------------
 from .pages.main import Main_page
 from .pages.info_pages_data.info_pages import *
 from .pages.forms.login import Login_page
@@ -18,9 +20,22 @@ from .models import * #база данных
 
 #------------------ main_pages --------------------------
 
-def index(request):
-    data = Main_page().getDict()
-    return render(request, 'flower/main/main_content.html', context=data)
+class FlowerHome(DataMixin, ListView):
+    model = Flower
+    template_name = 'flower/main/main_content.html'
+    context_object_name = 'products'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        c_def = self.get_user_data()
+        print('--------------------------------------------', c_def['header'])
+        # c_def.context['header'] = self.setContextData(c_def.context['header'], diction=[{'name':'cat_selected', 'value':{'section': 0, 'order': 0}},])
+        context = dict(list(context.items()) + list(c_def.items()))
+        return context
+
+# def index(request):
+#     data = Main_page().getDict()
+#     return render(request, 'flower/main/main_content.html', context=data)
 
 def product_details(request, prod_id):
     data = Detail_page(prod_id).getDict()

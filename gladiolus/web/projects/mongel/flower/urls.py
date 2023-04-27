@@ -4,7 +4,7 @@ from .views import *
 
 urlpatterns = [
     # ----------------------- main pages -------------------------------
-    path('', index, name='home'),
+    path('', FlowerHome.as_view(), name='home'),
     path('product/<int:prod_id>', product_details, name='product'),
     path('basket/', basket, name='basket'),
 
