@@ -19,6 +19,9 @@ class User_form (forms.ModelForm):
         return password
 
 class RegistrationPostForm (forms.ModelForm):
+    first_name = forms.CharField(required=True)
+    last_name = forms.CharField(required=True)
+
     class Meta:
         model = Register_form
         fields = ['name_register_field', 'email_register_field', 'password_first_register_field', 'password_second_register_field']
