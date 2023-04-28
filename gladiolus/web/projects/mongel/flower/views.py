@@ -10,6 +10,7 @@ from .pages.forms.login import Login_page
 from .pages.forms.registration import Registration_page
 from .pages.detail import Detail_page
 from .pages.basket import Basket_page
+from .pages.empty import Empty_page
 
 from .models import * #база данных
 
@@ -41,9 +42,15 @@ def basket(request):
     try:
         user_id = request.COOKIES["user_id"]
     except:
-        user_id = 0
+        return redirect('login')
+
     data = Basket_page(user_id).getDict()
-    return render(request, 'flower/main/basket_content.html', context=data)
+    if len(data['products']) == 0:
+        empty_data =  Empty_page(title='Корзина пуста').getDict()
+        empty_data['context'] = 'Корзина пуста'
+        return render(request, 'flower/main/empty_page.html', context=empty_data)
+    else:
+        return render(request, 'flower/main/basket_content.html', context=data)
 
 #--------------- main_cats_pages --------------------------
 

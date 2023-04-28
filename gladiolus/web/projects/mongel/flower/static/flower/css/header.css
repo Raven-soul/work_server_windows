@@ -95,3 +95,9 @@
 .content {
     min-height: 100px;
 }
+
+/* ----------------------------------- empty page ------------------------------------ */
+
+.empty-content-data {
+    font-size: 35px;
+}

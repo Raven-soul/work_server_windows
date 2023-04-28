@@ -8,9 +8,6 @@ class Basket_page(object):
         self.startBuilder()
         user = User.objects.filter(pk = int(user_id))
         products = SelectedProducts.objects.filter(user=user[0])
-        
-        print('--------------------------------------------- user_id', user_id)
-        print('--------------------------------------------- products', products)
 
         self.header.setData(value = 'Корзина пользователя')
         self.header.setData(name = 'content_style_path', value = 'flower/css/content/basket_content.css')
