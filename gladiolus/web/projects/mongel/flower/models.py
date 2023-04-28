@@ -200,7 +200,7 @@ class SelectedProducts(models.Model):
     time_create = models.DateTimeField(auto_now_add=True,verbose_name='Время создания')
 
     def __str__(self):
-        return self.sesseion_id
+        return self.product.title
     
     class Meta:
         verbose_name = '5. Список выбранных товаров'
@@ -214,7 +214,7 @@ class purchasedProducts(models.Model):
     time_create = models.DateTimeField(auto_now_add=True,verbose_name='Время создания')
 
     def __str__(self):
-        return self.sesseion_id
+        return self.product.title
     
     class Meta:
         verbose_name = '5. Список купленных товаров'

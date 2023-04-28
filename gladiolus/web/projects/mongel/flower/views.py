@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from django.http import HttpResponse, HttpResponseNotFound, Http404 #перехват исключения
+from django.http import HttpResponse, HttpResponseNotFound,JsonResponse, Http404 #перехват исключения
 from django.views.generic import ListView
 from .forms import *
 from .utils import *
@@ -170,4 +170,4 @@ def js_start_data(request):
                'footer': Footer().getData(),
                'content_data': 'js - is ready'}
     print('----------------------------------------------------------------- end')
-    return render(request, 'flower/main/index_shop_page.html', context=context)
+    return JsonResponse({'foo':'bar'})

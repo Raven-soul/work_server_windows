@@ -8,11 +8,11 @@ $("document").ready(function() {
     $.ajax({
         url: 'js_start/',
         method: 'post',
-        dataType: 'html',
+        dataType: "json",
         data: {text: 'Текст',
               csrfmiddlewaretoken: csrf_token},
         success: function(data){
-        alert(data);
+            alert(data.foo);
         }
     });
 })

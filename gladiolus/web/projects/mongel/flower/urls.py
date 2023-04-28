@@ -27,6 +27,7 @@ urlpatterns = [
     path('type/<int:typ_id>', FlowerShowType.as_view(), name='type'),
 
     # ----------------------- other pages -------------------------------
-    path('js/js_start/', js_start_data, name='js_start'),
     path('js/', js_data, name='js'),
+    path('js/js_start/', js_start_data, name='js_start'),
+    
 ]
