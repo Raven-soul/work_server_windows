@@ -20,7 +20,8 @@ class Basket_page(object):
         self.context = {
             'header': self.header.getData(),
             'footer': self.footer.getData(),
-            'products': products
+            'products': products,
+            'products_length': len(products)
         }
 
     def startBuilder(self):

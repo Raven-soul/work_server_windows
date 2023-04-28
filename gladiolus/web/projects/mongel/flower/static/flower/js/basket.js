@@ -1,43 +1,43 @@
-function awake(common_id, item_name) {
-    totalPriceCalculator(common_id, item_name);
-    delivery_calculate(common_id);
+function awake(common_data_id, product_row_name) {
+    totalPriceCalculator(common_data_id, product_row_name).then(console.log);
+    delivery_calculate(common_data_id);
 }
 
-function counterIncrease(tagButton, maxValue, factor, common_id, item_name) {
-    id = tagButton.getAttribute('aria-controls');
-    tagIncrease = document.getElementById(id);
+function counterIncrease(executing_button_tag, quantity_field_maxValue, factor, common_data_id, product_row_name) {
+    quantity_field_id = executing_button_tag.getAttribute('aria-controls');
+    quantity_field_tag = document.getElementById(quantity_field_id);
 
-    tagIncreasePreviousValue = Number(tagIncrease.getAttribute('value'));
-    minValue = Number(tagIncrease.getAttribute('min'));
+    quantity_field_tag_previous_value = Number(quantity_field_tag.getAttribute('value'));
+    quantity_field_minValue = Number(quantity_field_tag.getAttribute('min'));
 
-    if((tagIncreasePreviousValue + Number(1*factor)) > maxValue) {} 
-    else if((tagIncreasePreviousValue + Number(1*factor)) < minValue) {}
+    if((quantity_field_tag_previous_value + Number(1*factor)) > quantity_field_maxValue) {} 
+    else if((quantity_field_tag_previous_value + Number(1*factor)) < quantity_field_minValue) {}
     else {
-        tagIncrease.setAttribute('value', Number(tagIncreasePreviousValue + Number(1*factor)));
+        quantity_field_tag.setAttribute('value', Number(quantity_field_tag_previous_value + Number(1*factor)));
     }
 
-    productCostCalculator(tagButton.getAttribute('product-id'), tagIncrease.getAttribute('value'));
-    totalPriceCalculator(common_id, item_name);
+    productCostCalculator(executing_button_tag.getAttribute('product-id'), quantity_field_tag.getAttribute('value'));
+    totalPriceCalculator(common_data_id, product_row_name);
 }
 
-function productCostCalculator(RowId, number){
-    tagProduct = document.getElementById(RowId);
-    price = Number(tagProduct.getAttribute('price'));
-    priceTag = document.getElementById(tagProduct.getAttribute('priduct-id') + '-price');
-    priceTag.innerHTML = String(Number(number)*Number(price));
+function productCostCalculator(product_row_id, quantity_field_tag_view){
+    product_tag = document.getElementById(product_row_id);
+    product_price = parseFloat((product_tag.getAttribute('price').replace(",", ".")));
+    product_price_tag = document.getElementById(product_tag.getAttribute('priduct-id') + '-price');
+    product_price_tag.innerHTML = String(Number(quantity_field_tag_view)*Number(product_price));
 }
 
-function deleteRowButton(tagButton, common_id, item_name) {
-    id = tagButton.getAttribute('product-id');
-    document.getElementById(id).remove();
+function deleteRowButton(executing_button_tag, common_data_id, product_row_name) {
+    product_row_id = executing_button_tag.getAttribute('product-id');
+    document.getElementById(product_row_id).remove();
 
-    totalPriceCalculator(common_id, item_name);
+    totalPriceCalculator(common_data_id, product_row_name);
 }
 
-function totalPriceCalculator(common_id, item_name) {
-    commonDataTag = document.getElementById(common_id);
-
+function totalPriceCalculator(common_data_id, product_row_name) {
+    commonDataTag = document.getElementById(common_data_id);
     total_previous_tag = document.getElementById(commonDataTag.getAttribute('previous-price-area'));
+    
     total_delivery_tag = document.getElementById(commonDataTag.getAttribute('delivery-price-area'));
     total_price_tag = document.getElementById(commonDataTag.getAttribute('total-price-area'));
 
@@ -48,13 +48,10 @@ function totalPriceCalculator(common_id, item_name) {
 
     for (let i = 1; i <= max_product_rows_number; i++) { 
         try {
-            priduct_row = document.getElementById(String(item_name + String(i)));
-        
+            priduct_row = document.getElementById(String(product_row_name + String(i)));
             product_db_id = priduct_row.getAttribute('priduct-id');
-            product_price = Number(priduct_row.getAttribute('price'));
-
+            product_price = parseFloat((priduct_row.getAttribute('price').replace(",", ".")));
             product_number = Number(document.getElementById(product_db_id + '-qty-container').getAttribute('value'));
-
             total_price_data = total_price_data + (product_number * product_price);
         } catch (err) {}        
     }
@@ -68,8 +65,8 @@ function totalPriceCalculator(common_id, item_name) {
     total_price_tag.innerHTML = total_price_data;
 }
 
-function delivery_calculate(common_id) {
-    commonDataTag = document.getElementById(common_id);
+function delivery_calculate(common_data_id) {
+    commonDataTag = document.getElementById(common_data_id);
 
     delivery_tag = document.getElementById(commonDataTag.getAttribute('delivery-price-area'));
     currency_tag = document.getElementById(delivery_tag.getAttribute('currency-area'));
