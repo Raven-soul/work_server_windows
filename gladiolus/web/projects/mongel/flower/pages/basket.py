@@ -4,8 +4,11 @@ from .common_data.footer import Footer
 from .common_data.header import Header
 
 class Basket_page(object):
-    def __init__(self):
+    def __init__(self, user_id):
         self.startBuilder()
+        print('--------------------------------------------- ', user_id)
+        products = SelectedProducts.objects.filter(pk=int(user_id))
+        print('--------------------------------------------- ', products)
 
         self.header.setData(value = 'Корзина пользователя')
         self.header.setData(name = 'content_style_path', value = 'flower/css/content/basket_content.css')
@@ -15,6 +18,7 @@ class Basket_page(object):
         self.context = {
             'header': self.header.getData(),
             'footer': self.footer.getData(),
+            'products': products
         }
 
     def startBuilder(self):

@@ -31,8 +31,18 @@ def product_details(request, prod_id):
     data = Detail_page(prod_id).getDict()
     return render(request, 'flower/main/detail_content.html', context=data)
 
+def setCookie(request):
+    response = HttpResponse("hello")
+    response.method = "POST"
+    response.set_cookie(key='user_id', value='1', path='/')
+    return response
+
 def basket(request):
-    data = Basket_page().getDict()
+    try:
+        user_id = request.COOKIES["user_id"]
+    except:
+        user_id = 0
+    data = Basket_page(user_id).getDict()
     return render(request, 'flower/main/basket_content.html', context=data)
 
 #--------------- main_cats_pages --------------------------
