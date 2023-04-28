@@ -167,12 +167,12 @@ class InfoPages(models.Model):
         ordering = ['id',]
 
 class User(models.Model):
-    name = models.CharField(max_length=255, verbose_name='Имя')
-    email = models.CharField(unique=True, max_length=255, verbose_name='Логин')
-    password = models.CharField(max_length=255, verbose_name='Пароль')
+    name_user_field = models.CharField(max_length=255, verbose_name='Имя')
+    email_user_field = models.CharField(unique=True, max_length=255, verbose_name='Логин')
+    password_user_field = models.CharField(max_length=255, verbose_name='Пароль')
 
     def __str__(self):
-        return self.name
+        return self.name_user_field
     
     class Meta:
         verbose_name = '4. Пользователь'
@@ -180,13 +180,13 @@ class User(models.Model):
         ordering = ['id',]
 
 class Register_form(models.Model):
-    name = models.CharField(max_length=255, verbose_name='Имя')
-    email = models.CharField(unique=True, max_length=255, verbose_name='Логин')
-    password_first = models.CharField(max_length=255, verbose_name='Пароль')
-    password_second = models.CharField(max_length=255, verbose_name='Повтор пароля')
+    name_register_field = models.CharField(max_length=255, verbose_name='Имя')
+    email_register_field = models.CharField(unique=True, max_length=255, verbose_name='Логин')
+    password_first_register_field = models.CharField(max_length=255, verbose_name='Пароль')
+    password_second_register_field = models.CharField(max_length=255, verbose_name='Повтор пароля')
 
     def __str__(self):
-        return self.name
+        return self.nam_register_fielde
     
     class Meta:
         verbose_name = '4. Форма регистрации'
