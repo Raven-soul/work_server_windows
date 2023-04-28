@@ -6,9 +6,11 @@ from .common_data.header import Header
 class Basket_page(object):
     def __init__(self, user_id):
         self.startBuilder()
-        print('--------------------------------------------- ', user_id)
-        products = SelectedProducts.objects.filter(pk=int(user_id))
-        print('--------------------------------------------- ', products)
+        user = User.objects.filter(pk = int(user_id))
+        products = SelectedProducts.objects.filter(user=user[0])
+        
+        print('--------------------------------------------- user_id', user_id)
+        print('--------------------------------------------- products', products)
 
         self.header.setData(value = 'Корзина пользователя')
         self.header.setData(name = 'content_style_path', value = 'flower/css/content/basket_content.css')
