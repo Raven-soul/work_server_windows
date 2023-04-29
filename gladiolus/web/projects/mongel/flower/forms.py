@@ -18,17 +18,10 @@ class User_form (forms.ModelForm):
     
         return password
 
-class RegistrationPostForm (forms.ModelForm):
-    first_name = forms.CharField(required=True)
-    last_name = forms.CharField(required=True)
-
-    class Meta:
-        model = Register_form
-        fields = ['name_register_field', 'email_register_field', 'password_first_register_field', 'password_second_register_field']
-        widgets = {
-            'password_first_register_field': forms.TextInput(attrs={'type': 'password' }),
-            'password_second_register_field': forms.TextInput(attrs={'type': 'password' })
-        }
+class RegistrationPostForm (forms.Form):
+    email_register_field = forms.CharField(required=True, label='Логин')
+    password_first_register_field = forms.CharField(required=True, label='Пароль')
+    password_second_register_field = forms.CharField(required=True, label='Повторите пароль')
 
     def clean(self):
         password_1 = self.cleaned_data['password_first_register_field']
