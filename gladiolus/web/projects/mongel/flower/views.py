@@ -33,9 +33,11 @@ def product_details(request, prod_id):
     return render(request, 'flower/main/detail_content.html', context=data)
 
 def setCookie(request):
-    response = HttpResponse("hello")
+    user_id = request.param['user_id']
+    print('-------------------------------------------------------------- user_id', user_id)
+    response = HttpResponse(user_id)
     response.method = "POST"
-    response.set_cookie(key='user_id', value='1', path='/')
+    response.set_cookie(key='user_id', value=user_id, path='/')
     return response
 
 def basket(request):
@@ -144,6 +146,16 @@ def help_info(request):
 
 def login(request):
     data = Login_page(request).getDict()
+
+    if request.method == 'POST':
+        form = Login_form(request.POST)
+        if form.is_valid():
+            print('-*-------------------------------------------------- login')
+
+    else:
+        form = RegistrationPostForm()
+
+    data['form'] = form
     return render(request, 'flower/form_pages/login.html', context=data)
 
 def registration(request):
@@ -152,8 +164,8 @@ def registration(request):
     if request.method == 'POST':
         form = RegistrationPostForm(request.POST)
         if form.is_valid():
-            #User.objects.create(name=form.cleaned_data['name'], email=form.cleaned_data['email'], password=form.cleaned_data['password_first'])
-            return redirect('home')
+            print('-*-------------------------------------------------- register')
+
     else:
         form = RegistrationPostForm()
 
@@ -187,4 +199,4 @@ def js_start_data(request):
                'footer': Footer().getData(),
                'content_data': 'js - is ready'}
     print('----------------------------------------------------------------- end')
-    return JsonResponse({'foo':'bar'})
+    return JsonResponse(context)

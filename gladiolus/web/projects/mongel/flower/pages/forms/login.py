@@ -16,7 +16,7 @@ class Login_page(object):
         self.context = {
             'header': self.header.getData(),
             'footer': self.footer.getData(),
-            'form': self.form, 
+            'form': '', 
             'button_submit': 'Войти',
             'button_redirect': 'Регистрация',
             'action_page': 'login',
@@ -26,17 +26,6 @@ class Login_page(object):
     def startBuilder(self, request):
         self.header = Header()
         self.footer = Footer()
-        self.form = self.formValidation(request)
 
     def getDict(self):
         return self.context
-    
-    def formValidation(self, request):
-        if request.method == 'POST':
-            form = User_form(request.POST)
-            if form.is_valid():
-                print(form.cleaned_data)
-        else:
-            form = User_form()
-
-        return form
