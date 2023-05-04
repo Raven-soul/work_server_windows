@@ -11,6 +11,8 @@ urlpatterns = [
     # ----------------------- main form pages -------------------------------
     path('login/', login, name='login'),
     path('registration/', registration, name='registration'),
+    path('account/', account, name='account'),
+
 
     # ----------------------- information pages -------------------------------
     path('about/', about_info, name='about_info'),

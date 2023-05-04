@@ -168,8 +168,13 @@ class InfoPages(models.Model):
 
 class User(models.Model):
     name_user_field = models.CharField(max_length=255, verbose_name='Имя')
+    surname_user_field = models.CharField(max_length=255, verbose_name='Фамилия', null=True)
+
     email_user_field = models.CharField(unique=True, max_length=255, verbose_name='Логин')
     password_user_field = models.CharField(max_length=255, verbose_name='Пароль')
+
+    city_user_field = models.CharField(max_length=255, verbose_name='Город', null=True)
+    phone_user_field = models.CharField(max_length=255, verbose_name='Телефон', null=True)
 
     def __str__(self):
         return self.name_user_field
@@ -177,20 +182,6 @@ class User(models.Model):
     class Meta:
         verbose_name = '4. Пользователь'
         verbose_name_plural = '4. Пользователи'
-        ordering = ['id',]
-
-class Register_form(models.Model):
-    name_register_field = models.CharField(max_length=255, verbose_name='Имя')
-    email_register_field = models.CharField(unique=True, max_length=255, verbose_name='Логин')
-    password_first_register_field = models.CharField(max_length=255, verbose_name='Пароль')
-    password_second_register_field = models.CharField(max_length=255, verbose_name='Повтор пароля')
-
-    def __str__(self):
-        return self.nam_register_fielde
-    
-    class Meta:
-        verbose_name = '4. Форма регистрации'
-        verbose_name_plural = '4. Форма регистрации'
         ordering = ['id',]
 
 class SelectedProducts(models.Model):

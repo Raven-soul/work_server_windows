@@ -1,0 +1,40 @@
+{% include '../header.html' %}
+<div class="main_area my-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-4 category-info-area">
+                <div class="links-area">
+                   <div class="row-2">
+                        {% for link in user_page_links %}
+                            {% if link.pk == page_selected %}
+                            <div class="col p-0">
+                                <div class="category-info-link">
+                                    <div class="links-area-row-selected">
+                                        {{ link.data }}
+                                    </div>
+                                </div>
+                            </div>
+                            {% else %}
+                            <div class="col p-0">
+                                <a href="account" class="category-info-link">
+                                    <div class="links-area-row">
+                                        {{ link.data }}
+                                    </div>
+                                </a>
+                            </div>
+                            {% endif %}
+                        {% endfor %}
+                    </div> 
+                </div>
+            </div>
+            <div class="col data-info-area">
+                <div class="data-area">
+                    {% block content %}
+                    <p>{{ content_data }}</p>
+                    {% endblock content %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% include '../footer.html' %}

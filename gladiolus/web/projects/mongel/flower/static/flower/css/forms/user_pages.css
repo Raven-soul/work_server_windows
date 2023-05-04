@@ -58,3 +58,47 @@ form li {
     color: black;
     background-color: rgb(202, 207, 255);
 }
+
+/* user info template */
+.data-info-area, .category-info-area {
+    padding: 10px;
+}
+
+.main_area {
+    margin: 10px 0px;
+}
+
+.category-info-area {
+    border-right: 4px solid rgb(174,132,188);
+    padding-top: 0px;
+}
+
+.links-area {
+    background-color: none
+}
+
+.links-area-row {
+    padding: 10px 10px;
+    width: 100%;
+    border-top: 1px solid rgb(201, 201, 201);
+}
+
+.links-area-row:hover {
+    background-color: rgb(228, 228, 228);
+}
+
+.category-info-link {
+    text-decoration: none;
+    color: black;
+}
+
+.category-info-link:hover {
+    text-decoration: none;
+    color: black;
+}
+
+.links-area-row-selected {
+    padding: 10px 10px;
+    width: 100%;
+    background-color: rgb(201, 201, 201);;
+}

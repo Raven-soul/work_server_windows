@@ -1,0 +1,23 @@
+{% extends "../form_pages/user_pages_template.html" %}
+{% block content %}
+<div class="main_area">
+    <div class="container">
+        <div class="row-2">
+            <div class="col d-flex justify-content-center post-name-area" style="margin-bottom: 30px;">
+                <div class="data">
+                    <strong style="font-size: 25px; font-weight: 700;">Данные пользователя</strong>
+                </div>
+            </div>
+            <div class="col d-flex justify-content-center">
+                <form action="{% url action_page %}" method="post">
+                    {% csrf_token %}
+                    {{ form.as_div }}
+                    <div class="row form-button-row">
+                        <div class="col p-0"><button type="submit" class="form-button button-submit" onclick="data_click(0)">{{ button_submit }}</button></div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

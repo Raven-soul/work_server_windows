@@ -51,3 +51,11 @@ class RegistrationPostForm (forms.Form):
                 raise ValidationError('Пользователь с таким email уже зарегестрирован')
             
         return email
+    
+class Account_form (forms.Form):
+    name_user_field = forms.CharField(required=True, label='Имя пользователя')
+    surname_user_field = forms.CharField(required=False, label='Фамилия пользователя')
+    email_user_field = forms.CharField(required=True, label='Логин')
+    password_user_field = forms.CharField(required=True, label='Пароль')
+    city_user_field = forms.CharField(required=False, label='Выбранный город')
+    phone_user_field = forms.CharField(required=False, label='Номер телефона')
