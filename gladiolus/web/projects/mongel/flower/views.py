@@ -175,7 +175,7 @@ def registration(request):
     return render(request, 'flower/form_pages/login.html', context=data)
 
 def account(request, section_name):
-    data = Account_page(request, section_name).getDict()
+    data = Account_page(section_name).getDict()
     if section_name == 'user':
         user = User.objects.filter(pk=1)
         form = Account_form(initial={'name_user_field': user[0].name_user_field,
