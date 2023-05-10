@@ -174,18 +174,25 @@ def registration(request):
     data['form'] = form
     return render(request, 'flower/form_pages/login.html', context=data)
 
-def account(request):
-    data = Account_page(request).getDict()
-    user = User.objects.filter(pk=1)
-    form = Account_form(initial={'name_user_field': user[0].name_user_field,
-                                 'surname_user_field': user[0].surname_user_field,
-                                 'email_user_field': user[0].email_user_field,
-                                 'password_user_field': user[0].password_user_field,
-                                 'city_user_field': user[0].city_user_field,
-                                 'phone_user_field': user[0].phone_user_field})
+def account(request, section_name):
+    data = Account_page(request, section_name).getDict()
+    if section_name == 'user':
+        user = User.objects.filter(pk=1)
+        form = Account_form(initial={'name_user_field': user[0].name_user_field,
+                                    'surname_user_field': user[0].surname_user_field,
+                                    'email_user_field': user[0].email_user_field,
+                                    'password_user_field': user[0].password_user_field,
+                                    'city_user_field': user[0].city_user_field,
+                                    'phone_user_field': user[0].phone_user_field})
+        
+        data['form'] = form
+        return render(request, 'flower/form_pages/account_user.html', context=data)
 
-    data['form'] = form
-    return render(request, 'flower/form_pages/account_user_data.html', context=data)
+    elif section_name == 'order':
+        return render(request, 'flower/form_pages/account_order.html', context=data)
+    
+    else:
+        return HttpResponseNotFound('<h1>Страница не найдена</h1>')
 
 #----------------------------------- 404 ----------------------------------------
 

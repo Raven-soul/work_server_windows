@@ -1,0 +1,119 @@
+.links-area-row-selected {
+    padding: 10px 10px;
+    width: 100%;
+    background-color: rgb(201, 201, 201);;
+}
+
+.data-info-area, .category-info-area {
+    padding: 10px;
+}
+
+.main_area {
+    margin: 10px 0px;
+}
+
+.category-info-area {
+    border-right: 4px solid rgb(174,132,188);
+    padding-top: 0px;
+}
+
+.links-area {
+    background-color: none
+}
+
+.links-area-row {
+    padding: 10px 10px;
+    width: 100%;
+    border-top: 1px solid rgb(201, 201, 201);
+}
+
+.links-area-row:hover {
+    background-color: rgb(228, 228, 228);
+}
+
+.category-info-link {
+    text-decoration: none;
+    color: black;
+}
+
+.category-info-link:hover {
+    text-decoration: none;
+    color: black;
+}
+
+input {
+    width: 70%;
+    margin: 15px 40px;
+}
+
+.form-row-data {
+    margin-left: 10%;
+}
+
+.col-selector{
+    margin-bottom: 40px;
+}
+
+.category-selector-row, .category-selector-row .col {
+    padding: 0;
+    margin: 0;
+}
+
+.category-selector-row{
+    background-color: rgb(222, 222, 222);
+}
+
+.category-selector{
+    width: 100%;
+    border: none;
+    border-top: 3px solid rgb(174,132,188);
+    border-bottom: 3px solid rgb(174,132,188);
+    background-color: white;
+    font-size: 18px;
+}
+
+.category-selector:focus {
+    outline: none;
+}
+
+.category-selector:active{
+    background-color: azure;
+}
+
+.hr-vertical{
+    height: 100%;
+    padding: 0 2px;
+}
+
+.product-element-row{
+    margin-bottom: 20px;
+}
+
+.product-name-data{
+    color: black;
+    text-decoration: none;
+}
+
+.product-name-data:hover{
+    color: rgb(174,132,188);;
+    text-decoration: underline dashed;
+}
+
+.qty-container{
+    border: none;
+}
+
+.product-delete-button{
+    border: none;
+    color: rgb(174,132,188);
+    background-color: white;
+}
+
+.product-delete-button:focus {
+    outline: none;
+}
+
+.product-delete-button:hover {
+    text-decoration: underline solid rgb(112, 82, 122);;
+    color: rgb(112, 82, 122);
+}
