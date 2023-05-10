@@ -191,6 +191,9 @@ def account(request, section_name):
     elif section_name == 'order':
         return render(request, 'flower/form_pages/account_order.html', context=data)
     
+    elif section_name == 'logout':
+        return redirect('login')
+    
     else:
         return HttpResponseNotFound('<h1>Страница не найдена</h1>')
 

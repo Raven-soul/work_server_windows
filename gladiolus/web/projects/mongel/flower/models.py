@@ -211,3 +211,19 @@ class purchasedProducts(models.Model):
         verbose_name = '5. Список купленных товаров'
         verbose_name_plural = '5. Список купленных товаров'
         ordering = ['id',]
+
+        
+class UserPages(models.Model):
+    name = models.CharField(max_length=255, verbose_name='Название страницы')
+    alter_name = models.CharField(max_length=255, verbose_name='Код страницы')
+
+    def get_absolute_url(self):
+        return reverse("account", kwargs={"section_name": self.alter_name})
+
+    def __str__(self):
+        return self.name
+    
+    class Meta:
+        verbose_name = '6. Пользовательская страница'
+        verbose_name_plural = '6. Список пользовательских страниц'
+        ordering = ['id',]

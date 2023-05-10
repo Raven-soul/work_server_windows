@@ -10,15 +10,15 @@
                             <div class="col p-0">
                                 <div class="category-info-link">
                                     <div class="links-area-row-selected">
-                                        {{ link.data }}
+                                        {{ link.name }}
                                     </div>
                                 </div>
                             </div>
                             {% else %}
                             <div class="col p-0">
-                                <a href="{% url link.path %}" class="category-info-link">
+                                <a href="{{ link.get_absolute_url }}" class="category-info-link">
                                     <div class="links-area-row">
-                                        {{ link.data }}
+                                        {{ link.name }}
                                     </div>
                                 </a>
                             </div>

@@ -5,11 +5,11 @@
         <div class="row-2">
             <div class="col d-flex justify-content-center post-name-area" style="margin-bottom: 30px;">
                 <div class="data">
-                    <strong style="font-size: 25px; font-weight: 700;">Данные пользователя</strong>
+                    <strong style="font-size: 25px; font-weight: 700;">{{ form_title }}</strong>
                 </div>
             </div>
             <div class="col d-flex justify-content-center">
-                <form action="{% url action_page %}" method="post">
+                <form action="{{ action_page }}" method="post">
                     {% csrf_token %}
                     {{ form.as_div }}
                     <div class="row form-button-row">
