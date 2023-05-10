@@ -20,8 +20,8 @@ class Account_page(object):
             'action_page': 'account',
             'button_submit': 'Сохранить',
             'page_selected': 0,
-            'user_page_links': [{'pk': 0, 'data': 'Данные пользователя', 'path': '#'},
-                                {'pk': 1, 'data': 'Заказы', 'path': '#'}]
+            'user_page_links': [{'pk': 0, 'data': 'Данные пользователя', 'path': 'account'},
+                                {'pk': 1, 'data': 'Заказы', 'path': 'account_order'}]
         }
 
     def startBuilder(self, request):

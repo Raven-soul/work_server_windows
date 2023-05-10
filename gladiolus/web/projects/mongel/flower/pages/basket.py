@@ -7,7 +7,7 @@ class Basket_page(object):
     def __init__(self, user_id):
         self.startBuilder()
         user = User.objects.filter(pk = int(user_id))
-        products = SelectedProducts.objects.filter(user=user[0])
+        products = self.doublesClear(SelectedProducts.objects.filter(user=user[0]))
 
         self.header.setData(value = 'Корзина пользователя')
         self.header.setData(name = 'content_style_path', value = 'flower/css/content/basket_content.css')
@@ -20,6 +20,20 @@ class Basket_page(object):
             'products': products,
             'products_length': len(products)
         }
+
+    def doublesClear(self, list):
+        result_List= []
+        pk_list= []
+
+        for elem in list:
+            if elem.product.pk in pk_list:
+                pass
+            else:
+                result_List.append(elem)
+                pk_list.append(elem.product.pk)
+
+        return result_List
+    
 
     def startBuilder(self):
         self.header = Header()

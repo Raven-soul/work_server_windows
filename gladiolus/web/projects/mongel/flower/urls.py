@@ -12,6 +12,7 @@ urlpatterns = [
     path('login/', login, name='login'),
     path('registration/', registration, name='registration'),
     path('account/', account, name='account'),
+    path('account_order/', account, name='account_order'),
 
 
     # ----------------------- information pages -------------------------------
