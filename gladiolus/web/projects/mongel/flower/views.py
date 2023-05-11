@@ -145,37 +145,9 @@ def help_info(request):
     return render(request, 'flower/info_pages/help.html', context=data)
 
 #-------------------------------- form pages ---------------------------
-
-def login(request):
-    data = Login_page(request).getDict()
-
-    if request.method == 'POST':
-        form = Login_form(request.POST)
-        if form.is_valid():
-            print('-*-------------------------------------------------- login')
-
-    else:
-        form = RegistrationPostForm()
-
-    data['form'] = form
-    return render(request, 'flower/form_pages/login.html', context=data)
-
-def registration(request):
-    data = Registration_page(request).getDict()
-
-    if request.method == 'POST':
-        form = RegistrationPostForm(request.POST)
-        if form.is_valid():
-            print('-*-------------------------------------------------- register')
-
-    else:
-        form = RegistrationPostForm()
-
-    data['form'] = form
-    return render(request, 'flower/form_pages/login.html', context=data)
-
 def account(request, section_name):
     data = Account_page(section_name).getDict()
+    login_link = UserPages.objects.filter(alter_name = 'login')[0]
     if section_name == 'user':
         user = User.objects.filter(pk=1)
         form = Account_form(initial={'name_user_field': user[0].name_user_field,
@@ -187,13 +159,30 @@ def account(request, section_name):
         
         data['form'] = form
         return render(request, 'flower/form_pages/account_user.html', context=data)
-
     elif section_name == 'order':
         return render(request, 'flower/form_pages/account_order.html', context=data)
-    
+    elif section_name == 'login':
+        if request.method == 'POST':
+            form = Login_form(request.POST)
+            if form.is_valid():
+                print('-*-------------------------------------------------- login')
+        else:
+            form = Login_form()
+
+        data['form'] = form
+        return render(request, 'flower/form_pages/login.html', context=data)
+    elif section_name == 'registration':
+        if request.method == 'POST':
+            form = RegistrationPostForm(request.POST)
+            if form.is_valid():
+                print('-*-------------------------------------------------- register')
+        else:
+            form = RegistrationPostForm()
+
+        data['form'] = form
+        return render(request, 'flower/form_pages/login.html', context=data)
     elif section_name == 'logout':
-        return redirect('login')
-    
+        return redirect('/account/login')
     else:
         return HttpResponseNotFound('<h1>Страница не найдена</h1>')
 

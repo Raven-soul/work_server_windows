@@ -9,8 +9,6 @@ urlpatterns = [
     path('basket/', basket, name='basket'),
 
     # ----------------------- main form pages -------------------------------
-    path('login/', login, name='login'),
-    path('registration/', registration, name='registration'),
     path('account/<str:section_name>', account, name='account'),
 
     # ----------------------- information pages -------------------------------
