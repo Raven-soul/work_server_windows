@@ -6,14 +6,13 @@ from .utils import *
 
 #------------- главные страницы сайта --------------------------
 from .pages.info_pages_data.info_pages import *
-from .pages.forms.login import Login_page
-from .pages.forms.registration import Registration_page
 from .pages.forms.account import Account_page
 from .pages.detail import Detail_page
 from .pages.basket import Basket_page
 from .pages.empty import Empty_page
 
 from .models import * #база данных
+from .pages.common_data.authorisation import Authorization
 
 #------------------ main_pages --------------------------
 
@@ -165,6 +164,7 @@ def account(request, section_name):
                     if form.cleaned_data['email_user_field'] == user.name_user_field:
                         if form.cleaned_data['password_user_field'] == user.password_user_field:
                             User.objects.filter(pk=user.pk).update(sessionUNQid=request.COOKIES["sessionid"])
+                            return redirect('/account/user')
         else:
             form = Login_form()
 
@@ -210,7 +210,8 @@ def js_data(request):
     return render(request, 'flower/main/index_shop_page_button.html', context=context)
 
 def js_start_data(request):
-    username = request.COOKIES["sessionid"]
+    auth = Authorization(request)
+    username = auth.check_auth() #request.COOKIES["sessionid"]
     context = {'header': Header().getData(),
                'footer': Footer().getData(),
                'content_data': username}

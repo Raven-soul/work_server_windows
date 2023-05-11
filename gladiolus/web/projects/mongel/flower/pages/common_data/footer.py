@@ -1,6 +1,4 @@
 from ...models import * #база данных
-from django.shortcuts import render, redirect
-
 
 class Footer(object):
     def __init__(self):
