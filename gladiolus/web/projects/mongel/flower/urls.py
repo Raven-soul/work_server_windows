@@ -27,7 +27,5 @@ urlpatterns = [
 
     # ----------------------- other pages -------------------------------
     path('js/', js_data, name='js'),
-    path('js/js_start/', js_start_data, name='js_start'),
-    path('cookie/', setCookie, name='cookie'),
-    
+    path('cookie_check', js_start_data, name='js_start')
 ]

@@ -176,6 +176,8 @@ class User(models.Model):
     city_user_field = models.CharField(max_length=255, verbose_name='Город', null=True)
     phone_user_field = models.CharField(max_length=255, verbose_name='Телефон', null=True)
 
+    sessionUNQid = models.CharField(max_length=255, verbose_name='Пользовательский sessionid', null=True)
+
     def __str__(self):
         return self.name_user_field
     

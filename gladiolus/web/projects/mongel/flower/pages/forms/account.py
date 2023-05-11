@@ -15,11 +15,11 @@ class CommonBuild():
         self.userPages= [] 
         self.authenticationPages= []
 
-        self.userPages.append(UserPages.objects.filter(alter_name = 'user')[0])
-        self.userPages.append(UserPages.objects.filter(alter_name = 'order')[0])
-        self.userPages.append(UserPages.objects.filter(alter_name = 'logout')[0])
-        self.authenticationPages.append(UserPages.objects.filter(alter_name = 'login')[0])
-        self.authenticationPages.append(UserPages.objects.filter(alter_name = 'registration')[0])
+        self.userPages.append(UserPages.objects.get(alter_name = 'user'))
+        self.userPages.append(UserPages.objects.get(alter_name = 'order'))
+        self.userPages.append(UserPages.objects.get(alter_name = 'logout'))
+        self.authenticationPages.append(UserPages.objects.get(alter_name = 'login'))
+        self.authenticationPages.append(UserPages.objects.get(alter_name = 'registration'))
 
 class User_context():
     def __init__(self):

@@ -33,14 +33,6 @@ def product_details(request, prod_id):
     data = Detail_page(prod_id).getDict()
     return render(request, 'flower/main/detail_content.html', context=data)
 
-def setCookie(request):
-    user_id = request.param['user_id']
-    print('-------------------------------------------------------------- user_id', user_id)
-    response = HttpResponse(user_id)
-    response.method = "POST"
-    response.set_cookie(key='user_id', value=user_id, path='/')
-    return response
-
 def basket(request):
     try:
         user_id = request.COOKIES["user_id"]
@@ -147,7 +139,7 @@ def help_info(request):
 #-------------------------------- form pages ---------------------------
 def account(request, section_name):
     data = Account_page(section_name).getDict()
-    login_link = UserPages.objects.filter(alter_name = 'login')[0]
+    #------------------------------------------------------------------------------- user
     if section_name == 'user':
         user = User.objects.filter(pk=1)
         form = Account_form(initial={'name_user_field': user[0].name_user_field,
@@ -159,28 +151,39 @@ def account(request, section_name):
         
         data['form'] = form
         return render(request, 'flower/form_pages/account_user.html', context=data)
+    
+    #------------------------------------------------------------------------------- order
     elif section_name == 'order':
         return render(request, 'flower/form_pages/account_order.html', context=data)
+    
+    #------------------------------------------------------------------------------- login
     elif section_name == 'login':
         if request.method == 'POST':
             form = Login_form(request.POST)
             if form.is_valid():
-                print('-*-------------------------------------------------- login')
+                for user in User.objects.all():
+                    if form.cleaned_data['email_user_field'] == user.name_user_field:
+                        if form.cleaned_data['password_user_field'] == user.password_user_field:
+                            User.objects.filter(pk=user.pk).update(sessionUNQid=request.COOKIES["sessionid"])
         else:
             form = Login_form()
 
         data['form'] = form
         return render(request, 'flower/form_pages/login.html', context=data)
+    
+    #------------------------------------------------------------------------------- registration
     elif section_name == 'registration':
         if request.method == 'POST':
             form = RegistrationPostForm(request.POST)
             if form.is_valid():
-                print('-*-------------------------------------------------- register')
+                pass
         else:
             form = RegistrationPostForm()
 
         data['form'] = form
         return render(request, 'flower/form_pages/login.html', context=data)
+    
+    #------------------------------------------------------------------------------- registration
     elif section_name == 'logout':
         return redirect('/account/login')
     else:
@@ -207,9 +210,8 @@ def js_data(request):
     return render(request, 'flower/main/index_shop_page_button.html', context=context)
 
 def js_start_data(request):
-    print('-----------------------------------------------------------------')
+    username = request.COOKIES["sessionid"]
     context = {'header': Header().getData(),
                'footer': Footer().getData(),
-               'content_data': 'js - is ready'}
-    print('----------------------------------------------------------------- end')
-    return JsonResponse(context)
+               'content_data': username}
+    return render(request, 'flower/main/index_shop_page.html', context=context)
