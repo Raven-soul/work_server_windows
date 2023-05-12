@@ -29,16 +29,17 @@ class FlowerHome(DataMixin, ListView):
         return context
 
 def product_details(request, prod_id):
+    if not request.session.session_key:
+        request.session.create()
+
     data = Detail_page(prod_id).getDict()
     return render(request, 'flower/main/detail_content.html', context=data)
 
 def basket(request):
-    try:
-        user_id = request.COOKIES["user_id"]
-    except:
-        # return redirect('login')
-        user_id = 1
-
+    if not request.session.session_key:
+        request.session.create()
+    
+    user_id = 1  
     data = Basket_page(user_id).getDict()
     if len(data['products']) == 0:
         empty_data =  Empty_page(title='Корзина пуста').getDict()
@@ -112,31 +113,47 @@ class FlowerShowType(DataMixin, ListView):
 #---------------- info_pages --------------------------
 
 def about_info(request):
+    if not request.session.session_key:
+        request.session.create()
     data = About_page().getDict()
     return render(request, 'flower/info_pages/about.html', context=data)
 
 def payment_info(request):
+    if not request.session.session_key:
+        request.session.create()
     data = Payment_page().getDict()
     return render(request, 'flower/info_pages/payment.html', context=data)
 
 def guarantees_info(request):
+    if not request.session.session_key:
+        request.session.create()
     data = Guarantees_page().getDict()
     return render(request, 'flower/info_pages/guarantees.html', context=data)
 
 def return_info(request):
+    if not request.session.session_key:
+        request.session.create()
     data = Return_page().getDict()
     return render(request, 'flower/info_pages/return.html', context=data)
 
 def contacts_info(request):
+    if not request.session.session_key:
+        request.session.create()
     data = Contacts_page().getDict()
     return render(request, 'flower/info_pages/contacts.html', context=data)
 
 def help_info(request):
+    if not request.session.session_key:
+        request.session.create()
     data = Help_page().getDict()
     return render(request, 'flower/info_pages/help.html', context=data)
 
 #-------------------------------- form pages ---------------------------
 def account(request, section_name):
+    if not request.session.session_key:
+        request.session.create()
+
+    auth = Authorization(request)
     data = Account_page(section_name).getDict()
     #------------------------------------------------------------------------------- user
     if section_name == 'user':
@@ -176,7 +193,13 @@ def account(request, section_name):
         if request.method == 'POST':
             form = RegistrationPostForm(request.POST)
             if form.is_valid():
-                pass
+                
+                User.objects.create(name_user_field = form.cleaned_data['name_register_field'], 
+                                    email_user_field = form.cleaned_data['email_register_field'],
+                                    password_user_field = form.cleaned_data['password_first_register_field'])
+                auth.logout()
+                auth.login(User.objects.filter(email_user_field= form.cleaned_data['email_register_field']))
+                return redirect('/account/user')
         else:
             form = RegistrationPostForm()
 
@@ -185,6 +208,7 @@ def account(request, section_name):
     
     #------------------------------------------------------------------------------- registration
     elif section_name == 'logout':
+        auth.logout()
         return redirect('/account/login')
     else:
         return HttpResponseNotFound('<h1>Страница не найдена</h1>')
@@ -210,9 +234,17 @@ def js_data(request):
     return render(request, 'flower/main/index_shop_page_button.html', context=context)
 
 def js_start_data(request):
-    auth = Authorization(request)
-    username = auth.check_auth() #request.COOKIES["sessionid"]
+    if not request.session.session_key:
+        request.session.create()
+
+    # auth = Authorization(request)
+    # username = auth.isAuthorized()
+    # print('user --------------', auth.getAuthorizedUser().password_user_field)
     context = {'header': Header().getData(),
                'footer': Footer().getData(),
-               'content_data': username}
-    return render(request, 'flower/main/index_shop_page.html', context=context)
+               'content_data': 'data'}
+    return render(request, 'flower/main/index_page_button const.html', context=context)
+
+def append(request, prod_id):
+    print('ajax_data -------------------', prod_id)
+    return HttpResponse('data')

@@ -1,0 +1,11 @@
+{% load static %}
+{% include '../header.html' %}
+{% block content %}
+{% csrf_token %}
+<p>{{ content_data }}</p>
+<button onclick="data_click(this)" product-id="1">
+    Data
+</button>
+<script src="{% static 'flower/js/ajax/productAppend.js' %}"></script>
+{% endblock content %}
+{% include '../footer.html' %}
