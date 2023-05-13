@@ -8,10 +8,9 @@ from .pages.common_data.header import Header
 class DataMixin:
     def get_user_data(self, **kwargs):
         self.context = super().get_context_data(**kwargs)
-        header = Header()
         footer = Footer()
 
-        self.context['header'] = header.getData()
+        self.context['header'] = ''
         self.context['footer'] = footer.getData()
         return self.context
     

@@ -24,15 +24,17 @@ class FlowerHome(DataMixin, ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         c_def = self.get_user_data()
+        c_def['header'] = Header(self.request).getData()
         c_def['header'] = self.setContextData(c_def['header'], diction=[{'name':'cat_selected', 'value':{'section': 0, 'order': 0}},])
         context = dict(list(context.items()) + list(c_def.items()))
+        print(self.request)
         return context
 
 def product_details(request, prod_id):
     if not request.session.session_key:
         request.session.create()
 
-    data = Detail_page(prod_id).getDict()
+    data = Detail_page(prod_id, request).getDict()
     return render(request, 'flower/main/detail_content.html', context=data)
 
 def basket(request):
@@ -40,7 +42,7 @@ def basket(request):
         request.session.create()
     
     user_id = 1  
-    data = Basket_page(user_id).getDict()
+    data = Basket_page(user_id, request).getDict()
     if len(data['products']) == 0:
         empty_data =  Empty_page(title='Корзина пуста').getDict()
         empty_data['context'] = 'Корзина пуста'
@@ -58,6 +60,7 @@ class FlowerShowCategory(DataMixin, ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         c_def = self.get_user_data()
+        c_def['header'] = Header(self.request).getData()
         c_def['header'] = self.setContextData(c_def['header'], diction=[{'name':'cat_selected', 'value':{'section': 1, 'order': self.kwargs['cat_id']}},])
         context = dict(list(context.items()) + list(c_def.items()))
         return context
@@ -73,6 +76,7 @@ class FlowerShowOccasion(DataMixin, ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         c_def = self.get_user_data()
+        c_def['header'] = Header(self.request).getData()
         c_def['header'] = self.setContextData(c_def['header'], diction=[{'name':'cat_selected', 'value':{'section': 2, 'order': self.kwargs['occ_id']}},])
         context = dict(list(context.items()) + list(c_def.items()))
         return context
@@ -88,6 +92,7 @@ class FlowerShowSeason(DataMixin, ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         c_def = self.get_user_data()
+        c_def['header'] = Header(self.request).getData()
         c_def['header'] = self.setContextData(c_def['header'], diction=[{'name':'cat_selected', 'value':{'section': 3, 'order': self.kwargs['sea_id']}},])
         context = dict(list(context.items()) + list(c_def.items()))
         return context
@@ -103,6 +108,7 @@ class FlowerShowType(DataMixin, ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         c_def = self.get_user_data()
+        c_def['header'] = Header(self.request).getData()
         c_def['header'] = self.setContextData(c_def['header'], diction=[{'name':'cat_selected', 'value':{'section': 4, 'order': self.kwargs['typ_id']}},])
         context = dict(list(context.items()) + list(c_def.items()))
         return context
@@ -115,37 +121,37 @@ class FlowerShowType(DataMixin, ListView):
 def about_info(request):
     if not request.session.session_key:
         request.session.create()
-    data = About_page().getDict()
+    data = About_page(request).getDict()
     return render(request, 'flower/info_pages/about.html', context=data)
 
 def payment_info(request):
     if not request.session.session_key:
         request.session.create()
-    data = Payment_page().getDict()
+    data = Payment_page(request).getDict()
     return render(request, 'flower/info_pages/payment.html', context=data)
 
 def guarantees_info(request):
     if not request.session.session_key:
         request.session.create()
-    data = Guarantees_page().getDict()
+    data = Guarantees_page(request).getDict()
     return render(request, 'flower/info_pages/guarantees.html', context=data)
 
 def return_info(request):
     if not request.session.session_key:
         request.session.create()
-    data = Return_page().getDict()
+    data = Return_page(request).getDict()
     return render(request, 'flower/info_pages/return.html', context=data)
 
 def contacts_info(request):
     if not request.session.session_key:
         request.session.create()
-    data = Contacts_page().getDict()
+    data = Contacts_page(request).getDict()
     return render(request, 'flower/info_pages/contacts.html', context=data)
 
 def help_info(request):
     if not request.session.session_key:
         request.session.create()
-    data = Help_page().getDict()
+    data = Help_page(request).getDict()
     return render(request, 'flower/info_pages/help.html', context=data)
 
 #-------------------------------- form pages ---------------------------
@@ -154,16 +160,16 @@ def account(request, section_name):
         request.session.create()
 
     auth = Authorization(request)
-    data = Account_page(section_name).getDict()
+    data = Account_page(section_name, request).getDict()
     #------------------------------------------------------------------------------- user
     if section_name == 'user':
-        user = User.objects.filter(pk=1)
-        form = Account_form(initial={'name_user_field': user[0].name_user_field,
-                                    'surname_user_field': user[0].surname_user_field,
-                                    'email_user_field': user[0].email_user_field,
-                                    'password_user_field': user[0].password_user_field,
-                                    'city_user_field': user[0].city_user_field,
-                                    'phone_user_field': user[0].phone_user_field})
+        user = auth.getAuthorizedUser()
+        form = Account_form(initial={'name_user_field': user.name_user_field,
+                                    'surname_user_field': user.surname_user_field,
+                                    'email_user_field': user.email_user_field,
+                                    'password_user_field': user.password_user_field,
+                                    'city_user_field': user.city_user_field,
+                                    'phone_user_field': user.phone_user_field})
         
         data['form'] = form
         return render(request, 'flower/form_pages/account_user.html', context=data)
@@ -237,12 +243,12 @@ def js_start_data(request):
     if not request.session.session_key:
         request.session.create()
 
-    # auth = Authorization(request)
-    # username = auth.isAuthorized()
-    # print('user --------------', auth.getAuthorizedUser().password_user_field)
-    context = {'header': Header().getData(),
+    auth = Authorization(request)
+    username = auth.isAuthorized()
+    
+    context = {'header': Header(request).getData(),
                'footer': Footer().getData(),
-               'content_data': 'data'}
+               'content_data': username}
     return render(request, 'flower/main/index_page_button const.html', context=context)
 
 def append(request, prod_id):

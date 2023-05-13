@@ -6,8 +6,8 @@ from .common_data.header import Header
 import random
 
 class Detail_page(object):
-    def __init__(self, prod_id):
-        self.startBuilder(prod_id)
+    def __init__(self, prod_id, request):
+        self.startBuilder(prod_id, request)
 
         script_list = [{'script_url':'flower/js/detail.js'}]
 
@@ -21,8 +21,8 @@ class Detail_page(object):
             'like_block': self.likedFormer(self.productList)
         }
 
-    def startBuilder(self, prod_id):
-        self.header = Header()
+    def startBuilder(self, prod_id, request):
+        self.header = Header(request)
         self.footer = Footer()
 
         self.productList = Flower.objects.all()

@@ -5,118 +5,121 @@ from ..common_data.footer import Footer
 from ..common_data.header import Header
 from ...forms import *
 
-class CommonBuild():
-    def __init__(self):
-        self.startBuilder()
+class CommonBuild(object):
+    def __init__(self, request):
+        self.startBuilder(request)
 
-    def startBuilder(self):
-        self.header = Header()
-        self.footer = Footer()
-        self.userPages= [] 
-        self.authenticationPages= []
-
-        self.userPages.append(UserPages.objects.get(alter_name = 'user'))
-        self.userPages.append(UserPages.objects.get(alter_name = 'order'))
-        self.userPages.append(UserPages.objects.get(alter_name = 'logout'))
-        self.authenticationPages.append(UserPages.objects.get(alter_name = 'login'))
-        self.authenticationPages.append(UserPages.objects.get(alter_name = 'registration'))
-
-class User_context():
-    def __init__(self):
-        self.commonData = CommonBuild()
-
-        self.commonData.header.setData(name = 'content_style_path', value = 'flower/css/forms/user_form_pages.css')
-        self.commonData.header.setData(value = self.commonData.userPages[0].name)
-        
         self.context = {
-            'header': self.commonData.header.getData(),
-            'footer': self.commonData.footer.getData(),
-            'form': '',
-            'form_title': self.commonData.userPages[0].name,
-            'action_page': self.commonData.userPages[0].get_absolute_url,
-            'button_submit': 'Сохранить',
-            'page_selected': 1,
-            'user_page_links': self.commonData.userPages
+            'header': self.header.getData(),
+            'footer': self.footer.getData(),
+            'user_page_links': self.userPages.values()
         }
     
-    def getContext(self):
-        return self.context
-    
-class Order_context():
-    def __init__(self):
-        self.commonData = CommonBuild()
 
-        self.commonData.header.setData(name = 'content_style_path', value = 'flower/css/user_account_pages.css')
-        self.commonData.header.setData(value = self.commonData.userPages[1].name)
+    def startBuilder(self, request):
+        self.header = Header(request)
+        self.footer = Footer()
+
+        self.userPages = {'user': UserPages.objects.get(alter_name = 'user'),
+                           'order': UserPages.objects.get(alter_name = 'order'),
+                           'logout': UserPages.objects.get(alter_name = 'logout')}
         
+        self.authenticationPages = {'login': UserPages.objects.get(alter_name = 'login'),
+                                     'registration': UserPages.objects.get(alter_name = 'registration')}
+
+class User_context(object):
+    def __init__(self, request):
+        self.commonData = CommonBuild(request)
+
+        self.commonData.header.setData(name = 'content_style_path', value = 'flower/css/forms/user_form_pages.css')
+        self.commonData.header.setData(value = self.commonData.userPages['user'].name)
         
         self.context = {
-            'header': self.commonData.header.getData(),
-            'footer': self.commonData.footer.getData(),
-            
+            'form': '',
+            'form_title': self.commonData.userPages['user'].name,
+            'action_page': self.commonData.userPages['user'].get_absolute_url,
+            'button_submit': 'Сохранить',
+            'page_selected': 1
+        }
+
+        self.contextAll = dict(list(self.context.items()) + list(self.commonData.context.items()))
+    
+    def getContext(self):
+        return self.contextAll
+    
+class Order_context(object):
+    def __init__(self, request):
+        self.commonData = CommonBuild(request)
+
+        self.commonData.header.setData(name = 'content_style_path', value = 'flower/css/user_account_pages.css')
+        self.commonData.header.setData(value = self.commonData.userPages['order'].name)
+        
+        self.context = {            
             'page_selected': 2,
             'button_selected': 0,
             'buttons': [{'pk': 0, 'name': 'Выбранные продукты'},
-                    {'pk': 1, 'name': 'Оплаченные продукты'}],
-            'user_page_links': self.commonData.userPages
+                    {'pk': 1, 'name': 'Оплаченные продукты'},
+                    {'pk': 2, 'name': 'Понравившиеся продукты'}],
         }
+
+        self.contextAll = dict(list(self.context.items()) + list(self.commonData.context.items()))
     
     def getContext(self):
-        return self.context
+        return self.contextAll
     
 class Login_context(object):
-    def __init__(self):
-        self.commonData = CommonBuild()
+    def __init__(self, request):
+        self.commonData = CommonBuild(request)
 
         script_list = [{'script_url':'flower/js/ajax_try.js'}]
         
         self.commonData.header.setData(name = 'content_style_path', value = 'flower/css/forms/user_form_pages.css')
-        self.commonData.header.setData(value = 'Авторизация пользователя')
+        self.commonData.header.setData(value = self.commonData.authenticationPages['login'].name)
         self.commonData.footer.setData(name='script_list', value=script_list)
         
         self.context = {
-            'header': self.commonData.header.getData(),
-            'footer': self.commonData.footer.getData(),
             'form': '', 
             'button_submit': 'Войти',
             'button_redirect': 'Регистрация',
-            'action_page': self.commonData.authenticationPages[0].get_absolute_url,
-            'href_page': self.commonData.authenticationPages[1].get_absolute_url
+            'action_page': self.commonData.authenticationPages['login'].get_absolute_url,
+            'href_page': self.commonData.authenticationPages['registration'].get_absolute_url
         }
 
+        self.contextAll = dict(list(self.contex.items()) + list(self.commonData.context.items()))
+
     def getContext(self):
-        return self.context
+        return self.contextAll
 
 class Registration_context(object):
-    def __init__(self):
-        self.commonData = CommonBuild()
+    def __init__(self, request):
+        self.commonData = CommonBuild(request)
         
         self.commonData.header.setData(name = 'content_style_path', value = 'flower/css/forms/user_form_pages.css')
-        self.commonData.header.setData(value = self.commonData.authenticationPages[1].name)
+        self.commonData.header.setData(value = self.commonData.authenticationPages['registration'].name)
         
         self.context = {
-            'header': self.commonData.header.getData(),
-            'footer': self.commonData.footer.getData(),
             'form': '',
             'button_submit': 'Зарегистрировать',
             'button_redirect': 'Авторизация',
-            'action_page': self.commonData.authenticationPages[1].get_absolute_url,
-            'href_page': self.commonData.authenticationPages[0].get_absolute_url
+            'action_page': self.commonData.authenticationPages['registration'].get_absolute_url,
+            'href_page': self.commonData.authenticationPages['login'].get_absolute_url
         }
 
+        self.contextAll = dict(list(self.context.items()) + list(self.commonData.context.items()))
+
     def getContext(self):
-        return self.context
+        return self.contextAll
 
 class Account_page(object):
-    def __init__(self, section_name):
+    def __init__(self, section_name, request):
         if section_name == 'user':
-            self.context = User_context().getContext()
+            self.context = User_context(request).getContext()
         elif section_name == 'order':
-            self.context = Order_context().getContext()
+            self.context = Order_context(request).getContext()
         elif section_name == 'login':
-            self.context = Login_context().getContext()
+            self.context = Login_context(request).getContext()
         elif section_name == 'registration':
-            self.context = Registration_context().getContext() 
+            self.context = Registration_context(request).getContext() 
         elif section_name == 'logout':
             self.context = {'page_selected': 3}
         else:

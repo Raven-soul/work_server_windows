@@ -4,8 +4,8 @@ from .common_data.footer import Footer
 from .common_data.header import Header
 
 class Basket_page(object):
-    def __init__(self, user_id):
-        self.startBuilder()
+    def __init__(self, user_id, request):
+        self.startBuilder(request)
         user = User.objects.filter(pk = int(user_id))
         products = self.doublesClear(SelectedProducts.objects.filter(user=user[0]))
 
@@ -35,8 +35,8 @@ class Basket_page(object):
         return result_List
     
 
-    def startBuilder(self):
-        self.header = Header()
+    def startBuilder(self, request):
+        self.header = Header(request)
         self.footer = Footer()
         self.script_list = [{'script_url':'flower/js/basket.js'}]
 
