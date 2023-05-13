@@ -67,8 +67,6 @@ class Order_context(object):
             'selectedProdsList' : selectedProdsList
         }
 
-        print(selectedProdsList)
-
         self.contextAll = dict(list(self.context.items()) + list(self.commonData.context.items()))
     
     def getContext(self):

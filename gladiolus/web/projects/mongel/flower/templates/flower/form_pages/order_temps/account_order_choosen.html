@@ -1,12 +1,12 @@
 {% extends "../../form_pages/account_order.html" %}
 {% block fill %}
 <div class="col product-element-row" id="product-item-3" priduct-id="product-id_1000103">
+    <div class="for">
+        {% for selectItem in selectedProdsList %}
+            <p>name: {{ selectItem.product.title }}; price: {{ selectItem.product.price }}</p>
+        {% endfor %}
+    </div>
     <div class="row">
-        <div class="for">
-            {% for selectItem in selectedProdsList %}
-                <p>{{ selectItem.product }}</p>
-            {% endfor %}
-        </div>
         <div class="col d-flex">
             <div class="save-area d-flex align-items-center w-100">
                 <a href="#" class="product-name-data">Букет роз С бантиком в обмотке</a>
