@@ -3,6 +3,7 @@ from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect
 from ..common_data.footer import Footer
 from ..common_data.header import Header
+from ..common_data.authorisation import Authorization
 from ...forms import *
 
 class CommonBuild(object):
@@ -19,6 +20,7 @@ class CommonBuild(object):
     def startBuilder(self, request):
         self.header = Header(request)
         self.footer = Footer()
+        self.auth = Authorization(request)
 
         self.userPages = {'user': UserPages.objects.get(alter_name = 'user'),
                            'order': UserPages.objects.get(alter_name = 'order'),
@@ -53,6 +55,8 @@ class Order_context(object):
 
         self.commonData.header.setData(name = 'content_style_path', value = 'flower/css/user_account_pages.css')
         self.commonData.header.setData(value = self.commonData.userPages['order'].name)
+
+        selectedProdsList = SelectedProducts.objects.filter(user=self.commonData.auth.getAuthorizedUser())
         
         self.context = {            
             'page_selected': 2,
@@ -60,7 +64,10 @@ class Order_context(object):
             'buttons': [{'pk': 0, 'name': 'Выбранные продукты'},
                     {'pk': 1, 'name': 'Оплаченные продукты'},
                     {'pk': 2, 'name': 'Понравившиеся продукты'}],
+            'selectedProdsList' : selectedProdsList
         }
+
+        print(selectedProdsList)
 
         self.contextAll = dict(list(self.context.items()) + list(self.commonData.context.items()))
     
@@ -85,7 +92,7 @@ class Login_context(object):
             'href_page': self.commonData.authenticationPages['registration'].get_absolute_url
         }
 
-        self.contextAll = dict(list(self.contex.items()) + list(self.commonData.context.items()))
+        self.contextAll = dict(list(self.context.items()) + list(self.commonData.context.items()))
 
     def getContext(self):
         return self.contextAll
