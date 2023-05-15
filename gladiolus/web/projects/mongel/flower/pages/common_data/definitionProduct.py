@@ -16,8 +16,6 @@ class DefinitionProduct():
                 product = Flower.objects.get(pk=productId)
                 if product.count >= 1:
                     SelectedProducts.objects.create(product=product, count=1, user=self.user)
-            else:
-                print('product already exist')
 
     def deleteFromSelectedList(self, productId):
         if productId != 'none': 
@@ -34,8 +32,6 @@ class DefinitionProduct():
                 product = Flower.objects.get(pk=productId)
                 if product.count >= 1:
                     PurchasedProducts.objects.create(product=product, count=1, user=self.user)
-            else:
-                print('product already exist')
 
     def deleteFromPurchasedList(self, productId):
         if productId != 'none': 
@@ -48,12 +44,9 @@ class DefinitionProduct():
     
     def appendTokedList(self, productId):
         if productId != 'none':                
-            if LikedProducts.objects.filter(product = Flower.objects.get(pk=productId)).exists() == False:
-                product = Flower.objects.get(pk=productId)
-                if product.count >= 1:
-                    LikedProducts.objects.create(product=product, user=self.user)
-            else:
-                print('product already exist')
+            product = Flower.objects.get(pk=productId)
+            if LikedProducts.objects.filter(product = product).exists() == False:
+                LikedProducts.objects.create(product=product, user=self.user)
 
     def deleteFromkedList(self, productId):
         if productId != 'none': 

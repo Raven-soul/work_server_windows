@@ -29,7 +29,6 @@ class FlowerHome(DataMixin, ListView):
         c_def['header'] = Header(self.request).getData()
         c_def['header'] = self.setContextData(c_def['header'], diction=[{'name':'cat_selected', 'value':{'section': 0, 'order': 0}},])
         context = dict(list(context.items()) + list(c_def.items()))
-        print(self.request)
         return context
 
 def product_details(request, prod_id):
@@ -257,9 +256,12 @@ def append(request):
     auth = Authorization(request)
     if auth.isAuthorized():
         defProd = DefinitionProduct(auth.getAuthorizedUser())
+        JsonData = {}
 
         if request.POST.get('typeRequest', '') == 'addToSelectList':
             defProd.appendToSelectedList(request.POST.get("user_id", "none"))
+            if request.POST.get('isRedirect', ''):
+                JsonData['redirect'] = '/basket'
         elif request.POST.get('typeRequest', '') == 'addToFavoriteList':
             defProd.appendTokedList(request.POST.get("user_id", "none"))
-    return HttpResponse('data')
+    return JsonResponse(JsonData)
