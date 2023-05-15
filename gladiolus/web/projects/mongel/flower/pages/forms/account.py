@@ -57,6 +57,9 @@ class Order_context(object):
         self.commonData.header.setData(value = self.commonData.userPages['order'].name)
 
         selectedProdsList = SelectedProducts.objects.filter(user=self.commonData.auth.getAuthorizedUser())
+        selectedProdsTotalPriceList = []
+        for elem in selectedProdsList:
+            selectedProdsTotalPriceList.append(round(int(elem.count)*float(elem.product.price)))
         
         self.context = {            
             'page_selected': 2,
@@ -64,7 +67,8 @@ class Order_context(object):
             'buttons': [{'pk': 0, 'name': 'Выбранные продукты'},
                     {'pk': 1, 'name': 'Оплаченные продукты'},
                     {'pk': 2, 'name': 'Понравившиеся продукты'}],
-            'selectedProdsList' : selectedProdsList
+            'selectedProdsList' : selectedProdsList,
+            'selectedProdsTotalPriceList': selectedProdsTotalPriceList
         }
 
         self.contextAll = dict(list(self.context.items()) + list(self.commonData.context.items()))

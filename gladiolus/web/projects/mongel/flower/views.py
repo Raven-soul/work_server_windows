@@ -3,6 +3,7 @@ from django.http import HttpResponse, HttpResponseNotFound,JsonResponse, Http404
 from django.views.generic import ListView
 from .forms import *
 from .utils import *
+from django.views.decorators.csrf import csrf_exempt,csrf_protect
 
 #------------- главные страницы сайта --------------------------
 from .pages.info_pages_data.info_pages import *
@@ -249,8 +250,10 @@ def js_start_data(request):
     context = {'header': Header(request).getData(),
                'footer': Footer().getData(),
                'content_data': username}
-    return render(request, 'flower/main/index_page_button const.html', context=context)
+    return render(request, 'flower/main/index_page_button_const.html', context=context)
 
-def append(request, prod_id):
-    print('ajax_data -------------------', prod_id)
+def append(request):
+    print('ajax_data -------------------', request.POST.get("user_id", "none"))
+    print('ajax_data -------------------', request.POST.get("token", "none"))
+    
     return HttpResponse('data')

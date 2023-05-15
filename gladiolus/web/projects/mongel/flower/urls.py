@@ -30,5 +30,5 @@ urlpatterns = [
     path('check/', js_start_data, name='js_start'),
 
     # ----------------------- ajax pages- -------------------------------
-    path('append/<int:prod_id>', append, name='append')
+    path('append/', append, name='append')
 ]

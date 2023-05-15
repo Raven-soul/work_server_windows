@@ -2,11 +2,11 @@ function data_click(button) {
     $("document").ready(function() {
         csrf_token = $('input[name="csrfmiddlewaretoken"]').val();
         $.ajax({
-            url: '../append/' + button.getAttribute('product-id'),
+            url: '../append/',
             method: 'post',
             dataType: "html",
-            data: {user_id: 0,
-                  csrfmiddlewaretoken: csrf_token},
+            data: {'user_id': button.getAttribute('product-id'),
+                    csrfmiddlewaretoken: csrf_token},
             success: function(data){
                 alert(data);
             }

@@ -200,7 +200,7 @@ class SelectedProducts(models.Model):
         verbose_name_plural = '5. Список выбранных товаров'
         ordering = ['id',]
 
-class purchasedProducts(models.Model):
+class PurchasedProducts(models.Model):
     product = models.ForeignKey(Flower, on_delete=models.CASCADE, verbose_name='Товар')
     count = models.IntegerField(verbose_name='Количество товара')
     user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='Пользователь')
@@ -214,6 +214,18 @@ class purchasedProducts(models.Model):
         verbose_name_plural = '5. Список купленных товаров'
         ordering = ['id',]
 
+class LikedProducts(models.Model):
+    product = models.ForeignKey(Flower, on_delete=models.CASCADE, verbose_name='Товар')
+    user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='Пользователь')
+    time_create = models.DateTimeField(auto_now_add=True,verbose_name='Время создания')
+
+    def __str__(self):
+        return self.product.title
+    
+    class Meta:
+        verbose_name = '5. Список понравившихся товаров'
+        verbose_name_plural = '5. Понравившиеся товары'
+        ordering = ['id',]
         
 class UserPages(models.Model):
     name = models.CharField(max_length=255, verbose_name='Название страницы')
