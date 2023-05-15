@@ -14,6 +14,7 @@ from .pages.empty import Empty_page
 
 from .models import * #база данных
 from .pages.common_data.authorisation import Authorization
+from .pages.common_data.definitionProduct import DefinitionProduct
 
 #------------------ main_pages --------------------------
 
@@ -253,7 +254,12 @@ def js_start_data(request):
     return render(request, 'flower/main/index_page_button_const.html', context=context)
 
 def append(request):
-    print('ajax_data -------------------', request.POST.get("user_id", "none"))
-    print('ajax_data -------------------', request.POST.get("token", "none"))
-    
+    auth = Authorization(request)
+    if auth.isAuthorized():
+        defProd = DefinitionProduct(auth.getAuthorizedUser())
+
+        if request.POST.get('typeRequest', '') == 'addToSelectList':
+            defProd.appendToSelectedList(request.POST.get("user_id", "none"))
+        elif request.POST.get('typeRequest', '') == 'addToFavoriteList':
+            defProd.appendTokedList(request.POST.get("user_id", "none"))
     return HttpResponse('data')

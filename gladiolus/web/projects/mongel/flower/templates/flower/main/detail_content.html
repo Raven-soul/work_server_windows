@@ -1,11 +1,12 @@
 {% load static %}
 {% include '../header.html' %}
+{% csrf_token %}
 <!-- ########## ОБЛАСТЬ ДЛЯ МОДУЛЯ МАГАЗИНА ########## -->
     <div>
-        <div class="container">
+        <div class="container" id="product-data" product-id="{{ product.pk }}">
             <div class="row product-title-name-and-rating">
                 <div class="col">
-                    <div class="name-shop-item">{{ product.name }}</div>
+                    <div class="name-shop-item">{{ product.title }}</div>
                     <div class="rating-after-name">
                         <ul>
                             <li id="1"><i class="fa fa-star-half-o"></i></li>
@@ -40,9 +41,9 @@
                                 <div class="col p-0 js_product_size product-size-stile">
                                     <i class="fa fa-maximize detail-text-data-icon" aria-hidden="true"></i>
                                     Размер:
-                                    <span class="js_product__size-width" title="Ширина">{{ product.size.width }}</span>
+                                    <span class="js_product__size-width" title="Ширина">{{ product.size_width }}</span>
                                     ×
-                                    <span class="js_product__size-height" title="Высота">{{ product.size.height }}</span>
+                                    <span class="js_product__size-height" title="Высота">{{ product.size_height }}</span>
                                     см 
                                 </div>
                                 <div class="col p-0 js_product-delivery-price product-delivery-price-stile">
@@ -57,7 +58,7 @@
                         <div class="col p-o buy-button-group">
                             <div class="row">
                                 <div class="col-5 p-0 buy-button-item-div">
-                                    <button type="submit" class="buy-button-common buy-button w-100" onclick="eventAddToCart()">
+                                    <button type="submit" class="buy-button-common buy-button w-100" onclick="addToSelectedList(this)" product-data-area="product-data">
                                         <i class="fa-regular fa-calendar"></i>
                                         Заказать
                                     </button>
@@ -66,7 +67,7 @@
                                     <button type="button" class="buy-button-common buy-button-one-click w-100" onclick="quickorderForm(this)">Купить в 1 клик </button>
                                 </div>
                                 <div class="col-1 p-0 buy-button-item-div">
-                                    <button type="button" class="buy-button-common buy-button-favorite" onclick="addToFavorite(this, 3029, 0, true)">
+                                    <button type="button" class="buy-button-common buy-button-favorite" onclick="addToFavoriteList(this)" product-data-area="product-data">
                                         <i class="fa-regular fa-heart"></i>
                                     </button>
                                 </div>
@@ -98,16 +99,16 @@
                                                 <div class="row-2">
                                                     <div class="col global-data">
                                                         <div class="row reviews-global-data">
-                                                            <div class="col-auto reviews-global-grade">{{ product.reviews.global_grade }}</div>
+                                                            <div class="col-auto reviews-global-grade">{{ reviews.global_grade }}</div>
                                                             <div class="col">
                                                                 <div class="row-2">
                                                                     <div class="col">
                                                                         <div class="rating-after-name">
                                                                             <ul>
-                                                                                {% for i in product.reviews.global_stars.fill %}
+                                                                                {% for i in reviews.global_stars.fill %}
                                                                                     <li><i class="fa-solid fa-star"></i></li>
                                                                                 {% endfor %}
-                                                                                {% for i in product.reviews.global_stars.less %}
+                                                                                {% for i in reviews.global_stars.less %}
                                                                                     <li><i class="fa-regular fa-star"></i></li>
                                                                                 {% endfor %}
                                                                             </ul>
@@ -115,15 +116,15 @@
                                                                     </div>
                                                                     <div class="col">
                                                                         <div class="row">
-                                                                            <div class="col-auto">{{ product.reviews.number_all_reviews }}  Оценок</div>
-                                                                            <div class="col-auto">{{ product.reviews.number_all_reviews }}  Отзывов</div>
+                                                                            <div class="col-auto">{{ reviews.number_all_reviews }}  Оценок</div>
+                                                                            <div class="col-auto">{{ reviews.number_all_reviews }}  Отзывов</div>
                                                                         </div>
                                                                     </div>
                                                                 </div>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    {% for review in product.reviews.few_reviews %}
+                                                    {% for review in reviews.few_reviews %}
                                                         <div class="col rewiew-local-data">
                                                             <div class="row-2">
                                                                 <div class="col rewiew-local-data-stroke">
@@ -164,27 +165,27 @@
                                                 <div class="row compound-data">
                                                     <div class="col">
                                                         <div class="row-2">
-                                                            {% if product.composition.product == 'none' %}
+                                                            {% if composition.product == 'none' %}
                                                                 <div class="col compound-column-item">данные о цветке</div>
                                                                 <div class="col compound-column-item">данные о цветке</div>
                                                                 <div class="col compound-column-item">данные о цветке</div>
                                                             {% else %}
-                                                                <div class="col compound-column-item">{{product.composition.product.part_1}}</div>
-                                                                <div class="col compound-column-item">{{product.composition.product.part_2}}</div>
-                                                                <div class="col compound-column-item">{{product.composition.product.part_3}}</div>
+                                                                <div class="col compound-column-item">{{composition.product.part_1}}</div>
+                                                                <div class="col compound-column-item">{{composition.product.part_2}}</div>
+                                                                <div class="col compound-column-item">{{composition.product.part_3}}</div>
                                                             {% endif %}
                                                         </div>
                                                     </div>
                                                     <div class="col">
                                                         <div class="row-2">
-                                                            {% if product.composition.wrapping == 'none' %}
+                                                            {% if composition.wrapping == 'none' %}
                                                                 <div class="col compound-column-header">Упаковка</div>
                                                                 <div class="col compound-column-item">данные об упаковке</div>
                                                                 <div class="col compound-column-item">данные об упаковке</div>
                                                             {% else %}
                                                                 <div class="col compound-column-header">Упаковка</div>
-                                                                <div class="col compound-column-item">{{product.composition.wrapping.part_1}}</div>
-                                                                <div class="col compound-column-item">{{product.composition.wrapping.part_2}}</div>
+                                                                <div class="col compound-column-item">{{composition.wrapping.part_1}}</div>
+                                                                <div class="col compound-column-item">{{composition.wrapping.part_2}}</div>
                                                             {% endif %}
                                                         </div>
                                                     </div>
@@ -281,7 +282,7 @@
                     <div class="product-description-text-border">
                         <div class="product-description_text">
                             <h3>Описание</h3>
-                            <p>{{ product.description }}</p>
+                            <p>{{ product.description_content }}</p>
                         </div>
                     </div>
                 </div>
@@ -291,19 +292,19 @@
                         <ul class="product-characteristics md-0 p-0">
                             <li>
                                 <div class="product-characteristic-title">Тип</div>
-                                <span class="value">{{product.type}}</span>
+                                <span class="value">{{product.type_data}}</span>
                             </li>
                             <li>
                                 <div class="product-characteristic-title">Повод</div>
-                                <span class="value">{{product.reason}}</span>
+                                <span class="value">{{product.reason_data}}</span>
                             </li>
                             <li>
                                 <div class="product-characteristic-title">Ширина</div>
-                                <span class="value">{{product.size.width}}</span> см
+                                <span class="value">{{product.size_width}}</span> см
                             </li>
                             <li>
                                 <div class="product-characteristic-title">Высота</div>
-                                <span class="value">{{product.size.height}}</span> см
+                                <span class="value">{{product.size_height}}</span> см
                             </li>
                         </ul>
                     </div>

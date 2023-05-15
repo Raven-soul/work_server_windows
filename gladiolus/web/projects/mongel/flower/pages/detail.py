@@ -17,7 +17,9 @@ class Detail_page(object):
         self.context = {
             'header': self.header.getData(),
             'footer': self.footer.getData(),
-            'product': self.productContext,
+            'product': self.productItem,
+            'reviews': self.getReviews(self.productItem),
+            'composition': self.compositionFormer(self.productItem),
             'like_block': self.likedFormer(self.productList)
         }
 
@@ -26,25 +28,10 @@ class Detail_page(object):
         self.footer = Footer()
 
         self.productList = Flower.objects.all()
-        self.productItem = self.productSearch(self.productList, prod_id)
-
-        self.productContext = {'name': self.productItem.title,
-                               'photo': self.productItem.photo,
-                               'price': self.productItem.price,
-                               'size': {'width': self.productItem.size_width, 'height': self.productItem.size_height},
-                               'reviews': self.getReviews(self.productItem),
-                               'composition': self.compositionFormer(self.productItem),
-                               'description': self.productItem.description_content,
-                               'type': self.productItem.type_data,
-                               'reason': self.productItem.reason_data}
+        self.productItem = Flower.objects.get(pk=prod_id)
 
     def getDict(self):
         return self.context
-    
-    def productSearch(self, productDBList, desired_id):
-        for item in productDBList:
-            if item.pk == desired_id:
-                return item
             
     def getReviews(self, productItem):
         reviews = Review.objects.all()
