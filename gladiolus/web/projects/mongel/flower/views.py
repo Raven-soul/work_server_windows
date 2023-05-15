@@ -181,6 +181,9 @@ def account(request, section_name):
     
     #------------------------------------------------------------------------------- login
     elif section_name == 'login':
+        if auth.isAuthorized():
+            return redirect('/account/user')
+
         if request.method == 'POST':
             form = Login_form(request.POST)
             if form.is_valid():
@@ -197,6 +200,9 @@ def account(request, section_name):
     
     #------------------------------------------------------------------------------- registration
     elif section_name == 'registration':
+        if auth.isAuthorized():
+            return redirect('/account/user')
+
         if request.method == 'POST':
             form = RegistrationPostForm(request.POST)
             if form.is_valid():
