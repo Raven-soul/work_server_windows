@@ -165,12 +165,21 @@ def account(request, section_name):
     #------------------------------------------------------------------------------- user
     if section_name == 'user':
         user = auth.getAuthorizedUser()
-        form = Account_form(initial={'name_user_field': user.name_user_field,
-                                    'surname_user_field': user.surname_user_field,
-                                    'email_user_field': user.email_user_field,
-                                    'password_user_field': user.password_user_field,
-                                    'city_user_field': user.city_user_field,
-                                    'phone_user_field': user.phone_user_field})
+        if request.method == 'POST':
+            form = Account_form(request.POST)
+            if form.is_valid():
+                user = auth.getAuthorizedUser()
+                user.surname_user_field = form.cleaned_data['surname_user_field']
+                user.city_user_field = form.cleaned_data['city_user_field']
+                user.phone_user_field = form.cleaned_data['phone_user_field']
+                user.save()
+        else:
+            form = Account_form(initial={'name_user_field': user.name_user_field,
+                                        'surname_user_field': user.surname_user_field,
+                                        'email_user_field': user.email_user_field,
+                                        'password_user_field': user.password_user_field,
+                                        'city_user_field': user.city_user_field,
+                                        'phone_user_field': user.phone_user_field})
         
         data['form'] = form
         return render(request, 'flower/form_pages/account_user.html', context=data)

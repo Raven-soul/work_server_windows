@@ -64,9 +64,9 @@ class Order_context(object):
         self.context = {            
             'page_selected': 2,
             'button_selected': 0,
-            'buttons': [{'pk': 0, 'name': 'Выбранные продукты'},
-                    {'pk': 1, 'name': 'Оплаченные продукты'},
-                    {'pk': 2, 'name': 'Понравившиеся продукты'}],
+            'buttons': [{'pk': 0, 'name': 'fa-solid fa-cart-shopping'},
+                    {'pk': 1, 'name': 'fa-solid fa-check'},
+                    {'pk': 2, 'name': 'fa-regular fa-heart'}],
             'selectedProdsList' : selectedProdsList,
             'selectedProdsTotalPriceList': selectedProdsTotalPriceList
         }

@@ -77,7 +77,11 @@ input {
 }
 
 .button-select{
-    background-color: rgb(216, 216, 216);
+    background-color: rgb(255, 233, 233);
+}
+
+.selector-img {
+    color: rgb(174,132,188);
 }
 
 .hr-vertical{

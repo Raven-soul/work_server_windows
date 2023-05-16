@@ -53,9 +53,9 @@ class RegistrationPostForm (forms.Form):
         return email
     
 class Account_form (forms.Form):
-    name_user_field = forms.CharField(required=True, label='Имя пользователя', widget=forms.TextInput(attrs={'class': 'data'}))
+    name_user_field = forms.CharField(required=True, label='Имя пользователя', widget=forms.TextInput(attrs={'class': 'readonly-field', 'readonly': ''}))
     surname_user_field = forms.CharField(required=False, label='Фамилия пользователя')
-    email_user_field = forms.CharField(required=True, label='Логин')
-    password_user_field = forms.CharField(required=True, label='Пароль')
+    email_user_field = forms.CharField(required=True, label='Логин', widget=forms.TextInput(attrs={'class': 'readonly-field', 'readonly': ''}))
+    password_user_field = forms.CharField(required=True, label='Пароль', widget=forms.TextInput(attrs={'class': 'readonly-field', 'readonly': ''}))
     city_user_field = forms.CharField(required=False, label='Выбранный город')
     phone_user_field = forms.CharField(required=False, label='Номер телефона')

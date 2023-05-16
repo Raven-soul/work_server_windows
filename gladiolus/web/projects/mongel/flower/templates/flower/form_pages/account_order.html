@@ -9,18 +9,18 @@
                         <div class="col-auto hr-vertical"></div>    
                         {% if button_selected == button.pk %}
                             <div class="col">
-                                <button class="category-selector button-select">{{ button.name }}</button>
+                                <button class="category-selector button-select"><i class="selector-img {{ button.name }}"></i></button>
                             </div>
                         {% else %}
                             <div class="col">
-                                <button class="category-selector">{{ button.name }}</button>
+                                <button class="category-selector" data-show-area-id="data-show"><i class="selector-img {{ button.name }}"></i></button>
                             </div>
                         {% endif %}
                         <div class="col-auto hr-vertical"></div>
                     {% endfor %}
                 </div>
             </div>
-            <div class="col">
+            <div class="col" id="data-show">
                 {% block fill %}
                 {% endblock fill %}
             </div>
