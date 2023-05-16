@@ -1,5 +1,4 @@
-{% extends "../../form_pages/account_order.html" %}
-{% block fill %}
+{% csrf_token %}
 {% for selectItem in selectedProdsList %}
 <div class="col product-element-row" id="product-item-{{ selectItem.product.pk }}" priduct-id="{{ selectItem.product.pk }}">
     <div class="row">
@@ -29,4 +28,3 @@
 </div>
 <hr>
 {% endfor %}
-{% endblock fill %}
