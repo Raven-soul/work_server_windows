@@ -16,6 +16,12 @@ function ajaxRequest(typeRequest, majorArea, replaceableArea){
     })
 }
 
+function awake(majorTagId, replaceableAreaTagId ){
+    majorDataAreaTag = document.getElementById(majorTagId);
+    replaceableAreaTag = document.getElementById(replaceableAreaTagId);    
+    ajaxRequest('choosen_short', majorDataAreaTag, replaceableAreaTag);
+}
+
 function chooseButton(button, selectPos){
     commonDataTag = document.getElementById(button.getAttribute('common-data-id'));
 
@@ -53,4 +59,9 @@ function showFavoriteList(button){
     majorDataAreaTag = document.getElementById(button.getAttribute('data-area-id'));
     replaceableAreaTag = document.getElementById(button.getAttribute('show-content-area-id'));   
     ajaxRequest('liked_short', majorDataAreaTag, replaceableAreaTag);
+}
+
+function selectRowDelete(button){
+    id = button.getAttribute('product-id');
+    alert(id)
 }

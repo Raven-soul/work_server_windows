@@ -187,7 +187,8 @@ def account(request, section_name):
     
     #------------------------------------------------------------------------------- order
     elif section_name == 'order':
-        return render(request, 'flower/form_pages/order_temps/account_order_choosen.html', context=data)
+        data['header']['onload_function'] = '"data-show", "data-content"'
+        return render(request, 'flower/form_pages/account_order.html', context=data)
     
     #------------------------------------------------------------------------------- login
     elif section_name == 'login':

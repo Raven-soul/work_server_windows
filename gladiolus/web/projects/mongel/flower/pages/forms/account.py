@@ -50,14 +50,11 @@ class User_context(object):
 class Order_context(object):
     def __init__(self, request):
         self.commonData = CommonBuild(request)
-
         self.commonData.header.setData(name = 'content_style_path', value = 'flower/css/user_account_pages.css')
         self.commonData.header.setData(value = self.commonData.userPages['order'].name)
-        self.commonData.footer.setData(name = 'script_list', value = [{'script_url':'flower/js/ajax/accountLists.js'}])
-
-        
+        self.commonData.footer.setData(name = 'script_list', value = [{'script_url':'flower/js/ajax/accountLists.js'}])  
+              
         products = []
-
         for elem in SelectedProducts.objects.filter(user=self.commonData.auth.getAuthorizedUser()):
             products.append({
                 'position': elem,

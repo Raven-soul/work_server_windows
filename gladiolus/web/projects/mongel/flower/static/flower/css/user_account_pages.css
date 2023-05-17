@@ -135,3 +135,8 @@ input {
     border-left: 1px solid rgb(213, 213, 213);
     border-right: 1px solid rgb(213, 213, 213);
 }
+
+.list-title {
+    text-align: center;
+    font-size: 20px;
+}

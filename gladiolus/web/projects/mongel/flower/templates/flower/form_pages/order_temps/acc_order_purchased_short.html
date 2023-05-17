@@ -1,33 +1,34 @@
 {% csrf_token %}
 <div id="data-content">
-    <p>Покупка</p>
+    <p class="list-title">Купленные товары</p>
     {% for selectItem in products %}
-    <div class="col product-element-row" id="product-item-{{ selectItem.product.pk }}" priduct-id="{{ selectItem.product.pk }}">
+    <hr>
+    <div class="col product-element-row" id="product-item-{{ selectItem.position.product.pk }}" priduct-id="{{ selectItem.position.product.pk }}">
         <div class="row">
             <div class="col d-flex">
-                <div class="save-area d-flex align-items-center w-100">
-                    <a href="{{ selectItem.product.get_absolute_url }}" class="product-name-data">{{ selectItem.product.title }}</a>
+                <div class="d-flex align-items-center w-100">
+                    <a href="{{ selectItem.position.product.get_absolute_url }}" class="product-name-data">{{ selectItem.position.product.title }}</a>
                 </div>
             </div>                                        
             <div class="col-1 d-flex justify-content-center p-0">
-                <div class="save-area d-flex align-items-center w-100">
-                    <input readonly id="{{ selectItem.product.pk }}-qty-container" class="qty-container m-0 p-0" style="outline:none;" value="{{ selectedProdsTotalPriceList }}" min="1">  
+                <div class="qty-area d-flex align-items-center w-100">
+                    <input readonly id="{{ selectItem.position.product.pk }}-qty-container" class="qty-container m-0 p-0" value="{{ selectItem.position.count }}" min="1">  
                 </div>                                            
             </div>
-            <div class="col-2 d-flex justify-content-center p-0">
-                <div class="save-area d-flex align-items-center">
-                    <div class="table-product-cost-data">
-                        <span class="uc-price" id="product-id_1000103-price">{{ selectItem.product.price }}</span><span class="rur"> ₽</span>
-                    </div>
+            <div class="col-2 d-flex justify-content-center p-0 price-area">
+                <div class="d-flex align-items-center">
+                    <span class="uc-price" id="product-id_1000103-price">{{ selectItem.totalPrice }}</span><span class="rur"> ₽</span>
                 </div>
             </div>
-            <div class="col-1 d-flex justify-content-center p-0">
-                <div class="save-area d-flex align-items-center">
-                    <button class="product-delete-button">Detete</button>
+            <div class="col-auto d-flex justify-content-center p-0 price-area">
+                <div class="d-flex align-items-center mx-3"><span>status</span></div>
+            </div>
+            <div class="col-1 d-flex justify-content-center p-0 mx-2">
+                <div class="d-flex align-items-center">
+                    <button class="product-delete-button" onclick="selectRowDelete(this)" product-id="product-item-{{ selectItem.position.product.pk }}">Detete</button>
                 </div>
             </div>
         </div>
     </div>
-    <hr>
     {% endfor %}
 </div>
