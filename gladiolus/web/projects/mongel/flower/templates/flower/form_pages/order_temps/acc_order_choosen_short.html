@@ -5,6 +5,31 @@
     <div class="col product-element-row" id="product-item-{{ selectItem.product.pk }}" priduct-id="{{ selectItem.product.pk }}">
         <div class="row">
             <div class="col d-flex">
+                <div class="d-flex align-items-center w-100">
+                    <a href="{{ selectItem.product.get_absolute_url }}" class="product-name-data">{{ selectItem.product.title }}</a>
+                </div>
+            </div>                                        
+            <div class="col-1 d-flex justify-content-center p-0">
+                <div class="qty-area d-flex align-items-center w-100">
+                    <input readonly id="{{ selectItem.product.pk }}-qty-container" class="qty-container m-0 p-0" value="1" size="3" maxlength="3" min="1">  
+                </div>                                            
+            </div>
+            <div class="col-2 d-flex justify-content-center p-0 price-area">
+                <div class="d-flex align-items-center">
+                    <span class="uc-price" id="product-id_1000103-price">{{ selectItem.totalPrice }}</span><span class="rur"> ₽</span>
+                </div>
+            </div>
+            <div class="col-1 d-flex justify-content-center p-0 mx-2">
+                <div class="d-flex align-items-center">
+                    <button class="product-delete-button">Detete</button>
+                </div>
+            </div>
+        </div>
+
+        <hr>
+
+        <div class="row">
+            <div class="col d-flex">
                 <div class="save-area d-flex align-items-center w-100">
                     <a href="{{ selectItem.product.get_absolute_url }}" class="product-name-data">{{ selectItem.product.title }}</a>
                 </div>

@@ -105,6 +105,8 @@ input {
 
 .qty-container{
     border: none;
+    outline:none;
+    text-align: center;
 }
 
 .product-delete-button{
@@ -120,4 +122,16 @@ input {
 .product-delete-button:hover {
     text-decoration: underline solid rgb(112, 82, 122);;
     color: rgb(112, 82, 122);
+}
+
+.qty-area {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-left: 1px solid rgb(213, 213, 213);
+}
+
+.price-area {
+    border-left: 1px solid rgb(213, 213, 213);
+    border-right: 1px solid rgb(213, 213, 213);
 }

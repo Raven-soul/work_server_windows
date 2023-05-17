@@ -204,6 +204,7 @@ class PurchasedProducts(models.Model):
     product = models.ForeignKey(Flower, on_delete=models.CASCADE, verbose_name='Товар')
     count = models.IntegerField(verbose_name='Количество товара')
     user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='Пользователь')
+    status = models.CharField(max_length=255, verbose_name='статус заказа')
     time_create = models.DateTimeField(auto_now_add=True,verbose_name='Время создания')
 
     def __str__(self):

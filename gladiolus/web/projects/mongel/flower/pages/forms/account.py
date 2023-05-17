@@ -55,11 +55,14 @@ class Order_context(object):
         self.commonData.header.setData(value = self.commonData.userPages['order'].name)
         self.commonData.footer.setData(name = 'script_list', value = [{'script_url':'flower/js/ajax/accountLists.js'}])
 
-        selectedProdsList = SelectedProducts.objects.filter(user=self.commonData.auth.getAuthorizedUser())
-        selectedProdsTotalPriceList = []
+        
+        products = []
 
-        for elem in selectedProdsList:
-            selectedProdsTotalPriceList.append(round(int(elem.count)*float(elem.product.price)))
+        for elem in SelectedProducts.objects.filter(user=self.commonData.auth.getAuthorizedUser()):
+            products.append({
+                'position': elem,
+                'totalPrice': round(int(elem.count)*float(elem.product.price))
+            })
 
         buttons = [{'pk': 0, 'img': 'fa-solid fa-cart-shopping', 'function': 'showSelectedList(this)'},
                    {'pk': 1, 'img': 'fa-solid fa-check', 'function': 'showPurchasedList(this)'},
@@ -70,8 +73,7 @@ class Order_context(object):
             'button_selected': 0,
             'buttons': {'array': buttons,
                         'length': len(buttons)},
-            'products' : selectedProdsList,
-            'productsTotalPriceList': selectedProdsTotalPriceList
+            'products' : products
         }
 
         self.contextAll = dict(list(self.context.items()) + list(self.commonData.context.items()))

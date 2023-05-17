@@ -3,11 +3,11 @@
 {% block fill %}
 <div id="data-content">
     {% for selectItem in products %}
-    <div class="col product-element-row" id="product-item-{{ selectItem.product.pk }}" priduct-id="{{ selectItem.product.pk }}">
+    <div class="col product-element-row" id="product-item-{{ selectItem.position.product.pk }}" priduct-id="{{ selectItem.product.pk }}">
         <div class="row">
             <div class="col d-flex">
                 <div class="save-area d-flex align-items-center w-100">
-                    <a href="{{ selectItem.product.get_absolute_url }}" class="product-name-data">{{ selectItem.product.title }}</a>
+                    <a href="{{ selectItem.product.get_absolute_url }}" class="product-name-data">{{ selectItem.position.product.title }}</a>
                 </div>
             </div>                                        
             <div class="col-1 d-flex justify-content-center p-0">

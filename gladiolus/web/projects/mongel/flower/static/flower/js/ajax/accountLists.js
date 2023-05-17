@@ -11,7 +11,6 @@ function ajaxRequest(typeRequest, majorArea, replaceableArea){
             success: function(data){
                 replaceableArea.remove();
                 majorArea.innerHTML = data;
-                alert('ready');
             }
         });
     })
