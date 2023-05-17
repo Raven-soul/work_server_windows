@@ -1,6 +1,4 @@
 from ...models import * #база данных
-from django.http import HttpResponseRedirect
-from django.shortcuts import render, redirect
 from ..common_data.footer import Footer
 from ..common_data.header import Header
 from ..common_data.authorisation import Authorization
@@ -55,20 +53,25 @@ class Order_context(object):
 
         self.commonData.header.setData(name = 'content_style_path', value = 'flower/css/user_account_pages.css')
         self.commonData.header.setData(value = self.commonData.userPages['order'].name)
+        self.commonData.footer.setData(name = 'script_list', value = [{'script_url':'flower/js/ajax/accountLists.js'}])
 
         selectedProdsList = SelectedProducts.objects.filter(user=self.commonData.auth.getAuthorizedUser())
         selectedProdsTotalPriceList = []
+
         for elem in selectedProdsList:
             selectedProdsTotalPriceList.append(round(int(elem.count)*float(elem.product.price)))
-        
+
+        buttons = [{'pk': 0, 'img': 'fa-solid fa-cart-shopping', 'function': 'showSelectedList(this)'},
+                   {'pk': 1, 'img': 'fa-solid fa-check', 'function': 'showPurchasedList(this)'},
+                   {'pk': 2, 'img': 'fa-regular fa-heart', 'function': 'showFavoriteList(this)'}]
+
         self.context = {            
             'page_selected': 2,
             'button_selected': 0,
-            'buttons': [{'pk': 0, 'name': 'fa-solid fa-cart-shopping'},
-                    {'pk': 1, 'name': 'fa-solid fa-check'},
-                    {'pk': 2, 'name': 'fa-regular fa-heart'}],
-            'selectedProdsList' : selectedProdsList,
-            'selectedProdsTotalPriceList': selectedProdsTotalPriceList
+            'buttons': {'array': buttons,
+                        'length': len(buttons)},
+            'products' : selectedProdsList,
+            'productsTotalPriceList': selectedProdsTotalPriceList
         }
 
         self.contextAll = dict(list(self.context.items()) + list(self.commonData.context.items()))

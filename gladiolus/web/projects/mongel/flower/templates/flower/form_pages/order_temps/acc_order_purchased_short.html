@@ -1,6 +1,6 @@
 {% csrf_token %}
 <div id="data-content">
-    <p>Выбор</p>
+    <p>Покупка</p>
     {% for selectItem in products %}
     <div class="col product-element-row" id="product-item-{{ selectItem.product.pk }}" priduct-id="{{ selectItem.product.pk }}">
         <div class="row">

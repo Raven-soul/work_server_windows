@@ -8,6 +8,7 @@ from django.views.decorators.csrf import csrf_exempt,csrf_protect
 #------------- главные страницы сайта --------------------------
 from .pages.info_pages_data.info_pages import *
 from .pages.forms.account import Account_page
+from .pages.forms.account_lists import AccountlistsPages
 from .pages.detail import Detail_page
 from .pages.basket import Basket_page
 from .pages.empty import Empty_page
@@ -241,6 +242,34 @@ def pageNotFound(request, exception):
     return HttpResponseNotFound('<h1>Страница не найдена</h1>')
 
 #---------------------------- additional material ----------------------------------------
+def append(request):
+    auth = Authorization(request)
+    if auth.isAuthorized():
+        defProd = DefinitionProduct(auth.getAuthorizedUser())
+        JsonData = {}
+
+        if request.POST.get('typeRequest', '') == 'addToSelectList':
+            defProd.appendToSelectedList(request.POST.get("user_id", "none"))
+            if request.POST.get('isRedirect', ''):
+                JsonData['redirect'] = '/basket'
+        elif request.POST.get('typeRequest', '') == 'addToFavoriteList':
+            defProd.appendTokedList(request.POST.get("user_id", "none"))
+    return JsonResponse(JsonData)
+
+def accountLists(request):
+    auth = Authorization(request)
+    if auth.isAuthorized():
+        if request.POST.get('typeRequest', '') == 'choosen_short':
+            return render(request, 'flower/form_pages/order_temps/acc_order_choosen_short.html', context=AccountlistsPages(request.POST.get('typeRequest', ''), request).getDict())
+        elif request.POST.get('typeRequest', '') == 'liked_short':
+            return render(request, 'flower/form_pages/order_temps/acc_order_liked_short.html', context=AccountlistsPages(request.POST.get('typeRequest', ''), request).getDict())
+        elif request.POST.get('typeRequest', '') == 'purchased_short':
+            return render(request, 'flower/form_pages/order_temps/acc_order_purchased_short.html', context=AccountlistsPages(request.POST.get('typeRequest', ''), request).getDict())
+        else:
+            return HttpResponseNotFound('<h1>Страница не найдена</h1>')
+
+#---------------------------- other material ----------------------------------------
+
 def js_data(request):
     script_list = [{'script_url':'flower/js/ajax_try.js'}]
 
@@ -266,17 +295,3 @@ def js_start_data(request):
                'footer': Footer().getData(),
                'content_data': username}
     return render(request, 'flower/main/index_page_button_const.html', context=context)
-
-def append(request):
-    auth = Authorization(request)
-    if auth.isAuthorized():
-        defProd = DefinitionProduct(auth.getAuthorizedUser())
-        JsonData = {}
-
-        if request.POST.get('typeRequest', '') == 'addToSelectList':
-            defProd.appendToSelectedList(request.POST.get("user_id", "none"))
-            if request.POST.get('isRedirect', ''):
-                JsonData['redirect'] = '/basket'
-        elif request.POST.get('typeRequest', '') == 'addToFavoriteList':
-            defProd.appendTokedList(request.POST.get("user_id", "none"))
-    return JsonResponse(JsonData)

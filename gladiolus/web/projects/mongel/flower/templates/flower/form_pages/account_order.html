@@ -4,16 +4,16 @@
     <div class="container">
         <div class="row-2">
             <div class="col col-selector">
-                <div class="row category-selector-row">
-                    {% for button in buttons %}
+                <div class="row category-selector-row" id="common-data" number-buttons="{{ buttons.length }}" button-id-prefix="button-">
+                    {% for button in buttons.array %}
                         <div class="col-auto hr-vertical"></div>    
                         {% if button_selected == button.pk %}
                             <div class="col">
-                                <button class="category-selector button-select"><i class="selector-img {{ button.name }}"></i></button>
+                                <button class="category-selector button-select" common-data-id="common-data" data-area-id="data-show" show-content-area-id="data-content" id="button-{{ button.pk }}" onclick="{{ button.function }}"><i class="selector-img {{ button.img }}"></i></button>
                             </div>
                         {% else %}
                             <div class="col">
-                                <button class="category-selector" data-show-area-id="data-show"><i class="selector-img {{ button.name }}"></i></button>
+                                <button class="category-selector" common-data-id="common-data" data-area-id="data-show" show-content-area-id="data-content"  id="button-{{ button.pk }}" onclick="{{ button.function }}"><i class="selector-img {{ button.img }}"></i></button>
                             </div>
                         {% endif %}
                         <div class="col-auto hr-vertical"></div>
