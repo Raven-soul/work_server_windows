@@ -1,25 +1,29 @@
-function ajaxRequest(typeRequest, majorArea, replaceableArea){
-    $("document").ready(function() {
-        csrf_token = $('input[name="csrfmiddlewaretoken"]').val();
-        $.ajax({
-            url: '../accountLists/',
-            method: 'post',
-            dataType: "html",
-            data: { csrfmiddlewaretoken: csrf_token,
-                    'typeRequest': typeRequest
-                    },
-            success: function(data){
-                replaceableArea.remove();
-                majorArea.innerHTML = data;
-            }
-        });
-    })
+function ajaxReplaceRequest(typeRequest, majorArea, replaceableArea){
+    csrf_token = $('input[name="csrfmiddlewaretoken"]').val();
+    $.post('../accountLists/', {csrfmiddlewaretoken: csrf_token, 'typeRequest': typeRequest}, function(data){
+        replaceableArea.remove();
+        majorArea.innerHTML = data;
+    });
+}
+
+function ajaxDeleteRequest(productId, list, row){
+    csrf_token = $('input[name="csrfmiddlewaretoken"]').val();
+    $.post('../delete/', {csrfmiddlewaretoken: csrf_token, 'productId': productId, 'list': list}, function(data){
+        alert('delete ready')
+    });
+}
+
+function ajaxReviewRequest(productId, list){
+    csrf_token = $('input[name="csrfmiddlewaretoken"]').val();
+    $.post('../startReview/', {csrfmiddlewaretoken: csrf_token, 'productId': productId}, function(data){
+        alert('review ready')
+    });
 }
 
 function awake(majorTagId, replaceableAreaTagId ){
     majorDataAreaTag = document.getElementById(majorTagId);
     replaceableAreaTag = document.getElementById(replaceableAreaTagId);    
-    ajaxRequest('choosen_short', majorDataAreaTag, replaceableAreaTag);
+    ajaxReplaceRequest('choosen_short', majorDataAreaTag, replaceableAreaTag);
 }
 
 function chooseButton(button, selectPos){
@@ -44,24 +48,29 @@ function showSelectedList(button){
     chooseButton(button, 0)
     majorDataAreaTag = document.getElementById(button.getAttribute('data-area-id'));
     replaceableAreaTag = document.getElementById(button.getAttribute('show-content-area-id'));    
-    ajaxRequest('choosen_short', majorDataAreaTag, replaceableAreaTag);
+    ajaxReplaceRequest('choosen_short', majorDataAreaTag, replaceableAreaTag);
 }
 
 function showPurchasedList(button){
     chooseButton(button, 1)
     majorDataAreaTag = document.getElementById(button.getAttribute('data-area-id'));
     replaceableAreaTag = document.getElementById(button.getAttribute('show-content-area-id'));   
-    ajaxRequest('purchased_short', majorDataAreaTag, replaceableAreaTag);
+    ajaxReplaceRequest('purchased_short', majorDataAreaTag, replaceableAreaTag);
 }
 
 function showFavoriteList(button){
     chooseButton(button, 2)
     majorDataAreaTag = document.getElementById(button.getAttribute('data-area-id'));
     replaceableAreaTag = document.getElementById(button.getAttribute('show-content-area-id'));   
-    ajaxRequest('liked_short', majorDataAreaTag, replaceableAreaTag);
+    ajaxReplaceRequest('liked_short', majorDataAreaTag, replaceableAreaTag);
 }
 
-function selectRowDelete(button){
+function productDelete(button){
+    productTag = document.getElementById(button.getAttribute('product-id'));
+    ajaxDeleteRequest(productTag.getAttribute('product-id'), productTag.getAttribute('list-type'), productTag)
+}
+
+function addReview(button){
     id = button.getAttribute('product-id');
     alert(id)
 }

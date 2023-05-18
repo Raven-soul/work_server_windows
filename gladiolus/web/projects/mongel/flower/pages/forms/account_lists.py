@@ -16,23 +16,61 @@ class AccountlistsPages(object):
                 })
             
             self.context = {
-                'products': products
+                'products': products,
+                'listCode': 'select'
             }
         elif section_name == 'purchased_short':
+            products = []
             for elem in PurchasedProducts.objects.filter(user = auth.getAuthorizedUser()):
                 products.append({
                         'position': elem,
                         'totalPrice': round(int(elem.count)*float(elem.product.price)),
-                        'button': ''
+                        'color': self.getColor(elem.status.code),
+                        'button': {
+                            'name': self.getButton(elem.status.code),
+                            'function': self.getFunction(elem.status.code)
+                        }
                     })
             
             self.context = {
-                'products': PurchasedProducts.objects.filter(user = auth.getAuthorizedUser())
+                'products': products,
+                'listCode': 'purchase'
             }
         elif section_name == 'liked_short':
             self.context = {
-                'products': LikedProducts.objects.filter(user = auth.getAuthorizedUser())
+                'products': LikedProducts.objects.filter(user = auth.getAuthorizedUser()),
+                'listCode': 'like'
             }
 
     def getDict(self):
         return self.context
+    
+    def getColor(self, code):
+        if code == 0:
+            return 'red;'
+        elif code == 1:
+            return 'rgb(238, 191, 37);'
+        elif code == 2:
+            return 'green;'
+        else:
+            return ''
+        
+    def getButton(self, code):
+        if code == 0:
+            return 'Cancel'
+        elif code == 1:
+            return 'none'
+        elif code == 2:
+            return 'Review'
+        else:
+            return ''
+        
+    def getFunction(self, code):
+        if code == 0:
+            return 'productDelete'
+        elif code == 1:
+            return 'none'
+        elif code == 2:
+            return 'addReview'
+        else:
+            return ''

@@ -42,7 +42,7 @@ class SelectedProductsAdmin(admin.ModelAdmin):
     search_fields = ('id', 'user')
 
 class PurchasedProductsAdmin(admin.ModelAdmin):
-    list_display = ('id', 'count', 'user', 'product', 'time_create')
+    list_display = ('id', 'count', 'user', 'product', 'status', 'time_create')
     list_display_links = ('id', 'user', 'product')
     search_fields = ('id', 'user')
 
@@ -55,6 +55,11 @@ class UserPagesAdmin(admin.ModelAdmin):
     list_display = ('id', 'name', 'alter_name')
     list_display_links = ('id', 'name', 'alter_name')
     search_fields = ('id', 'alter_name')
+
+class OrderStatusAdmin(admin.ModelAdmin):
+    list_display = ('id', 'name', 'code')
+    list_display_links = ('id', 'name')
+    search_fields = ('id', 'code')
 
 
 admin.site.register(Category, CategoryAdmin)
@@ -71,4 +76,5 @@ admin.site.register(User, UserAdmin)
 admin.site.register(SelectedProducts, SelectedProductsAdmin)
 admin.site.register(PurchasedProducts, PurchasedProductsAdmin)
 admin.site.register(LikedProducts, LikedProductsAdmin)
-admin.site.register(UserPages, UserPagesAdmin)
+admin.site.register(UserPages, UserPagesAdmin) 
+admin.site.register(OrderStatus, OrderStatusAdmin)

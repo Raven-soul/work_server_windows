@@ -186,6 +186,18 @@ class User(models.Model):
         verbose_name_plural = '4. Пользователи'
         ordering = ['id',]
 
+class OrderStatus(models.Model):
+    name = models.CharField(max_length=255, verbose_name='Статус заказа')
+    code = models.IntegerField(verbose_name='Код статуса')
+
+    def __str__(self):
+        return self.name
+    
+    class Meta:
+        verbose_name = '6. Статус заказа'
+        verbose_name_plural = '6. Статусы заказов'
+        ordering = ['id',]
+
 class SelectedProducts(models.Model):
     product = models.ForeignKey(Flower, on_delete=models.CASCADE, verbose_name='Товар')
     count = models.IntegerField(verbose_name='Количество товара')
@@ -204,7 +216,7 @@ class PurchasedProducts(models.Model):
     product = models.ForeignKey(Flower, on_delete=models.CASCADE, verbose_name='Товар')
     count = models.IntegerField(verbose_name='Количество товара')
     user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='Пользователь')
-    status = models.CharField(max_length=255, verbose_name='статус заказа')
+    status = models.ForeignKey(OrderStatus, on_delete=models.CASCADE, verbose_name='статус заказа')
     time_create = models.DateTimeField(auto_now_add=True,verbose_name='Время создания')
 
     def __str__(self):
@@ -242,3 +254,4 @@ class UserPages(models.Model):
         verbose_name = '6. Пользовательская страница'
         verbose_name_plural = '6. Список пользовательских страниц'
         ordering = ['id',]
+

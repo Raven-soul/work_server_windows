@@ -165,6 +165,9 @@ def account(request, section_name):
     data = Account_page(section_name, request).getDict()
     #------------------------------------------------------------------------------- user
     if section_name == 'user':
+        if auth.isAuthorized() == False:
+            return redirect('/account/login')
+
         user = auth.getAuthorizedUser()
         if request.method == 'POST':
             form = Account_form(request.POST)
@@ -187,6 +190,9 @@ def account(request, section_name):
     
     #------------------------------------------------------------------------------- order
     elif section_name == 'order':
+        if auth.isAuthorized() == False:
+            return redirect('/account/login')
+
         data['header']['onload_function'] = '"data-show", "data-content"'
         return render(request, 'flower/form_pages/account_order.html', context=data)
     
@@ -256,6 +262,15 @@ def append(request):
         elif request.POST.get('typeRequest', '') == 'addToFavoriteList':
             defProd.appendTokedList(request.POST.get("user_id", "none"))
     return JsonResponse(JsonData)
+
+def delete(request):
+    auth = Authorization(request)
+    # print('-------------------------------------------------', request.POST.get('list', ''))
+    # print('-------------------------------------------------', request.POST.get('productId', ''))
+    if request.POST.get('list', '') == 'select':
+        pass
+
+    return HttpResponse()
 
 def accountLists(request):
     auth = Authorization(request)

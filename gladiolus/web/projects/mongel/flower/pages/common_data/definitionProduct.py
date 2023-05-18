@@ -3,12 +3,17 @@ from ...models import * #база данных
 class DefinitionProduct():
     def __init__(self, user):
         self.user = user
-        self.selectedList = SelectedProducts.objects.filter(user = user)
-        self.purchasedList = PurchasedProducts.objects.filter(user = user)
-        self.likedList = LikedProducts.objects.filter(user = user)
 
     def getSelectedList(self):
-        return self.selectedList
+        return SelectedProducts.objects.filter(user = self.user)
+    
+    def containst(self, list, product):
+        temp = False
+        if list.exist() == True: 
+            for elem in list:
+                if elem.product == product:
+                    temp = True
+        return temp
     
     def appendToSelectedList(self, productId):
         if productId != 'none': 
@@ -24,7 +29,7 @@ class DefinitionProduct():
                 SelectedProducts.objects.filter(product=product).delete()
     
     def getPurchasedList(self):
-        return self.purchasedList
+        return PurchasedProducts.objects.filter(user = self.user)
     
     def appendToPurchasedList(self, productId):
         if productId != 'none': 
@@ -36,20 +41,20 @@ class DefinitionProduct():
     def deleteFromPurchasedList(self, productId):
         if productId != 'none': 
             product = Flower.objects.get(pk=productId)
-            if PurchasedProducts.objects.filter(product = product).exists():
+            if self.containst(PurchasedProducts.objects.filter(user=self.user), product):
                 PurchasedProducts.objects.filter(product=product).delete()
     
     def getLikedList(self):
-        return self.likedList
+        return LikedProducts.objects.filter(user = self.user)
     
     def appendTokedList(self, productId):
         if productId != 'none':                
             product = Flower.objects.get(pk=productId)
-            if LikedProducts.objects.filter(product = product).exists() == False:
+            if self.containst(LikedProducts.objects.filter(user=self.user), product) == False:
                 LikedProducts.objects.create(product=product, user=self.user)
 
     def deleteFromkedList(self, productId):
         if productId != 'none': 
             product = Flower.objects.get(pk=productId)
-            if LikedProducts.objects.filter(product = product).exists():
+            if self.containst(LikedProducts.objects.filter(user=self.user), product):
                 LikedProducts.objects.filter(product=product).delete()

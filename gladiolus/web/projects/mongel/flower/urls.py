@@ -10,6 +10,7 @@ urlpatterns = [
 
     # ----------------------- main form pages -------------------------------
     path('account/<str:section_name>', account, name='account'),
+    # path('review/', review, name='review'),
 
     # ----------------------- information pages -------------------------------
     path('about/', about_info, name='about_info'),
@@ -31,5 +32,7 @@ urlpatterns = [
 
     # ----------------------- ajax pages- -------------------------------
     path('append/', append, name='append'),
-    path('accountLists/', accountLists, name='accountLists')
+    path('delete/', delete, name='delete'),
+    path('accountLists/', accountLists, name='accountLists'),
+    # path('startReview/', startReview, name='startReview')
 ]

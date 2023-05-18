@@ -3,7 +3,7 @@
     <p class="list-title">Понравившиеся товары</p>
     {% for selectItem in products %}
     <hr>
-    <div class="col product-element-row" id="product-item-{{ selectItem.product.pk }}" priduct-id="{{ selectItem.product.pk }}">
+    <div class="col product-element-row" id="product-item-{{ selectItem.product.pk }}" list-type="{{ listCode }}" product-id="{{ selectItem.product.pk }}">
         <div class="row">
             <div class="col d-flex">
                 <div class="d-flex align-items-center w-100">
@@ -17,7 +17,7 @@
             </div>
             <div class="col-1 d-flex justify-content-center p-0 mx-2">
                 <div class="d-flex align-items-center">
-                    <button class="product-delete-button" onclick="selectRowDelete(this)" product-id="product-item-{{ selectItem.product.pk }}">Delete</button>
+                    <button class="product-delete-button" onclick="productDelete(this)" product-id="product-item-{{ selectItem.product.pk }}">Delete</button>
                 </div>
             </div>
         </div>
