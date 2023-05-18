@@ -9,14 +9,16 @@ function ajaxReplaceRequest(typeRequest, majorArea, replaceableArea){
 function ajaxDeleteRequest(productId, list, row){
     csrf_token = $('input[name="csrfmiddlewaretoken"]').val();
     $.post('../delete/', {csrfmiddlewaretoken: csrf_token, 'productId': productId, 'list': list}, function(data){
-        alert('delete ready')
+        document.getElementById(row.getAttribute('hr-id')).remove();
+        row.remove();
     });
 }
 
-function ajaxReviewRequest(productId, list){
+function ajaxReviewRequest(productId){
     csrf_token = $('input[name="csrfmiddlewaretoken"]').val();
     $.post('../startReview/', {csrfmiddlewaretoken: csrf_token, 'productId': productId}, function(data){
-        alert('review ready')
+        // window.location.href = data.redirect
+        alert(data.redirect + ' ' + window.location.href)
     });
 }
 
@@ -67,10 +69,17 @@ function showFavoriteList(button){
 
 function productDelete(button){
     productTag = document.getElementById(button.getAttribute('product-id'));
-    ajaxDeleteRequest(productTag.getAttribute('product-id'), productTag.getAttribute('list-type'), productTag)
+    if(productTag.getAttribute('list-type') == 'purchase'){
+        if (confirm("Вы уверены? \nДеньги вернутся вам втечении двух рабочих дней")) {
+            ajaxDeleteRequest(productTag.getAttribute('product-id'), productTag.getAttribute('list-type'), productTag);
+        }
+        else{}
+    }
+    else {
+        ajaxDeleteRequest(productTag.getAttribute('product-id'), productTag.getAttribute('list-type'), productTag);
+    }
 }
 
 function addReview(button){
-    id = button.getAttribute('product-id');
-    alert(id)
+    ajaxReviewRequest(button.getAttribute('product-id'));
 }

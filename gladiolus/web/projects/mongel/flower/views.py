@@ -243,6 +243,9 @@ def account(request, section_name):
     else:
         return HttpResponseNotFound('<h1>Страница не найдена</h1>')
 
+def review():
+    pass
+
 #----------------------------------- 404 ----------------------------------------
 
 def pageNotFound(request, exception):
@@ -254,7 +257,6 @@ def append(request):
     if auth.isAuthorized():
         defProd = DefinitionProduct(auth.getAuthorizedUser())
         JsonData = {}
-
         if request.POST.get('typeRequest', '') == 'addToSelectList':
             defProd.appendToSelectedList(request.POST.get("user_id", "none"))
             if request.POST.get('isRedirect', ''):
@@ -265,12 +267,18 @@ def append(request):
 
 def delete(request):
     auth = Authorization(request)
-    # print('-------------------------------------------------', request.POST.get('list', ''))
-    # print('-------------------------------------------------', request.POST.get('productId', ''))
+    defProd = DefinitionProduct(auth.getAuthorizedUser())
     if request.POST.get('list', '') == 'select':
-        pass
-
+        defProd.deleteFromSelectedList(request.POST.get('productId', ''))
+    elif request.POST.get('list', '') == 'purchase':
+        defProd.deleteFromPurchasedList(request.POST.get('productId', ''))
+    elif request.POST.get('list', '') == 'like':
+        defProd.deleteFromLikedList(request.POST.get('productId', ''))
     return HttpResponse()
+
+def startReview(request):
+    JsonData = {'redirect': '/review'}
+    return JsonResponse(JsonData)
 
 def accountLists(request):
     auth = Authorization(request)

@@ -11,24 +11,17 @@ function collapsElement(elem){
 }
 
 function ajaxRequest(productId, typeRequest, isRedirect = false){
-    $("document").ready(function() {
-        csrf_token = $('input[name="csrfmiddlewaretoken"]').val();
-        $.ajax({
-            url: '../append/',
-            method: 'post',
-            dataType: "json",
-            data: { csrfmiddlewaretoken: csrf_token,
-                    'user_id': productId,
-                    'typeRequest': typeRequest,
-                    'isRedirect': isRedirect
-                    },
-            success: function(data){
-                if (isRedirect){
-                   window.location.href = data.redirect
+    csrf_token = $('input[name="csrfmiddlewaretoken"]').val();
+    $.post('../append/', {
+        csrfmiddlewaretoken: csrf_token, 
+        'user_id': productId,
+        'typeRequest': typeRequest,
+        'isRedirect': isRedirect}, 
+        function(data){
+            if (isRedirect){
+                window.location.href = data.redirect
                 }
-            }
-        });
-    })
+    });
 }
 
 function addToSelectedList(button){
