@@ -18,7 +18,7 @@ function ajaxReviewRequest(productId){
     csrf_token = $('input[name="csrfmiddlewaretoken"]').val();
     $.post('../startReview/', {csrfmiddlewaretoken: csrf_token, 'productId': productId}, function(data){
         // window.location.href = data.redirect
-        alert(data.redirect + ' ' + window.location.href)
+        alert(data.redirect) // + ' ' + window.location.href)
     });
 }
 

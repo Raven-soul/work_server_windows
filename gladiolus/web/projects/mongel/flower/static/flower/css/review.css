@@ -1,0 +1,51 @@
+input[type=number]::-webkit-inner-spin-button,
+input[type=number]::-webkit-outer-spin-button {
+opacity: 1;
+}
+
+.qty-grade{
+    border: none;
+    outline: none;
+    background-color: rgb(239, 236, 232);
+}
+
+.view-name{
+    text-align: center;
+    font-size: 22px;
+    font-weight: 700;
+}
+
+.flower-name{
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+.data-row{
+    margin-bottom: 15px;
+} 
+
+.button-submit:active, .button-submit:focus{
+    outline: none;
+}
+
+.button-submit{
+    background-color: rgb(174,132,188);
+    color: white;
+    border:none;
+    padding: 8px 15px;
+    border-radius: 10px;
+}
+
+.button-submit:active{
+    background-color: rgb(139,86,157);
+}
+
+.description-area:active, .description-area:focus{
+    outline: none;
+}
+
+.description-area{
+    border-radius: 10px;
+    padding: 4px;
+}

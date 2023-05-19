@@ -35,8 +35,7 @@ class DefinitionProduct():
         if productId != 'none': 
             product = Flower.objects.get(pk=productId)
             if product.count >= 1:
-                if self.containst(PurchasedProducts.objects.filter(user=self.user).exists(), PurchasedProducts.objects.filter(user=self.user), product) == False:
-                    PurchasedProducts.objects.create(product=product, count=1, user=self.user)
+                PurchasedProducts.objects.create(product=product, count=1, user=self.user)
 
     def deleteFromPurchasedList(self, productId):
         if productId != 'none': 

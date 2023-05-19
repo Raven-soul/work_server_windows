@@ -59,3 +59,9 @@ class Account_form (forms.Form):
     password_user_field = forms.CharField(required=True, label='Пароль', widget=forms.TextInput(attrs={'class': 'readonly-field', 'readonly': ''}))
     city_user_field = forms.CharField(required=False, label='Выбранный город')
     phone_user_field = forms.CharField(required=False, label='Номер телефона')
+
+class Comment_form (forms.Form):
+    user = forms.CharField(required=True, label='Пользователь')
+    product = forms.CharField(required=False, label='Товар')
+    grade = forms.CharField(required=True, label='Оценка')
+    comment = forms.CharField(required=True, label='Комментарий')

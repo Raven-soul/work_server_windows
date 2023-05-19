@@ -3,7 +3,6 @@ from django.http import HttpResponse, HttpResponseNotFound,JsonResponse, Http404
 from django.views.generic import ListView
 from .forms import *
 from .utils import *
-from django.views.decorators.csrf import csrf_exempt,csrf_protect
 
 #------------- главные страницы сайта --------------------------
 from .pages.info_pages_data.info_pages import *
@@ -12,6 +11,7 @@ from .pages.forms.account_lists import AccountlistsPages
 from .pages.detail import Detail_page
 from .pages.basket import Basket_page
 from .pages.empty import Empty_page
+from .pages.review import Review_page
 
 from .models import * #база данных
 from .pages.common_data.authorisation import Authorization
@@ -243,8 +243,9 @@ def account(request, section_name):
     else:
         return HttpResponseNotFound('<h1>Страница не найдена</h1>')
 
-def review():
-    pass
+def review(request):
+    context = Review_page(request, 9).getDict()
+    return render(request, 'flower/main/review.html', context=context)
 
 #----------------------------------- 404 ----------------------------------------
 
