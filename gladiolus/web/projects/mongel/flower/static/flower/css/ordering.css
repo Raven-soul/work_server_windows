@@ -1,0 +1,82 @@
+.data-col{
+    margin-bottom: 20px;
+}
+
+.text-area, .date-time-area{
+    width: 100%;
+    outline: none;
+}
+
+.col-text-area{
+    padding: 4px 10px;
+}
+
+.button-submit{
+    outline: none;
+    background-color: rgb(174,132,188);
+    color:white;
+    border: none;
+    border-radius: 10px;
+    padding: 4px 20px;
+    font-size: 20px;
+}
+
+.button-submit:hover{
+    outline: none;
+    background-color: rgb(139,86,157);
+    color:white;
+}
+
+.form-col{
+    background-color: beige;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    border-radius: 12px;
+}
+
+.stage-view{
+    margin-bottom: 20px;
+}
+
+.basket-stage-title-block, .basket-stage-block {
+    margin-bottom: 20px;
+}
+
+.basket-stage {
+    color:gray
+}
+
+.basket-stage-selected {
+    color: rgb(174,132,188);
+}
+
+.basket-stage-passed {
+    color: rgb(139,86,157);
+}
+
+.info-col{
+    color: rgb(153, 153, 153);
+}
+
+.backward-button{
+    padding: 4px 18px;
+    background-color: rgb(174,132,188);
+    border-radius: 10px;
+    color: white;
+    text-decoration: none;
+    font-size: 20px;
+}
+
+.backward-button:hover{
+    background-color: rgb(139,86,157);
+    color: white;
+    text-decoration: none;
+}
+
+.fa-arrow-left{
+    font-size: 20px;
+}
+
+.button-col{
+    margin-top:30px;
+}
