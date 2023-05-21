@@ -1,12 +1,13 @@
 from ..models import * #база данных
 from .common_data.footer import Footer
 from .common_data.header import Header
+from .common_data.authorisation import Authorization
 
 class Basket_page(object):
-    def __init__(self, user_id, request):
+    def __init__(self, request):
         self.startBuilder(request)
-        user = User.objects.filter(pk = int(user_id))
-        products = self.doublesClear(SelectedProducts.objects.filter(user=user[0]))
+        user = self.auth.getAuthorizedUser()
+        products = SelectedProducts.objects.get(user=user)
 
         self.header.setData(value = 'Корзина пользователя')
         self.header.setData(name = 'content_style_path', value = 'flower/css/content/basket_content.css')
@@ -18,25 +19,12 @@ class Basket_page(object):
             'footer': self.footer.getData(),
             'products': products,
             'products_length': len(products)
-        }
-
-    def doublesClear(self, list):
-        result_List= []
-        pk_list= []
-
-        for elem in list:
-            if elem.product.pk in pk_list:
-                pass
-            else:
-                result_List.append(elem)
-                pk_list.append(elem.product.pk)
-
-        return result_List
-    
+        }    
 
     def startBuilder(self, request):
         self.header = Header(request)
         self.footer = Footer()
+        self.auth = Authorization()
         self.script_list = [{'script_url':'flower/js/basket.js'}]
 
     def getDict(self):
