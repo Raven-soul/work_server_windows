@@ -1,5 +1,5 @@
 {% load static %}
-{% include '../header.html' %}
+{% include '../../header.html' %}
 {% block content %}
 {% csrf_token %}
 <p>{{ content_data }}</p>
@@ -8,4 +8,4 @@
 </button>
 <script src="{% static 'flower/js/ajax/productAppend.js' %}"></script>
 {% endblock content %}
-{% include '../footer.html' %}
+{% include '../../footer.html' %}

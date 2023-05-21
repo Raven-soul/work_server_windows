@@ -13,7 +13,7 @@ class Header(object):
 
         self.context = {
             'title': 'Гладиолус, магазин доставки цветов',
-            'content_style_path': 'flower/css/content/main_content.css',
+            'content_style_path': 'flower/css/content/main.css',
             'onload_function':'',
             'topLinks': self.topPageLinks,
             'userLoginUrl_name': userLoginUrl_name,

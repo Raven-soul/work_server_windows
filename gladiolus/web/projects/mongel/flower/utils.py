@@ -1,7 +1,6 @@
 #------------- Общие страницы сайта --------------------------
 
 from .pages.common_data.footer import Footer
-from .pages.common_data.header import Header
 
 #------------------ common data --------------------------
 

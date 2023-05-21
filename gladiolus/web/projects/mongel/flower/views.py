@@ -3,25 +3,38 @@ from django.http import HttpResponse, HttpResponseNotFound,JsonResponse, Http404
 from django.views.generic import ListView
 from .forms import *
 from .utils import *
+from .models import * #база данных
 
 #------------- главные страницы сайта --------------------------
-from .pages.info_pages_data.info_pages import *
-from .pages.forms.account import Account_page
-from .pages.forms.account_lists import AccountlistsPages
 from .pages.detail import Detail_page
 from .pages.basket import Basket_page
+from .pages.ordering import Ordering_page
+from .pages.payment import Payment_main_page
+
+#------------- пользовательские страницы сайта --------------------------
+from .pages.forms.account import Account_page
+from .pages.forms.account_lists import AccountlistsPages
+
+#------------- дополнительные страницы сайта --------------------------
+from .pages.info_pages_data.info_pages import *
 from .pages.empty import Empty_page
 from .pages.review import Review_page
 
-from .models import * #база данных
+#------------- Классы для работы с пользователем и продуктами --------------------------
 from .pages.common_data.authorisation import Authorization
 from .pages.common_data.definitionProduct import DefinitionProduct
+
+def сheckAuthorization(request):
+    auth = Authorization(request)
+    if auth.isAuthorized == False:
+        return redirect('/account/login')
+
 
 #------------------ main_pages --------------------------
 
 class FlowerHome(DataMixin, ListView):
     model = Flower
-    template_name = 'flower/main/main_content.html'
+    template_name = 'flower/main/main.html'
     context_object_name = 'products'
 
     def get_context_data(self, **kwargs):
@@ -37,55 +50,42 @@ def product_details(request, prod_id):
         request.session.create()
 
     data = Detail_page(prod_id, request).getDict()
-    return render(request, 'flower/main/detail_content.html', context=data)
+    return render(request, 'flower/main/detail.html', context=data)
 
 def basket(request):
     if not request.session.session_key:
         request.session.create()
-    
-    auth = Authorization()
-    if auth.isAuthorized == False:
-        return redirect('/account/login')
-    
+            
+    сheckAuthorization(request)
     data = Basket_page(request).getDict()
     if len(data['products']) == 0:
         empty_data =  Empty_page(title='Корзина пуста').getDict()
         empty_data['context'] = 'Корзина пуста'
-        return render(request, 'flower/main/empty_page.html', context=empty_data)
+        return render(request, 'flower/main/complex_templates/empty_page.html', context=empty_data)
     else:
-        return render(request, 'flower/main/basket_content.html', context=data)
+        return render(request, 'flower/main/basket.html', context=data)
     
 def ordering(request):
     if not request.session.session_key:
         request.session.create()
-    
-    user_id = 1  
-    data = Basket_page(user_id, request).getDict()
-    if len(data['products']) == 0:
-        empty_data =  Empty_page(title='Корзина пуста').getDict()
-        empty_data['context'] = 'Корзина пуста'
-        return render(request, 'flower/main/empty_page.html', context=empty_data)
-    else:
-        return render(request, 'flower/main/basket_content.html', context=data)
+
+    сheckAuthorization(request)
+    data = Ordering_page(request).getDict()
+    return render(request, 'flower/main/ordering.html', context=data)
     
 def payment(request):
     if not request.session.session_key:
         request.session.create()
-    
-    user_id = 1  
-    data = Basket_page(user_id, request).getDict()
-    if len(data['products']) == 0:
-        empty_data =  Empty_page(title='Корзина пуста').getDict()
-        empty_data['context'] = 'Корзина пуста'
-        return render(request, 'flower/main/empty_page.html', context=empty_data)
-    else:
-        return render(request, 'flower/main/basket_content.html', context=data)
+
+    сheckAuthorization(request)
+    data = Payment_main_page( request).getDict()
+    return render(request, 'flower/main/payment.html', context=data)
 
 #--------------- main_cats_pages --------------------------
 
 class FlowerShowCategory(DataMixin, ListView):
     model = Flower
-    template_name = 'flower/main/main_content.html'
+    template_name = 'flower/main/main.html'
     context_object_name = 'products'
 
     def get_context_data(self, **kwargs):
@@ -101,7 +101,7 @@ class FlowerShowCategory(DataMixin, ListView):
 
 class FlowerShowOccasion(DataMixin, ListView):
     model = Flower
-    template_name = 'flower/main/main_content.html'
+    template_name = 'flower/main/main.html'
     context_object_name = 'products'
 
     def get_context_data(self, **kwargs):
@@ -117,7 +117,7 @@ class FlowerShowOccasion(DataMixin, ListView):
 
 class FlowerShowSeason(DataMixin, ListView):
     model = Flower
-    template_name = 'flower/main/main_content.html'
+    template_name = 'flower/main/main.html'
     context_object_name = 'products'
 
     def get_context_data(self, **kwargs):
@@ -133,7 +133,7 @@ class FlowerShowSeason(DataMixin, ListView):
 
 class FlowerShowType(DataMixin, ListView):
     model = Flower
-    template_name = 'flower/main/main_content.html'
+    template_name = 'flower/main/main.html'
     context_object_name = 'products'
 
     def get_context_data(self, **kwargs):

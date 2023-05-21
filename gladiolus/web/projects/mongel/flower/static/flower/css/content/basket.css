@@ -1,12 +1,8 @@
-.basket-state-title-block {
+.basket-stage-title-block, .basket-stage-block {
     margin-bottom: 20px;
 }
 
-.basket-state-block {
-    margin-bottom: 20px;
-}
-
-.basket-state-stage {
+.basket-stage {
     color:gray
 }
 
@@ -18,8 +14,13 @@
     border-bottom: 1px dashed black;
 }
 
+.table-data-image-area{
+    padding: 8px;
+}
+
 .table-data-image-area img{
-    padding: 10px 5px 10px 5px;
+    max-width: 150px;
+    max-height: 150px;
 }
 
 .receipt-list-block {
@@ -61,4 +62,23 @@
 
 .total-block-cell {
     border-bottom: dashed black 1px;
+}
+
+.button-ordering{
+    background-color: rgb(174,132,188);
+    color: white;
+    text-decoration: none;
+    padding: 4px 20px;
+    font-size: 20px;
+    border-radius: 10px;
+}
+
+.button-ordering:hover{
+    background-color: rgb(139,86,157);
+    color: white;
+    text-decoration: none;
+}
+
+.total-data-block{
+    margin-bottom: 30px;
 }

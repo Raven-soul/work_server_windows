@@ -11,7 +11,7 @@ class Detail_page(object):
 
         script_list = [{'script_url':'flower/js/detail.js'}]
 
-        self.header.setData(name = 'content_style_path', value = 'flower/css/content/detail_content.css')
+        self.header.setData(name = 'content_style_path', value = 'flower/css/content/detail.css')
         self.footer.setData(name = 'script_list', value = script_list)
 
         self.context = {
@@ -39,10 +39,12 @@ class Detail_page(object):
         temp_reviews = []
         grades = []
 
+        number = 0
         for item in reviews:
-            if item.flower.pk == productItem.pk:
+            if item.flower.pk == productItem.pk and number < 4:
                 temp_reviews.append({'grade': item.grade, 'stars':{'fill': [0 for i in range(item.grade)], 'less': [0 for i in range(5-item.grade)]}, 'author': item.author, 'description': item.description})
                 grades.append(item.grade)
+                number += 1
         
         
         if temp_reviews == []:
@@ -53,7 +55,7 @@ class Detail_page(object):
             temp_result['global_grade'] = average
             temp_result['global_stars'] = {'fill': [0 for i in range(round(average))], 'less': [0 for i in range(5-round(average))]}
             temp_result['number_all_reviews'] = len(temp_reviews)
-            temp_result['few_reviews'] = temp_reviews # TODO нужно сократить выгрузку до 3-4 отзывов
+            temp_result['few_reviews'] = temp_reviews
             
 
         return temp_result

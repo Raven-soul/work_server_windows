@@ -7,10 +7,10 @@ class Basket_page(object):
     def __init__(self, request):
         self.startBuilder(request)
         user = self.auth.getAuthorizedUser()
-        products = SelectedProducts.objects.get(user=user)
+        products = SelectedProducts.objects.filter(user=user)
 
         self.header.setData(value = 'Корзина пользователя')
-        self.header.setData(name = 'content_style_path', value = 'flower/css/content/basket_content.css')
+        self.header.setData(name = 'content_style_path', value = 'flower/css/content/basket.css')
         self.header.setData(name = 'onload_function', value = "'common-data', 'product-item-'")
         self.footer.setData(name = 'script_list', value = self.script_list)
         
@@ -24,7 +24,7 @@ class Basket_page(object):
     def startBuilder(self, request):
         self.header = Header(request)
         self.footer = Footer()
-        self.auth = Authorization()
+        self.auth = Authorization(request)
         self.script_list = [{'script_url':'flower/js/basket.js'}]
 
     def getDict(self):

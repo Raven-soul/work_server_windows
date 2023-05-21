@@ -1,26 +1,26 @@
 {% load static %}
 {% include '../header.html' %}
 <div class="container" style="margin-bottom:50px;">
-    <div class="row justify-content-center basket-state-title-block">
+    <div class="row justify-content-center basket-stage-title-block">
         <div class="col-auto">
-            <div class="basket-state-title">
+            <div class="basket-title">
                 <h3>Корзина</h3>
             </div>
         </div>
     </div>
-    <div class="row basket-state-block justify-content-between">
+    <div class="row basket-stage-block justify-content-between">
         <div class="col-auto">
-            <div class="basket-state-stage-selected">
+            <div class="basket--stage-selected">
                 <h4>Корзина</h4>
             </div>
         </div>
         <div class="col-auto">
-            <div class="basket-state-stage">
+            <div class="basket-stage">
                 <h4>Оформление заказа</h4>
             </div>
         </div>
         <div class="col-auto">
-            <div class="basket-state-stage">
+            <div class="basket-stage">
                 <h4>Оплата</h4>
             </div>
         </div>
@@ -101,7 +101,7 @@
             </div>
         {% endfor %}
     </div>
-    <div class="row d-block">
+    <div class="row d-block total-data-block">
         <div class="col-lg-10 offset-1">
             <div class="row">
                 <div class="col stock-block p-0">
@@ -144,6 +144,15 @@
                 </div>
             </div>
         </div>
+    </div>
+    <div class="row">
+        <div class="col"></div>
+        <div class="col d-flex justify-content-center">
+            <a href="{% url 'ordering' %}" class="button-ordering">
+                Оформить заказ
+            </a>
+        </div>
+        <div class="col"></div>
     </div>
 </div>
 {% include '../footer.html' %}
