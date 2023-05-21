@@ -1,0 +1,71 @@
+.basket-stage-title-block, .basket-stage-block {
+    margin-bottom: 20px;
+}
+
+.basket-stage {
+    color:gray
+}
+
+.basket-stage-selected {
+    color: rgb(174,132,188);
+}
+
+.basket-stage-passed {
+    color: rgb(139,86,157);
+}
+
+
+.data-cell{
+    text-align: center;
+    margin-right: 10px;
+    max-width: 120px;
+    padding: 8px;
+}
+
+.data-cell img{
+    max-height: 100px;
+}
+
+.data-cell:hover{
+    border-radius: 10px;
+    box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.5);
+}
+
+.row-name{
+    font-size: 20px;
+    margin-bottom: 10px;
+}
+
+.backward-button-row{
+    margin-top: 20px;
+    margin-bottom: 40px;
+}
+
+.backward-button{
+    padding: 4px 18px;
+    background-color: rgb(174,132,188);
+    border-radius: 10px;
+    color: white;
+    text-decoration: none;
+    font-size: 20px;
+}
+
+.backward-button:hover{
+    background-color: rgb(139,86,157);
+    color: white;
+    text-decoration: none;
+}
+
+.data-cell-link{
+    color: black;
+    text-decoration: none;
+}
+
+.data-cell-link:hover{
+    color: black;
+    text-decoration: none;
+}
+
+.fa-arrow-left{
+    font-size: 20px;
+}
