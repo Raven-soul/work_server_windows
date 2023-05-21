@@ -9,15 +9,16 @@
                 <div class="name-shop-item">{{ product.title }}</div>
                 <div class="rating-after-name">
                     <ul>
-                        <li id="1"><i class="fa fa-star-half-o"></i></li>
-                        <li id="2"><i class="fa-regular fa-star"></i></li>
-                        <li id="3"><i class="fa-regular fa-star"></i></li>
-                        <li id="4"><i class="fa-regular fa-star"></i></li>
-                        <li id="5"><i class="fa-regular fa-star"></i></li>
+                        {% for i in reviews.global_stars.fill %}
+                            <li><i class="fa-solid fa-star"></i></li>
+                        {% endfor %}
+                        {% for i in reviews.global_stars.less %}
+                            <li><i class="fa-regular fa-star"></i></li>
+                        {% endfor %}
                     </ul>
                 </div>
                 <div class="number-ratings">
-                    <span class="value">100</span> отзывов
+                    <span class="value">{{ number_reviews }}</span> отзывов
                 </div>
             </div>
         </div>

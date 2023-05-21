@@ -18,7 +18,8 @@ class Detail_page(object):
             'header': self.header.getData(),
             'footer': self.footer.getData(),
             'product': self.productItem,
-            'reviews': self.getReviews(self.productItem),
+            'reviews': self.reviews,
+            'number_reviews': Review.objects.filter(flower=self.productItem).count(),
             'composition': self.compositionFormer(self.productItem),
             'like_block': self.likedFormer(self.productList)
         }
@@ -30,28 +31,29 @@ class Detail_page(object):
         self.productList = Flower.objects.all()
         self.productItem = Flower.objects.get(pk=prod_id)
 
+        self.reviews = self.getReviews(self.productItem)
+
     def getDict(self):
         return self.context
             
     def getReviews(self, productItem):
-        reviews = Review.objects.all()
+        reviews = Review.objects.filter(flower=productItem)
         temp_result = {'global_grade': 0, 'global_stars': '', 'number_all_reviews' : 0, 'few_reviews': ''}
         temp_reviews = []
         grades = []
 
         number = 0
         for item in reviews:
-            if item.flower.pk == productItem.pk and number < 4:
+            if number < 4:
                 temp_reviews.append({'grade': item.grade, 'stars':{'fill': [0 for i in range(item.grade)], 'less': [0 for i in range(5-item.grade)]}, 'author': item.author, 'description': item.description})
                 grades.append(item.grade)
                 number += 1
-        
         
         if temp_reviews == []:
             temp_result['few_reviews'] = ''  
             temp_result['global_stars'] = {'fill': [], 'less': [0 for i in range(5)]}  
         else:
-            average = sum(grades)/len(grades)
+            average = round(sum(grades)/len(grades), 1)
             temp_result['global_grade'] = average
             temp_result['global_stars'] = {'fill': [0 for i in range(round(average))], 'less': [0 for i in range(5-round(average))]}
             temp_result['number_all_reviews'] = len(temp_reviews)
