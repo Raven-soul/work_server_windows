@@ -7,6 +7,8 @@ urlpatterns = [
     path('', FlowerHome.as_view(), name='home'),
     path('product/<int:prod_id>', product_details, name='product'),
     path('basket/', basket, name='basket'),
+    path('ordering/', ordering, name='ordering'),
+    path('payment/', payment, name='payment'),
 
     # ----------------------- main form pages -------------------------------
     path('account/<str:section_name>', account, name='account'),

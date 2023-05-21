@@ -43,6 +43,35 @@ def basket(request):
     if not request.session.session_key:
         request.session.create()
     
+    auth = Authorization()
+    if auth.isAuthorized == False:
+        return redirect('/account/login')
+    
+    data = Basket_page(request).getDict()
+    if len(data['products']) == 0:
+        empty_data =  Empty_page(title='Корзина пуста').getDict()
+        empty_data['context'] = 'Корзина пуста'
+        return render(request, 'flower/main/empty_page.html', context=empty_data)
+    else:
+        return render(request, 'flower/main/basket_content.html', context=data)
+    
+def ordering(request):
+    if not request.session.session_key:
+        request.session.create()
+    
+    user_id = 1  
+    data = Basket_page(user_id, request).getDict()
+    if len(data['products']) == 0:
+        empty_data =  Empty_page(title='Корзина пуста').getDict()
+        empty_data['context'] = 'Корзина пуста'
+        return render(request, 'flower/main/empty_page.html', context=empty_data)
+    else:
+        return render(request, 'flower/main/basket_content.html', context=data)
+    
+def payment(request):
+    if not request.session.session_key:
+        request.session.create()
+    
     user_id = 1  
     data = Basket_page(user_id, request).getDict()
     if len(data['products']) == 0:
