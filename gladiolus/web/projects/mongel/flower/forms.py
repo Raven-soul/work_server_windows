@@ -5,7 +5,7 @@ from django.core.exceptions import ValidationError
 
 class Login_form (forms.Form):
     email_user_field = forms.CharField(required=True, label='Логин')
-    password_user_field = forms.CharField(required=True, label='Пароль')
+    password_user_field = forms.CharField(required=True, label='Пароль', widget=forms.TextInput(attrs={'type':"password"}))
 
     def clean_email_user_field(self):
         users = User.objects.all()
@@ -31,8 +31,8 @@ class Login_form (forms.Form):
 class RegistrationPostForm (forms.Form):
     name_register_field = forms.CharField(required=True, label='Имя пользователя')
     email_register_field = forms.CharField(required=True, label='Логин')
-    password_first_register_field = forms.CharField(required=True, label='Пароль')
-    password_second_register_field = forms.CharField(required=True, label='Повторите пароль')
+    password_first_register_field = forms.CharField(required=True, label='Пароль', widget=forms.TextInput(attrs={'type':"password"}))
+    password_second_register_field = forms.CharField(required=True, label='Повторите пароль', widget=forms.TextInput(attrs={'type':"password"}))
 
     def clean(self):
         password_1 = self.cleaned_data['password_first_register_field']
@@ -57,7 +57,7 @@ class Account_form (forms.Form):
     surname_user_field = forms.CharField(required=False, label='Фамилия пользователя')
     email_user_field = forms.CharField(required=True, label='Логин', widget=forms.TextInput(attrs={'class': 'readonly-field', 'readonly': ''}))
     password_user_field = forms.CharField(required=True, label='Пароль', widget=forms.TextInput(attrs={'class': 'readonly-field', 'readonly': ''}))
-    city_user_field = forms.CharField(required=False, label='Выбранный город')
+    city_user_field = forms.ModelChoiceField(queryset=Cities.objects.all(), label='Город', required=False)
     phone_user_field = forms.CharField(required=False, label='Номер телефона')
 
 class Comment_form (forms.Form):
