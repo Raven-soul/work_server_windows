@@ -25,9 +25,9 @@
             </div>
         </div>
     </div>
-    <div class="row-2 receipt-list-block" id="common-data" product-max-rows="{{ products_length }}" previous-price-area="total-products-price" delivery-price-area="total-delivery-price" total-price-area="total-receipt-price" onload="awake2({{header.onload_function}})">
+    <div class="row-2 receipt-list-block" id="common-data" product-max-rows="{{ products_length }}" previous-price-area="total-products-price" delivery-price-area="total-delivery-price" total-price-id="total-price">
         {% for row in products %}
-            <div class="col-lg-10 offset-1" id="product-item-{{ row.pk }}" price="{{ row.product.price }}" priduct-id="product-id_{{ row.product.pk }}">
+            <div class="col-lg-10 offset-1 product-row" id="{{ row.product.pk }}" price="{{ row.product.price }}" product-price-name="product-price-" qty-name="qty-container-" common-data-id="common-data">
                 <div class="row table-data-basket-row">
                     <div class="col table-data-basket table-data-image">
                         <div class="table-data-image-area">
@@ -73,15 +73,15 @@
                         <div class="save-area d-flex align-items-center">
                             <div class="table-product-number-data">
                                 <div class="order-container">
-                                    <a onclick="counterIncrease(this, 4, -1, 'common-data', 'product-item-')" aria-controls="product-id_{{ row.product.pk }}-qty-container" product-id="product-item-{{ row.pk }}">
+                                    <a onclick="counterDecrease(this, {{ row.product.count }})" product-id="{{ row.product.pk }}">
                                         <div class="strength-button d-inline">
                                             -
                                         </div>
                                     </a>
                                     <div class="qty-container d-inline mx-2">
-                                        <input id="product-id_{{ row.product.pk }}-qty-container" class="qty-container-panel" style="outline:none;" value="1" size="3" maxlength="3" min="1">
+                                        <input id="qty-container-{{ row.product.pk }}" class="qty-container-panel" style="outline:none;" value="1" size="3" maxlength="3" min="1">
                                     </div>
-                                    <a onclick="counterIncrease(this, 4, 1, 'common-data', 'product-item-')" aria-controls="product-id_{{ row.product.pk }}-qty-container" product-id="product-item-{{ row.pk }}">
+                                    <a onclick="counterIncrease(this, {{ row.product.count }})" product-id="{{ row.product.pk }}">
                                         <div class="strength-button d-inline">
                                             +
                                         </div>
@@ -93,7 +93,7 @@
                     <div class="col table-data-basket d-flex justify-content-center p-0">
                         <div class="save-area d-flex align-items-center">
                             <div class="table-product-cost-data">
-                                <span class="uc-price" id="product-id_{{ row.product.pk }}-price">{{ row.product.price }}</span><span class="rur"> ₽</span>
+                                <span class="uc-price" id="product-price-{{ row.product.pk }}">{{ row.product.price }}</span><span class="rur"> ₽</span>
                             </div>
                         </div>
                     </div>
@@ -136,7 +136,7 @@
                             <div class="row d-flex justify-content-between">
                                 <div class="col total-price-name">Итого:</div>
                                 <div class="col-auto total-price-value">
-                                    <span class="price" id="total-receipt-price" currency-area="total-receipt-price-currency">100</span> <span class="currency" id="total-receipt-price-currency">₽</span>
+                                    <span class="price" id="total-price">100</span> <span class="currency">₽</span>
                                 </div>
                             </div>
                         </div>

@@ -25,7 +25,7 @@ class Basket_page(object):
         self.header = Header(request)
         self.footer = Footer()
         self.auth = Authorization(request)
-        self.script_list = [{'script_url':'flower/js/basket.js'}]
+        self.script_list = [{'script_url':'flower/js/ajax/basket.js'}]
 
     def getDict(self):
         return self.context
