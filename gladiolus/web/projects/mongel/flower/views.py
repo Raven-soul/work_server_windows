@@ -281,7 +281,7 @@ def review(request):
 def pageNotFound(request, exception):
     return HttpResponseNotFound('<h1>Страница не найдена</h1>')
 
-#---------------------------- additional material ----------------------------------------
+#---------------------------- ajax material ----------------------------------------
 def append(request):
     auth = Authorization(request)
     if auth.isAuthorized():
@@ -321,31 +321,6 @@ def accountLists(request):
             return render(request, 'flower/form_pages/order_temps/acc_order_purchased_short.html', context=AccountlistsPages(request.POST.get('typeRequest', ''), request).getDict())
         else:
             return HttpResponseNotFound('<h1>Страница не найдена</h1>')
-
-#---------------------------- other material ----------------------------------------
-
-def js_data(request):
-    script_list = [{'script_url':'flower/js/ajax_try.js'}]
-
-    header = Header()
-    footer = Footer()
-
-    footer.setData(name='script_list', value=script_list)
-
-    context = {'header': header.getData(),
-               'footer': footer.getData(),
-               'content_data': 'проверяем аджакс', 
-               'onclick_function': 'data_click()'}
-    return render(request, 'flower/main/index_shop_page_button.html', context=context)
-
-def js_start_data(request):
-    if not request.session.session_key:
-        request.session.create()
-
-    auth = Authorization(request)
-    username = auth.isAuthorized()
-    
-    context = {'header': Header(request).getData(),
-               'footer': Footer().getData(),
-               'content_data': username}
-    return render(request, 'flower/main/index_page_button_const.html', context=context)
+        
+def setSity():
+    pass

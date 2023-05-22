@@ -8,12 +8,21 @@ class Header(object):
 
         if self.auth.isAuthorized():
             userLoginUrl_name = self.accountPages['us_data'].get_absolute_url
+            if self.auth.getAuthorizedUser().city_user_field == None:
+                User.objects.filter(pk = self.auth.getAuthorizedUser().pk).update(city_user_field=Cities.objects.get(pk=1))
+            else:
+                self.user_sity = self.auth.getAuthorizedUser().city_user_field
         else:
             userLoginUrl_name = self.accountPages['log'].get_absolute_url
+            self.user_sity = Cities.objects.get(pk=1)
 
         self.context = {
             'title': 'Гладиолус, магазин доставки цветов',
             'content_style_path': 'flower/css/content/main.css',
+            'user_sity': self.user_sity,
+            'header_functions':{
+                'sity': 'setSity(this)'
+            },
             'onload_function':'',
             'topLinks': self.topPageLinks,
             'userLoginUrl_name': userLoginUrl_name,
@@ -22,7 +31,8 @@ class Header(object):
             'product_occasion': self.occasion,
             'product_season': self.season,
             'product_type': self.type,
-            'cat_selected': {'section': -1, 'order': 0}
+            'cat_selected': {'section': -1, 'order': 0},
+            'script': 'flower/js/ajax/header.js'
         }
 
     def startBuilder(self, request):
@@ -38,6 +48,7 @@ class Header(object):
                               'us_data': UserPages.objects.get(alter_name = 'user'),
                               'ord_data': UserPages.objects.get(alter_name = 'order'),
                             }
+        self.user_sity = ''
 
     def setData(self, name='title', value='Гладиолус, магазин доставки цветов'):
         self.context[name] = value

@@ -140,6 +140,17 @@ class Wrapping(models.Model):
         verbose_name_plural = '2. Состав упаковки'
         ordering = ['flower',]
 
+class Cities(models.Model):
+    name = models.CharField(max_length=255, verbose_name='Название города')
+
+    def __str__(self):
+        return self.name
+    
+    class Meta:
+        verbose_name = '2. Список доступных городов'
+        verbose_name_plural = '2. Доступные города'
+        ordering = ['id', 'name']
+
 class InfoClass(models.Model):
     name = models.CharField(max_length=255, verbose_name='Название группы')
     name_code = models.CharField(max_length=255, verbose_name='Код группы')
@@ -173,7 +184,7 @@ class User(models.Model):
     email_user_field = models.CharField(unique=True, max_length=255, verbose_name='Логин')
     password_user_field = models.CharField(max_length=255, verbose_name='Пароль')
 
-    city_user_field = models.CharField(max_length=255, verbose_name='Город', null=True)
+    city_user_field = models.ForeignKey(Cities, on_delete=models.CASCADE, null=True, verbose_name='Город')
     phone_user_field = models.CharField(max_length=255, verbose_name='Телефон', null=True)
 
     sessionUNQid = models.CharField(max_length=255, verbose_name='Пользовательский sessionid', null=True)
@@ -254,4 +265,3 @@ class UserPages(models.Model):
         verbose_name = '6. Пользовательская страница'
         verbose_name_plural = '6. Список пользовательских страниц'
         ordering = ['id',]
-

@@ -28,13 +28,10 @@ urlpatterns = [
     path('season/<int:sea_id>', FlowerShowSeason.as_view(), name='season'),
     path('type/<int:typ_id>', FlowerShowType.as_view(), name='type'),
 
-    # ----------------------- other pages -------------------------------
-    path('js/', js_data, name='js'),
-    path('check/', js_start_data, name='js_start'),
-
     # ----------------------- ajax pages- -------------------------------
     path('append/', append, name='append'),
     path('delete/', delete, name='delete'),
     path('accountLists/', accountLists, name='accountLists'),
-    path('startReview/', startReview, name='startReview')
+    path('startReview/', startReview, name='startReview'),
+    path('setSity/', setSity, name='setSity')
 ]

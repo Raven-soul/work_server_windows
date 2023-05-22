@@ -83,13 +83,27 @@
     text-align: center;
 }
 
-.header-address-city-value a {
+.header-address-city-value {
     text-decoration: underline dashed;
     color: black;
 }
 
-.header-address-city-value a:hover {
+.header-address-city-value:hover {
+    text-decoration: underline dashed;
     color: rgb(140, 140, 140);
+}
+
+.address-city-dropdown-item, .address-city-dropdown-item:active, .address-city-dropdown-item:focus{
+    outline: none;
+} 
+
+.address-city-dropdown-item{
+    text-decoration: none;
+}
+
+.address-city-dropdown-item:active{
+    background-color: rgb(139,86,157);
+    color: white;    
 }
 
 .content {
