@@ -1,0 +1,9 @@
+{% csrf_token %}
+<div class="dropdown" id="sity-to-clean">
+    <a class="dropdown-toggle p-0 header-address-city-value" data-bs-toggle="dropdown" aria-expanded="false">{{ header.user_sity }}</a>
+    <ul class="dropdown-menu">
+        {% for elem in header.cities_list %}
+            <li><button class="dropdown-item address-city-dropdown-item" onclick="{{ header.header_functions.sity }}" city-id="{{ elem.id }}" replaceable-area="sity-to-clean" output-area="sity-to-show">{{ elem.name }}</button></li>
+        {% endfor %}
+    </ul>
+</div>

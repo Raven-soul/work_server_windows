@@ -19,16 +19,11 @@ from .pages.forms.account_lists import AccountlistsPages
 from .pages.info_pages_data.info_pages import *
 from .pages.empty import Empty_page
 from .pages.review import Review_page
+from .pages.short_pages.city_stroke import City_stroke
 
 #------------- Классы для работы с пользователем и продуктами --------------------------
 from .pages.common_data.authorisation import Authorization
 from .pages.common_data.definitionProduct import DefinitionProduct
-
-def сheckAuthorization(request):
-    auth = Authorization(request)
-    if auth.isAuthorized == False:
-        return redirect('/account/login')
-
 
 #------------------ main_pages --------------------------
 
@@ -56,7 +51,10 @@ def basket(request):
     if not request.session.session_key:
         request.session.create()
             
-    сheckAuthorization(request)
+    auth = Authorization(request)
+    if auth.isAuthorized() == False:
+        return redirect('/account/login')
+
     data = Basket_page(request).getDict()
     if len(data['products']) == 0:
         empty_data =  Empty_page(title='Корзина пуста').getDict()
@@ -69,7 +67,10 @@ def ordering(request):
     if not request.session.session_key:
         request.session.create()
 
-    сheckAuthorization(request)
+    auth = Authorization(request)
+    if auth.isAuthorized() == False:
+        return redirect('/account/login')
+
     data = Ordering_page(request).getDict()
     return render(request, 'flower/main/ordering.html', context=data)
     
@@ -77,7 +78,10 @@ def payment(request):
     if not request.session.session_key:
         request.session.create()
 
-    сheckAuthorization(request)
+    auth = Authorization(request)
+    if auth.isAuthorized() == False:
+        return redirect('/account/login')
+    
     data = Payment_main_page( request).getDict()
     return render(request, 'flower/main/payment.html', context=data)
 
@@ -284,15 +288,19 @@ def pageNotFound(request, exception):
 #---------------------------- ajax material ----------------------------------------
 def append(request):
     auth = Authorization(request)
+    JsonData = {}
     if auth.isAuthorized():
         defProd = DefinitionProduct(auth.getAuthorizedUser())
-        JsonData = {}
         if request.POST.get('typeRequest', '') == 'addToSelectList':
             defProd.appendToSelectedList(request.POST.get("user_id", "none"))
             if request.POST.get('isRedirect', ''):
                 JsonData['redirect'] = '/basket'
+                JsonData['isRedirect'] = True
         elif request.POST.get('typeRequest', '') == 'addToFavoriteList':
-            defProd.appendTokedList(request.POST.get("user_id", "none"))
+            defProd.appendToLikedList(request.POST.get("user_id", "none"))
+    else:
+        JsonData['redirect'] = '/account/login'
+        JsonData['isRedirect'] = True
     return JsonResponse(JsonData)
 
 def delete(request):
@@ -314,13 +322,17 @@ def accountLists(request):
     auth = Authorization(request)
     if auth.isAuthorized():
         if request.POST.get('typeRequest', '') == 'choosen_short':
-            return render(request, 'flower/form_pages/order_temps/acc_order_choosen_short.html', context=AccountlistsPages(request.POST.get('typeRequest', ''), request).getDict())
+            return render(request, 'flower/form_pages/short_account_temps/acc_order_choosen_short.html', context=AccountlistsPages(request.POST.get('typeRequest', ''), request).getDict())
         elif request.POST.get('typeRequest', '') == 'liked_short':
-            return render(request, 'flower/form_pages/order_temps/acc_order_liked_short.html', context=AccountlistsPages(request.POST.get('typeRequest', ''), request).getDict())
+            return render(request, 'flower/form_pages/short_account_temps/acc_order_liked_short.html', context=AccountlistsPages(request.POST.get('typeRequest', ''), request).getDict())
         elif request.POST.get('typeRequest', '') == 'purchased_short':
-            return render(request, 'flower/form_pages/order_temps/acc_order_purchased_short.html', context=AccountlistsPages(request.POST.get('typeRequest', ''), request).getDict())
+            return render(request, 'flower/form_pages/short_account_temps/acc_order_purchased_short.html', context=AccountlistsPages(request.POST.get('typeRequest', ''), request).getDict())
         else:
             return HttpResponseNotFound('<h1>Страница не найдена</h1>')
         
-def setSity():
-    pass
+def setSity(request):
+    auth = Authorization(request)
+    if auth.isAuthorized():
+        return render(request, 'flower/form_pages/short_main_templates/city_choosen_short.html', context=City_stroke(request.POST.get('cityId', ''), request).getDict())
+    else:
+        return render(request, 'flower/form_pages/short_main_templates/city_choosen_short.html', context=City_stroke(1, request).getDict())

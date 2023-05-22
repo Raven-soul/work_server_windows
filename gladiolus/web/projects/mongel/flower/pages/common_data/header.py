@@ -20,6 +20,7 @@ class Header(object):
             'title': 'Гладиолус, магазин доставки цветов',
             'content_style_path': 'flower/css/content/main.css',
             'user_sity': self.user_sity,
+            'cities_list': self.getCities(),
             'header_functions':{
                 'sity': 'setSity(this)'
             },
@@ -34,6 +35,12 @@ class Header(object):
             'cat_selected': {'section': -1, 'order': 0},
             'script': 'flower/js/ajax/header.js'
         }
+
+    def getCities(self):
+        cities = []
+        for elem in Cities.objects.all():
+            cities.append({'name': elem.name, 'id': elem.pk})
+        return cities
 
     def startBuilder(self, request):
         self.category = Category.objects.all()

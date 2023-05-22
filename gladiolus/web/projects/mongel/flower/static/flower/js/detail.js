@@ -18,7 +18,7 @@ function ajaxRequest(productId, typeRequest, isRedirect = false){
         'typeRequest': typeRequest,
         'isRedirect': isRedirect}, 
         function(data){
-            if (isRedirect){
+            if (data.isRedirect){
                 window.location.href = data.redirect
                 }
     });

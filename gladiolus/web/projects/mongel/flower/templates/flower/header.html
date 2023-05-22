@@ -1,5 +1,4 @@
 {% load static %}
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -74,12 +73,13 @@
                                 <div class="col-auto p-0">
                                     <div class="row-2 justify-content-center">
                                         <div class="col-auto header-address-city-name">Город доставки</div>
-                                        <div class="col-auto header-address-city-value">
-                                            <div class="dropdown" id="sity-to-show">
-                                                <a class="dropdown-toggle p-0 header-address-city-value" id="sity-to-clean" data-bs-toggle="dropdown" onload="{{ header.header_functions.sity }}" aria-expanded="false">{{ header.user_sity }}</a>
+                                        <div class="col-auto header-address-city-value" id="sity-to-show">
+                                            <div class="dropdown" id="sity-to-clean">
+                                                <a class="dropdown-toggle p-0 header-address-city-value" data-bs-toggle="dropdown" aria-expanded="false">{{ header.user_sity }}</a>
                                                 <ul class="dropdown-menu">
-                                                    <li><button class="dropdown-item address-city-dropdown-item" onclick="{{ header.header_functions.sity }}">Таганрог</button></li>
-                                                    <li><button class="dropdown-item address-city-dropdown-item" onclick="{{ header.header_functions.sity }}">Краснодар</a></li>
+                                                    {% for elem in header.cities_list %}
+                                                        <li><button class="dropdown-item address-city-dropdown-item" onclick="{{ header.header_functions.sity }}" city-id="{{ elem.id }}" replaceable-area="sity-to-clean" output-area="sity-to-show">{{ elem.name }}</button></li>
+                                                    {% endfor %}
                                                 </ul>
                                             </div>
                                         </div>

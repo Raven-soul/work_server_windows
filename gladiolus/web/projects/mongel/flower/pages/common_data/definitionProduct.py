@@ -46,7 +46,7 @@ class DefinitionProduct():
     def getLikedList(self):
         return LikedProducts.objects.filter(user = self.user)
     
-    def appendTokedList(self, productId):
+    def appendToLikedList(self, productId):
         if productId != 'none':                
             product = Flower.objects.get(pk=productId)
             if self.containst(LikedProducts.objects.filter(user=self.user).exists(), LikedProducts.objects.filter(user=self.user), product) == False:
