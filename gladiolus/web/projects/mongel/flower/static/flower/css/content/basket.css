@@ -82,3 +82,19 @@
 .total-data-block{
     margin-bottom: 30px;
 }
+
+.city-button-update, .city-button-update:active, .city-button-update:focus{
+    outline: none;
+}
+
+.city-button-update{
+    border: none;
+    background: none;
+}
+
+.city-button-update:hover{
+    color:rgb(166, 166, 166);
+}
+.city-button-update i{
+    font-size: 15px;
+}

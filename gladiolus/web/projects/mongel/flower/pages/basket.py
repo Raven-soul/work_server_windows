@@ -11,7 +11,7 @@ class Basket_page(object):
 
         self.header.setData(value = 'Корзина пользователя')
         self.header.setData(name = 'content_style_path', value = 'flower/css/content/basket.css')
-        self.header.setData(name = 'onload_function', value = "'common-data', 'product-item-'")
+        self.header.setData(name = 'onload_function', value = '\"common-data\"')
         self.footer.setData(name = 'script_list', value = self.script_list)
         
         self.context = {

@@ -33,5 +33,6 @@ urlpatterns = [
     path('delete/', delete, name='delete'),
     path('accountLists/', accountLists, name='accountLists'),
     path('startReview/', startReview, name='startReview'),
-    path('setSity/', setSity, name='setSity')
+    path('setSity/', setSity, name='setSity'),
+    path('getSity/', getSity, name='getSity')
 ]

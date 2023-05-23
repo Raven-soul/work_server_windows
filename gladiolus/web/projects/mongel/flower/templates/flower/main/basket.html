@@ -1,5 +1,6 @@
 {% load static %}
 {% include '../header.html' %}
+{% csrf_token %}
 <div class="container" style="margin-bottom:50px;">
     <div class="row justify-content-center basket-stage-title-block">
         <div class="col-auto">
@@ -25,7 +26,7 @@
             </div>
         </div>
     </div>
-    <div class="row-2 receipt-list-block" id="common-data" product-max-rows="{{ products_length }}" previous-price-area="total-products-price" delivery-price-area="total-delivery-price" total-price-id="total-price">
+    <div class="row-2 receipt-list-block" id="common-data" product-max-rows="{{ products_length }}" previous-price-area="total-products-price" delivery-price-area="total-delivery-price" total-price-id="total-price" city-button-id="button-sity-update">
         {% for row in products %}
             <div class="col-lg-10 offset-1 product-row" id="{{ row.product.pk }}" price="{{ row.product.price }}" product-price-name="product-price-" qty-name="qty-container-" common-data-id="common-data">
                 <div class="row table-data-basket-row">
@@ -120,13 +121,19 @@
                             <div class="row d-flex justify-content-between">
                                 <div class="col total-previously-price-name">Итого по позициям:</div>
                                 <div class="col-auto total-price-value">
-                                    <span class="price" id="total-products-price" currency-area="total-products-price-currency">100</span> <span class="currency" id="total-products-price-currency">₽</span>
+                                    <span class="price" id="total-products-price">100</span> <span class="currency">₽</span>
                                 </div>
                             </div>
                         </div>
                         <div class="col total-block-cell py-2">
                             <div class="row d-flex justify-content-between">
-                                <div class="col delivery-price-name">Доставка <b class="city">г.Краснодар</b></div>
+                                <div class="col delivery-price-name">
+                                    Доставка 
+                                    <button class="p-0 city-button-update" onclick="checkCity(this)" city-area-id="city-on-report" id="button-sity-update">
+                                        <b>г.<span id="city-on-report">Краснодар</span></b>
+                                        <i class="fa-solid fa-arrow-rotate-right"></i>
+                                    </button>
+                                </div>
                                 <div class="col-auto delivery-price-value" >
                                     <span class="price" id="total-delivery-price" currency-area="total-delivery-price-currency" delivery-cost="0">бесплатно</span> <span class="currency" id="total-delivery-price-currency">₽</span>
                                 </div>

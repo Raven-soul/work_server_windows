@@ -336,3 +336,8 @@ def setSity(request):
         return render(request, 'flower/form_pages/short_main_templates/city_choosen_short.html', context=City_stroke(request.POST.get('cityId', ''), request).getDict())
     else:
         return render(request, 'flower/form_pages/short_main_templates/city_choosen_short.html', context=City_stroke(1, request).getDict())
+
+def getSity(request):
+    auth = Authorization(request)
+    JsonData = {'cityCurent': auth.getAuthorizedUser().city_user_field.name}
+    return JsonResponse(JsonData)

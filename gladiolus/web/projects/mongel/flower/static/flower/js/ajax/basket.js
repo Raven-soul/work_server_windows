@@ -1,7 +1,14 @@
-function awake(common_data_id, data) {
-    alert(common_data_id);
-    // totalPrice(common_data_id);
-    // delivery(common_data_id);
+function ajaxGetSityRequest(showArea){
+    csrf_token = $('input[name="csrfmiddlewaretoken"]').val();
+    $.post('../getSity/', {csrfmiddlewaretoken: csrf_token}, function(data){
+        showArea.innerHTML = data.cityCurent;
+    });
+}
+
+function awake(common_data_id) {
+    totalPrice(common_data_id);
+    delivery_compute(common_data_id);
+    checkCity(document.getElementById(document.getElementById(common_data_id).getAttribute('city-button-id')));
 }
 
 function counterIncrease(button, qty_max){
@@ -29,7 +36,7 @@ function local_compute(button, qty_max, factor){
     }
 
     localPrice(qty, row, result_price);
-    totalPrice(document.getElementById(row.getAttribute('common-data-id')));
+    totalPrice(row.getAttribute('common-data-id'));
 }
 
 function localPrice(qty, row, result_price){
@@ -47,6 +54,29 @@ function totalPrice(common){
         count = Number(qty.getAttribute('value'));
         result = result + (price*count);
     });
+    document.getElementById(document.getElementById(common).getAttribute('previous-price-area')).innerHTML = result;
+    delivery_compute(common);
+    delivery_price = Number(document.getElementById(document.getElementById(common).getAttribute('delivery-price-area')).getAttribute('delivery-cost'));
+    document.getElementById(document.getElementById(common).getAttribute('total-price-id')).innerHTML = delivery_price + result;
+}
 
-    document.getElementById(common.getAttribute('total-price-id')).innerHTML = result;
+function delivery_compute(common_data_id) {
+    common = document.getElementById(common_data_id);
+
+    delivery = document.getElementById(common.getAttribute('delivery-price-area'));
+    currency = document.getElementById(delivery.getAttribute('currency-area'));
+
+    delivery_price = Number(delivery.getAttribute('delivery-cost'));
+
+    if (delivery_price == 0) {
+        delivery.innerHTML = 'бесплатно';
+        currency.style.display = 'none';
+    }
+    else {
+        delivery.innerHTML = delivery_price;
+    }
+}
+
+function checkCity(button){
+    ajaxGetSityRequest(document.getElementById(button.getAttribute('city-area-id')));
 }
