@@ -209,10 +209,37 @@ class OrderStatus(models.Model):
         verbose_name_plural = '6. Статусы заказов'
         ordering = ['id',]
 
+class Order(models.Model):
+    # ------------------------------------ sender data --------------------------------
+    sender_phone = models.CharField(max_length=255, verbose_name='Телефон отправителя')
+    sender_email = models.IntegerField(verbose_name='Email отправителя')
+    sender_user  = models.ForeignKey(User, on_delete=models.CASCADE, null=True, verbose_name='Данные пользователя')
+    
+    # ----------------------------------- receiver data --------------------------------
+    receiver_name = models.CharField(max_length=255, verbose_name='Имя получателя')
+    receiver_phone = models.CharField(max_length=255, verbose_name='Телефон получателя')
+    receiver_additional_info = models.CharField(max_length=255, verbose_name='Доп. информация для доставки')
+    
+    # ------------------------------------- order data ---------------------------------
+    order_date = models.DateField(verbose_name='Дата заказа')
+    order_time = models.TimeField(verbose_name='Время доставки')
+    order_city = models.ForeignKey(Cities, on_delete=models.CASCADE, null=True, verbose_name='Город заказа')
+    order_address =  models.CharField(max_length=255, verbose_name='Адрес доставки')
+    time_create = models.DateTimeField(auto_now_add=True,verbose_name='Время создания')
+
+    def __str__(self):
+        return self.time_create
+    
+    class Meta:
+        verbose_name = '6. Заказ'
+        verbose_name_plural = '6. Заказы'
+        ordering = ['id',]
+
 class SelectedProducts(models.Model):
     product = models.ForeignKey(Flower, on_delete=models.CASCADE, verbose_name='Товар')
     count = models.IntegerField(verbose_name='Количество товара')
     user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='Пользователь')
+    order_num =  models.ForeignKey(Order, null=True, on_delete=models.CASCADE, verbose_name='Данные заказа')
     time_create = models.DateTimeField(auto_now_add=True,verbose_name='Время создания')
 
     def __str__(self):
@@ -265,3 +292,4 @@ class UserPages(models.Model):
         verbose_name = '6. Пользовательская страница'
         verbose_name_plural = '6. Список пользовательских страниц'
         ordering = ['id',]
+

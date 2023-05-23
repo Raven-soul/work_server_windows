@@ -71,6 +71,11 @@ class OrderStatusAdmin(admin.ModelAdmin):
     list_display_links = ('id', 'name')
     search_fields = ('id', 'code')
 
+class OrderAdmin(admin.ModelAdmin):
+    list_display = ('id', 'sender_phone', 'sender_user', 'sender_email', 'order_city', 'order_date', 'order_time')
+    list_display_links = ('id', 'sender_phone', 'sender_user', 'sender_email', 'order_city')
+    search_fields = ('id', 'sender_phone', 'sender_user', 'order_city')
+
 
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(Occasion, OccasionAdmin)
@@ -89,3 +94,4 @@ admin.site.register(PurchasedProducts, PurchasedProductsAdmin)
 admin.site.register(LikedProducts, LikedProductsAdmin)
 admin.site.register(UserPages, UserPagesAdmin) 
 admin.site.register(OrderStatus, OrderStatusAdmin)
+admin.site.register(Order, OrderAdmin)

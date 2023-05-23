@@ -65,3 +65,26 @@ class Comment_form (forms.Form):
     product = forms.CharField(required=False, label='Товар')
     grade = forms.CharField(required=True, label='Оценка')
     comment = forms.CharField(required=True, label='Комментарий')
+
+class Order_form (forms.Form):
+    #----------------отправитель------------------------------
+    user_phone = forms.CharField(required=True, label='Номер телефона отправителя', widget=forms.TextInput(attrs={'class': 'text-area'}))
+    user_email = forms.CharField(required=False, label='Email отправителя', widget=forms.TextInput(attrs={'class': 'readonly-field text-area', 'readonly': ''}))
+    user_name = forms.CharField(required=False, label='Имя отправителя', widget=forms.TextInput(attrs={'class': 'readonly-field text-area', 'readonly': ''}))
+
+    #----------------получатель-------------------------------
+    receiver_name = forms.CharField(required=False, label='Имя получателя', widget=forms.TextInput(attrs={'class': 'text-area'}))
+    receiver_phone = forms.CharField(required=False, label='Номер телефона получателя', widget=forms.TextInput(attrs={'class': 'text-area'}))
+    receiver_additional_info = forms.CharField(required=False, label='Уточнение адреса доставки', widget=forms.TextInput(attrs={'class': 'text-area'}))
+
+    #-------------дата и время заказа-------------------------
+    order_date = forms.DateField(required=False, label='Дата заказа', widget=forms.TextInput(attrs={'class': 'input-area'}))
+    order_time = forms.TimeField(required=False, label='Время заказа', widget=forms.TextInput(attrs={'class': 'input-area'}))
+
+    #--------------адрес доставки-----------------------------
+    order_city = forms.ModelChoiceField(queryset = Cities.objects.all(), empty_label=None, required=False, label='Город доставки')
+    order_address = forms.CharField(required=True, label='Адрес доставки', widget=forms.TextInput(attrs={'class': 'input-area'}))
+    
+    ## номер заказа
+    ## пользователь, в данном случае отправитель
+    ## товары, в списке покупок будут иметь отдельные данные о номере заказа

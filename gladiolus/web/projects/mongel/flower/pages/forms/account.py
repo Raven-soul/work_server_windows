@@ -2,7 +2,6 @@ from ...models import * #база данных
 from ..common_data.footer import Footer
 from ..common_data.header import Header
 from ..common_data.authorisation import Authorization
-from ...forms import *
 
 class CommonBuild(object):
     def __init__(self, request):

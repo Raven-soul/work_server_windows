@@ -5,6 +5,7 @@ from .forms import *
 from .utils import *
 from .models import * #база данных
 import json
+import datetime
 
 #------------- главные страницы сайта --------------------------
 from .pages.detail import Detail_page
@@ -73,6 +74,22 @@ def ordering(request):
         return redirect('/account/login')
 
     data = Ordering_page(request).getDict()
+    user = auth.getAuthorizedUser()
+    if request.method == 'POST':
+        form = Order_form(request.POST)
+        if form.is_valid():
+            pass
+    else:
+        form = Order_form(initial={
+            'user_name': user.name_user_field,
+            'user_email': user.email_user_field,
+            'user_phone': user.phone_user_field,
+
+            'order_date': datetime.date.today,
+            'order_time': datetime.time,
+            'order_city': user.city_user_field})
+
+    data['form'] = form
     return render(request, 'flower/main/ordering.html', context=data)
     
 def payment(request):

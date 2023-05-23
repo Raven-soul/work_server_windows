@@ -41,13 +41,16 @@
                         Отправитель
                         <div class="row">
                             <div class="col col-text-area">
-                                <input class="text-area" type="text" name="telephon" placeholder="Ваш телефон"/>
+                                {{ form.user_phone }}
+                                <input hidden class="text-area" type="text" name="telephon" placeholder="Ваш телефон"/>
                             </div>
                             <div class="col col-text-area">
-                                <input class="text-area" type="text" name="e-mail" placeholder="Ваш E-mail"/>
+                                {{ form.user_email }}
+                                <input hidden class="text-area" type="text" name="e-mail" placeholder="Ваш E-mail"/>
                             </div>
                             <div class="col col-text-area">
-                                <input class="text-area" type="text" name="name" placeholder="Ваше имя"/>
+                                {{ form.user_name }}
+                                <input hidden class="text-area" type="text" name="name" placeholder="Ваше имя"/>
                             </div>
                         </div>
                     </div>
@@ -55,13 +58,16 @@
                         Получатель
                         <div class="row">
                             <div class="col col-text-area">
-                                <input class="text-area" type="text" name="telephon" placeholder="Фамилия Имя Отчество"/>
+                                {{ form.receiver_name }}
+                                <input hidden class="text-area" type="text" name="telephon" placeholder="Фамилия Имя Отчество"/>
                             </div>
                             <div class="col col-text-area">
-                                <input class="text-area" type="text" name="e-mail" placeholder="Телефон получателя"/>
+                                {{ form.receiver_phone }}
+                                <input hidden class="text-area" type="text" name="e-mail" placeholder="Телефон получателя"/>
                             </div>
                             <div class="col col-text-area">
-                                <input class="text-area" type="text" name="name" placeholder="Уточнить время и адрес доставки"/>
+                                {{ form.receiver_additional_info }}
+                                <input hidden class="text-area" type="text" name="name" placeholder="Уточнить время и адрес доставки"/>
                             </div>
                         </div>
                     </div>
@@ -72,10 +78,12 @@
                         Дата и время заказа
                         <div class="row">
                             <div class="col col-text-area">
-                                <input class="date-time-area" type="date" id="localdate" name="date"/>
+                                {{ form.order_date }}
+                                <input hidden class="date-time-area" type="date" id="localdate" name="date"/>
                             </div>
                             <div class="col col-text-area">
-                                <input class="date-time-area" type="time" id="time" name="time"/>
+                                {{ form.order_time }}
+                                <input hidden class="date-time-area" type="time" id="time" name="time"/>
                             </div>
                             <div class="col"></div>
                         </div>
@@ -84,9 +92,13 @@
                         Адрес доставки
                         <div class="row">
                             <div class="col col-text-area">
-                                <input class="text-area" type="text" name="telephon" placeholder="Город, адрес доставки"/>
+                                {{ form.order_city }}
+                                <input hidden class="text-area" type="text" name="telephon" placeholder="Город, адрес доставки"/>
                             </div>
-                            <div class="col"></div>
+                            <div class="col col-text-area">
+                                {{ form.order_address }}
+                                <input hidden class="text-area" type="text" name="telephon" placeholder="Город, адрес доставки"/>
+                            </div>
                             <div class="col"></div>
                         </div>
                     </div>

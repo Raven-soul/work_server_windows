@@ -12,7 +12,8 @@ class Ordering_page(object):
         
         self.context = {
             'header': self.header.getData(),
-            'footer': self.footer.getData()
+            'footer': self.footer.getData(),
+            'form': ''
         }    
 
     def startBuilder(self, request):
