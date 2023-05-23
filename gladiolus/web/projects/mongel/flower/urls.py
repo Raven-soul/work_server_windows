@@ -34,5 +34,6 @@ urlpatterns = [
     path('accountLists/', accountLists, name='accountLists'),
     path('startReview/', startReview, name='startReview'),
     path('setSity/', setSity, name='setSity'),
-    path('getSity/', getSity, name='getSity')
+    path('getSity/', getSity, name='getSity'),
+    path('basketConfirm/', basketConfirm, name='basketConfirm'),
 ]

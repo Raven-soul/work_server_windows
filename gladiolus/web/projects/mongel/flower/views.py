@@ -4,6 +4,7 @@ from django.views.generic import ListView
 from .forms import *
 from .utils import *
 from .models import * #база данных
+import json
 
 #------------- главные страницы сайта --------------------------
 from .pages.detail import Detail_page
@@ -269,7 +270,7 @@ def account(request, section_name):
         data['form'] = form
         return render(request, 'flower/form_pages/login.html', context=data)
     
-    #------------------------------------------------------------------------------- registration
+    #------------------------------------------------------------------------------- logout
     elif section_name == 'logout':
         auth.logout()
         return redirect('/account/login')
@@ -340,4 +341,16 @@ def setSity(request):
 def getSity(request):
     auth = Authorization(request)
     JsonData = {'cityCurent': auth.getAuthorizedUser().city_user_field.name}
+    return JsonResponse(JsonData)
+
+def basketConfirm(request):
+    selected_products_stroke = request.POST.get('selected_products', '')
+    selected_products = json.loads(selected_products_stroke)
+    if selected_products != '':
+        user = Authorization(request).getAuthorizedUser()
+        for element in selected_products: 
+            data = SelectedProducts.objects.get(user=user, product=Flower.objects.get(pk=int(element['product_id'])))
+            data.count = element['count']
+            data.save(update_fields=["count"])
+        JsonData = {'redirect': '/ordering'}
     return JsonResponse(JsonData)

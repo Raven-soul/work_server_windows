@@ -5,6 +5,24 @@ function ajaxGetSityRequest(showArea){
     });
 }
 
+function ajaxDeleteRequest(productId, list, row){
+    csrf_token = $('input[name="csrfmiddlewaretoken"]').val();
+    $.post('../delete/', {csrfmiddlewaretoken: csrf_token, 'productId': productId, 'list': list}, function(data){
+        row.remove();
+    });
+}
+
+function ajaxConfirmRequest(productList){
+    alert(productList[0]['count']);
+    csrf_token = $('input[name="csrfmiddlewaretoken"]').val();
+    $.post('../basketConfirm/', {
+        csrfmiddlewaretoken: csrf_token, 
+        'selected_products': JSON.stringify(productList)
+    }, function(data){
+        window.location.href = data.redirect;
+    });
+}
+
 function awake(common_data_id) {
     totalPrice(common_data_id);
     delivery_compute(common_data_id);
@@ -46,9 +64,9 @@ function localPrice(qty, row, result_price){
 }
 
 function totalPrice(common){
-    row = document.querySelectorAll('.product-row');
+    rows = document.querySelectorAll('.product-row');
     result = 0;
-    [].forEach.call(row, el => {
+    [].forEach.call(rows, el => {
         qty = document.getElementById(el.getAttribute('qty-name') + el.getAttribute('id'));
         price = Number(el.getAttribute('price').replace(/,/, '.'));        
         count = Number(qty.getAttribute('value'));
@@ -79,4 +97,27 @@ function delivery_compute(common_data_id) {
 
 function checkCity(button){
     ajaxGetSityRequest(document.getElementById(button.getAttribute('city-area-id')));
+}
+
+function deleteRow(button){
+    list = 'select';
+    productId = button.getAttribute('product-id');
+    row = document.getElementById(productId);
+    
+    ajaxDeleteRequest(productId, list, row);
+}
+
+function orderConfirm(){
+    rows = document.querySelectorAll('.product-row');
+    result = [];
+    [].forEach.call(rows, el => {
+        qty = document.getElementById(el.getAttribute('qty-name') + el.getAttribute('id'));      
+        count = Number(qty.getAttribute('value'));
+        result.push({
+            'product_id': el.getAttribute('id'),
+            'count': count
+        });
+    });
+    alert(result);
+    ajaxConfirmRequest(result);
 }

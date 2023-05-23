@@ -3,9 +3,6 @@ from ...models import * #база данных
 class DefinitionProduct():
     def __init__(self, user):
         self.user = user
-
-    def getSelectedList(self):
-        return SelectedProducts.objects.filter(user = self.user)
     
     def containst(self, isEmpty, list, product):
         temp = False
@@ -14,6 +11,11 @@ class DefinitionProduct():
                 if elem.product == product:
                     temp = True
         return temp
+    
+    #--------------------------------- SelectedList ------------------------------------------------ 
+
+    def getSelectedList(self):
+        return SelectedProducts.objects.filter(user = self.user)
     
     def appendToSelectedList(self, productId):
         if productId != 'none':                
@@ -28,6 +30,8 @@ class DefinitionProduct():
             if self.containst(SelectedProducts.objects.filter(user=self.user).exists(), SelectedProducts.objects.filter(user=self.user), product):
                 SelectedProducts.objects.get(product=product, user= self.user).delete()
     
+    #--------------------------------- PurchasedList ------------------------------------------------ 
+
     def getPurchasedList(self):
         return PurchasedProducts.objects.filter(user = self.user)
     
@@ -43,6 +47,8 @@ class DefinitionProduct():
             if self.containst(PurchasedProducts.objects.filter(user=self.user).exists(), PurchasedProducts.objects.filter(user=self.user), product):
                 PurchasedProducts.objects.get(product=product, user= self.user).delete()
     
+    #--------------------------------- LikedList ------------------------------------------------ 
+
     def getLikedList(self):
         return LikedProducts.objects.filter(user = self.user)
     

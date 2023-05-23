@@ -63,7 +63,7 @@
                     </div>
                     <div class="col-auto table-data-basket d-flex justify-content-center p-0">
                         <div class="save-area d-flex align-items-center">
-                            <a class="delete-button" onclick="deleteRowButton(this, 'common-data', 'product-item-')" product-id="product-item-{{ row.pk }}">
+                            <a class="delete-button" onclick="deleteRow(this)" product-id="{{ row.product.pk }}">
                                 <div class="table-product-delete-data">
                                     <i class="fa-regular fa-trash-can"></i>
                                 </div>
@@ -80,7 +80,7 @@
                                         </div>
                                     </a>
                                     <div class="qty-container d-inline mx-2">
-                                        <input id="qty-container-{{ row.product.pk }}" class="qty-container-panel" style="outline:none;" value="1" size="3" maxlength="3" min="1">
+                                        <input id="qty-container-{{ row.product.pk }}" class="qty-container-panel" style="outline:none;" value="{{ row.count }}" size="3" maxlength="3" min="1">
                                     </div>
                                     <a onclick="counterIncrease(this, {{ row.product.count }})" product-id="{{ row.product.pk }}">
                                         <div class="strength-button d-inline">
@@ -102,7 +102,7 @@
             </div>
         {% endfor %}
     </div>
-    <div class="row d-block total-data-block">
+    <div class="row-2 d-block total-data-block">
         <div class="col-lg-10 offset-1">
             <div class="row">
                 <div class="col stock-block p-0">
@@ -155,9 +155,9 @@
     <div class="row">
         <div class="col"></div>
         <div class="col d-flex justify-content-center">
-            <a href="{% url 'ordering' %}" class="button-ordering">
+            <button onclick="orderConfirm()" class="button-ordering">
                 Оформить заказ
-            </a>
+            </button>
         </div>
         <div class="col"></div>
     </div>
