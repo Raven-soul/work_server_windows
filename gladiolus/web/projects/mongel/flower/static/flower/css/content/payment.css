@@ -14,19 +14,25 @@
     color: rgb(139,86,157);
 }
 
+.data-cell-link, .data-cell-link:active, .data-cell-link:focus{
+    outline: none;
+}
 
-.data-cell{
+.data-cell-link{
     text-align: center;
     margin-right: 10px;
     max-width: 120px;
     padding: 8px;
+    border: none;
+    border-radius: 10px;
 }
 
-.data-cell img{
+.data-cell-link img{
     max-height: 100px;
+    border-radius: 10px;
 }
 
-.data-cell:hover{
+.data-cell-link:hover{
     border-radius: 10px;
     box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.5);
 }
@@ -56,16 +62,7 @@
     text-decoration: none;
 }
 
-.data-cell-link{
-    color: black;
-    text-decoration: none;
-}
-
-.data-cell-link:hover{
-    color: black;
-    text-decoration: none;
-}
-
-.fa-arrow-left{
-    font-size: 20px;
+.cell-name {
+    margin-top: 10px;
+    font-size: 12px;
 }

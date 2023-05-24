@@ -52,7 +52,7 @@ def product_details(request, prod_id):
 def basket(request):
     if not request.session.session_key:
         request.session.create()
-            
+
     auth = Authorization(request)
     if auth.isAuthorized() == False:
         return redirect('/account/login')
@@ -64,7 +64,7 @@ def basket(request):
         return render(request, 'flower/main/complex_templates/empty_page.html', context=empty_data)
     else:
         return render(request, 'flower/main/basket.html', context=data)
-    
+
 def ordering(request):
     if not request.session.session_key:
         request.session.create()
@@ -73,7 +73,7 @@ def ordering(request):
     isCreation = True
     if auth.isAuthorized() == False:
         return redirect('/account/login')
-    
+
     user = auth.getAuthorizedUser()
 
     if SelectedProducts.objects.filter(user=user).exists():
@@ -82,11 +82,11 @@ def ordering(request):
                 isCreation = False
         else:
             isCreation = True
-    else: 
+    else:
         return redirect('/basket')
 
     data = Ordering_page(request).getDict()
-    
+
     if request.method == 'POST':
         form = Order_form(request.POST)
         if form.is_valid():
@@ -133,7 +133,7 @@ def ordering(request):
 
     data['form'] = form
     return render(request, 'flower/main/ordering.html', context=data)
-    
+
 def payment(request):
     if not request.session.session_key:
         request.session.create()
@@ -141,7 +141,7 @@ def payment(request):
     auth = Authorization(request)
     if auth.isAuthorized() == False:
         return redirect('/account/login')
-    
+
     data = Payment_main_page( request).getDict()
     return render(request, 'flower/main/payment.html', context=data)
 
@@ -159,7 +159,7 @@ class FlowerShowCategory(DataMixin, ListView):
         c_def['header'] = self.setContextData(c_def['header'], diction=[{'name':'cat_selected', 'value':{'section': 1, 'order': self.kwargs['cat_id']}},])
         context = dict(list(context.items()) + list(c_def.items()))
         return context
-    
+
     def get_queryset(self):
         return Flower.objects.filter(categ__pk=self.kwargs['cat_id'])
 
@@ -175,7 +175,7 @@ class FlowerShowOccasion(DataMixin, ListView):
         c_def['header'] = self.setContextData(c_def['header'], diction=[{'name':'cat_selected', 'value':{'section': 2, 'order': self.kwargs['occ_id']}},])
         context = dict(list(context.items()) + list(c_def.items()))
         return context
-    
+
     def get_queryset(self):
         return Flower.objects.filter(reason_data__pk=self.kwargs['occ_id'])
 
@@ -191,7 +191,7 @@ class FlowerShowSeason(DataMixin, ListView):
         c_def['header'] = self.setContextData(c_def['header'], diction=[{'name':'cat_selected', 'value':{'section': 3, 'order': self.kwargs['sea_id']}},])
         context = dict(list(context.items()) + list(c_def.items()))
         return context
-    
+
     def get_queryset(self):
         return Flower.objects.filter(maturation_data__pk=self.kwargs['sea_id'])
 
@@ -207,7 +207,7 @@ class FlowerShowType(DataMixin, ListView):
         c_def['header'] = self.setContextData(c_def['header'], diction=[{'name':'cat_selected', 'value':{'section': 4, 'order': self.kwargs['typ_id']}},])
         context = dict(list(context.items()) + list(c_def.items()))
         return context
-    
+
     def get_queryset(self):
         return Flower.objects.filter(type_data__pk=self.kwargs['typ_id'])
 
@@ -277,10 +277,10 @@ def account(request, section_name):
                                         'password_user_field': user.password_user_field,
                                         'city_user_field': user.city_user_field,
                                         'phone_user_field': user.phone_user_field})
-        
+
         data['form'] = form
         return render(request, 'flower/form_pages/account_user.html', context=data)
-    
+
     #------------------------------------------------------------------------------- order
     elif section_name == 'order':
         if auth.isAuthorized() == False:
@@ -288,7 +288,7 @@ def account(request, section_name):
 
         data['header']['onload_function'] = '"data-show", "data-content"'
         return render(request, 'flower/form_pages/account_order.html', context=data)
-    
+
     #------------------------------------------------------------------------------- login
     elif section_name == 'login':
         if auth.isAuthorized():
@@ -307,7 +307,7 @@ def account(request, section_name):
 
         data['form'] = form
         return render(request, 'flower/form_pages/login.html', context=data)
-    
+
     #------------------------------------------------------------------------------- registration
     elif section_name == 'registration':
         if auth.isAuthorized():
@@ -316,7 +316,7 @@ def account(request, section_name):
         if request.method == 'POST':
             form = RegistrationPostForm(request.POST)
             if form.is_valid():
-                User.objects.create(name_user_field = form.cleaned_data['name_register_field'], 
+                User.objects.create(name_user_field = form.cleaned_data['name_register_field'],
                                     email_user_field = form.cleaned_data['email_register_field'],
                                     password_user_field = form.cleaned_data['password_first_register_field'])
                 auth.logout()
@@ -327,7 +327,7 @@ def account(request, section_name):
 
         data['form'] = form
         return render(request, 'flower/form_pages/login.html', context=data)
-    
+
     #------------------------------------------------------------------------------- logout
     elif section_name == 'logout':
         auth.logout()
@@ -336,6 +336,25 @@ def account(request, section_name):
         return HttpResponseNotFound('<h1>Страница не найдена</h1>')
 
 def review(request):
+    # if request.method == 'POST':
+    #         form = Account_form(request.POST)
+    #         if form.is_valid():
+    #             user = auth.getAuthorizedUser()
+    #             user.surname_user_field = form.cleaned_data['surname_user_field']
+    #             user.city_user_field = form.cleaned_data['city_user_field']
+    #             user.phone_user_field = form.cleaned_data['phone_user_field']
+    #             user.save()
+    #     else:
+    #         form = Account_form(initial={'name_user_field': user.name_user_field,
+    #                                     'surname_user_field': user.surname_user_field,
+    #                                     'email_user_field': user.email_user_field,
+    #                                     'password_user_field': user.password_user_field,
+    #                                     'city_user_field': user.city_user_field,
+    #                                     'phone_user_field': user.phone_user_field})
+
+    #     data['form'] = form
+    #     return render(request, 'flower/form_pages/account_user.html', context=data)
+
     context = Review_page(request, 9).getDict()
     return render(request, 'flower/main/review.html', context=context)
 
@@ -373,7 +392,7 @@ def delete(request):
         defProd.deleteFromLikedList(request.POST.get('productId', ''))
     return HttpResponse()
 
-def startReview(request):
+def setReview(request):
     JsonData = {'redirect': '/review'}
     return JsonResponse(JsonData)
 
@@ -388,7 +407,7 @@ def accountLists(request):
             return render(request, 'flower/form_pages/short_account_temps/acc_order_purchased_short.html', context=AccountlistsPages(request.POST.get('typeRequest', ''), request).getDict())
         else:
             return HttpResponseNotFound('<h1>Страница не найдена</h1>')
-        
+
 def setSity(request):
     auth = Authorization(request)
     if auth.isAuthorized():
@@ -406,9 +425,29 @@ def basketConfirm(request):
     selected_products = json.loads(selected_products_stroke)
     if selected_products != '':
         user = Authorization(request).getAuthorizedUser()
-        for element in selected_products: 
+        for element in selected_products:
             data = SelectedProducts.objects.get(user=user, product=Flower.objects.get(pk=int(element['product_id'])))
             data.count = element['count']
             data.save(update_fields=["count"])
         JsonData = {'redirect': '/ordering'}
+    return JsonResponse(JsonData)
+
+def pay(request):
+    user = Authorization(request).getAuthorizedUser()
+    productList = SelectedProducts.objects.filter(user=user)
+    payMethod = request.POST.get('method', '')
+
+    for selectProduct in productList:
+        purchProduct = PurchasedProducts(
+            product = selectProduct.product,
+            count = selectProduct.count,
+            user = user,
+            status = OrderStatus.objects.get(code=0),
+            order_code = Order.objects.filter(sender_user=user).last(),
+            pay_method = payMethod
+        )
+        purchProduct.save()
+
+    productList.delete()
+    JsonData = {'redirect': '/'}
     return JsonResponse(JsonData)

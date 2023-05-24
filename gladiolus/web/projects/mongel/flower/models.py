@@ -101,7 +101,7 @@ class Flower(models.Model):
 class Review(models.Model):
     grade = models.IntegerField(verbose_name='Оценка товара')
     description = models.TextField(blank=True, verbose_name='Описание отзыва')
-    author = models.CharField(max_length=255, null=True, verbose_name='Автор отзыва')
+    author =  models.ForeignKey(Occasion, on_delete=models.CASCADE, null=True, verbose_name='Автор отзыва')
     time_create = models.DateTimeField(auto_now_add=True, verbose_name='Время создания')
     flower = models.ForeignKey(Flower, on_delete=models.CASCADE, verbose_name='Товар')
 
@@ -255,6 +255,8 @@ class PurchasedProducts(models.Model):
     count = models.IntegerField(verbose_name='Количество товара')
     user = models.ForeignKey(User, on_delete=models.CASCADE, verbose_name='Пользователь')
     status = models.ForeignKey(OrderStatus, on_delete=models.CASCADE, verbose_name='статус заказа')
+    order_code =  models.ForeignKey(Order, null=True, on_delete=models.CASCADE, verbose_name='Данные заказа')
+    pay_method = models.CharField(max_length=255, null=True, verbose_name='Метод оплаты')
     time_create = models.DateTimeField(auto_now_add=True,verbose_name='Время создания')
 
     def __str__(self):
