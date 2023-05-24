@@ -11,7 +11,6 @@ class City_stroke(object):
 
     def startBuilder(self, cityId, request):
         auth = Authorization(request)
-        print('------------------------------------------------------------', cityId)
         User.objects.filter(pk= auth.getAuthorizedUser().pk).update(city_user_field=Cities.objects.get(pk=cityId))
         self.header = Header(request)
         
