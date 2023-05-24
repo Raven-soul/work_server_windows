@@ -70,39 +70,57 @@ def ordering(request):
         request.session.create()
 
     auth = Authorization(request)
+    isCreation = True
     if auth.isAuthorized() == False:
         return redirect('/account/login')
     
-    try:
-        if Order.objects.last().pk != SelectedProducts.objects.last().order_code or Order.objects.last().sender_user != auth.getAuthorizedUser():
-            pass
-        #elif Order.objects.last().pk != SelectedProducts.objects.last().order_code :
+    user = auth.getAuthorizedUser()
 
-    except:
-        pass
+    if SelectedProducts.objects.filter(user=user).exists():
+        if SelectedProducts.objects.last().order_code != None and Order.objects.filter(user=user).exists():
+            if SelectedProducts.objects.last().order_code == Order.objects.filter(user=user).last().pk:
+                isCreation = False
+        else:
+            isCreation = True
+    else: 
+        return redirect('/basket')
 
     data = Ordering_page(request).getDict()
-    user = auth.getAuthorizedUser()
+    
     if request.method == 'POST':
         form = Order_form(request.POST)
         if form.is_valid():
-            order = Order(
-                sender_phone = form.cleaned_data['user_phone'],
-                sender_email = user.email_user_field,
-                sender_user = user,
-                receiver_name = form.cleaned_data['receiver_name'],
-                receiver_phone = form.cleaned_data['receiver_phone'],
-                receiver_additional_info = form.cleaned_data['receiver_additional_info'],
-                order_date = form.cleaned_data['order_date'],
-                order_time = form.cleaned_data['order_time'],
-                order_city = form.cleaned_data['order_city'],
-                order_address = form.cleaned_data['order_address'],
-            )
-            order.save()
-            orderCode = Order.objects.last().pk
-            SelectedProducts.objects.filter(user=user).update(
-                order_code = orderCode
-            )
+            if isCreation:
+                order = Order(
+                    sender_phone = form.cleaned_data['user_phone'],
+                    sender_email = user.email_user_field,
+                    sender_user = user,
+                    receiver_name = form.cleaned_data['receiver_name'],
+                    receiver_phone = form.cleaned_data['receiver_phone'],
+                    receiver_additional_info = form.cleaned_data['receiver_additional_info'],
+                    order_date = form.cleaned_data['order_date'],
+                    order_time = form.cleaned_data['order_time'],
+                    order_city = form.cleaned_data['order_city'],
+                    order_address = form.cleaned_data['order_address']
+                )
+                order.save()
+                orderCode = Order.objects.last().pk
+                SelectedProducts.objects.filter(user=user).update(
+                    order_code = orderCode
+                )
+            else:
+                order = Order.objects.filter(user).last()
+                order.sender_phone = form.cleaned_data['user_phone']
+                order.sender_email = user.email_user_field
+                order.sender_user = user
+                order.receiver_name = form.cleaned_data['receiver_name']
+                order.receiver_phone = form.cleaned_data['receiver_phone']
+                order.receiver_additional_info = form.cleaned_data['receiver_additional_info']
+                order.order_date = form.cleaned_data['order_date']
+                order.order_time = form.cleaned_data['order_time']
+                order.order_city = form.cleaned_data['order_city']
+                order.order_address = form.cleaned_data['order_address']
+                order.save()
             return redirect('/payment')
     else:
         form = Order_form(initial={

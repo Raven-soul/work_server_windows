@@ -9,10 +9,16 @@ class Ordering_page(object):
 
         self.header.setData(value = 'Оформление заказа')
         self.header.setData(name = 'content_style_path', value = 'flower/css/content/ordering.css')
+
+        totalPrice = 0
+
+        for element in self.products:
+            totalPrice += element.product.price * element.count
         
         self.context = {
             'header': self.header.getData(),
             'footer': self.footer.getData(),
+            'total_price': totalPrice,
             'form': ''
         }    
 
@@ -20,6 +26,7 @@ class Ordering_page(object):
         self.header = Header(request)
         self.footer = Footer()
         self.auth = Authorization(request)
+        self.products = SelectedProducts.objects.filter(user=self.auth.getAuthorizedUser())
 
     def getDict(self):
         return self.context
