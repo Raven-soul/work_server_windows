@@ -77,8 +77,8 @@ def ordering(request):
     user = auth.getAuthorizedUser()
 
     if SelectedProducts.objects.filter(user=user).exists():
-        if SelectedProducts.objects.last().order_code != None and Order.objects.filter(user=user).exists():
-            if SelectedProducts.objects.last().order_code == Order.objects.filter(user=user).last().pk:
+        if SelectedProducts.objects.last().order_code != None and Order.objects.filter(sender_user=user).exists():
+            if SelectedProducts.objects.last().order_code == Order.objects.filter(sender_user=user).last().pk:
                 isCreation = False
         else:
             isCreation = True

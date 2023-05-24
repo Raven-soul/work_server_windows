@@ -293,3 +293,26 @@ class UserPages(models.Model):
         verbose_name_plural = '6. Список пользовательских страниц'
         ordering = ['id',]
 
+class PaymentMethodSection(models.Model):
+    name = models.CharField(max_length=255, verbose_name='Секция метода оплаты')
+
+    def __str__(self):
+        return self.name
+    
+    class Meta:
+        verbose_name = '7. Секция метода оплаты'
+        verbose_name_plural = '7. Секции методов оплаты'
+        ordering = ['id',]
+
+class PaymentMethod(models.Model):
+    name = models.CharField(max_length=255, verbose_name='Метод оплаты')
+    photo = models.ImageField(upload_to="photos/payment/%Y/%m/%d/", verbose_name='Фото')
+    section =  models.ForeignKey(PaymentMethodSection, on_delete=models.CASCADE, verbose_name='Секция')
+
+    def __str__(self):
+        return self.name
+    
+    class Meta:
+        verbose_name = '7. Метод оплаты'
+        verbose_name_plural = '7. Методы оплаты'
+        ordering = ['id',]

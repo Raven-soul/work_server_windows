@@ -76,6 +76,16 @@ class OrderAdmin(admin.ModelAdmin):
     list_display_links = ('id', 'sender_phone', 'sender_user', 'sender_email', 'order_city')
     search_fields = ('id', 'sender_phone', 'sender_user', 'order_city')
 
+class PaymentMethodSectionAdmin(admin.ModelAdmin):
+    list_display = ('id', 'name')
+    list_display_links = ('id', 'name')
+    search_fields = ('id', 'name')
+
+class PaymentMethodAdmin(admin.ModelAdmin):
+    list_display = ('id', 'name', 'section', 'photo')
+    list_display_links = ('id', 'name')
+    search_fields = ('id', 'name')
+
 
 admin.site.register(Category, CategoryAdmin)
 admin.site.register(Occasion, OccasionAdmin)
@@ -95,3 +105,5 @@ admin.site.register(LikedProducts, LikedProductsAdmin)
 admin.site.register(UserPages, UserPagesAdmin) 
 admin.site.register(OrderStatus, OrderStatusAdmin)
 admin.site.register(Order, OrderAdmin)
+admin.site.register(PaymentMethodSection, PaymentMethodSectionAdmin)
+admin.site.register(PaymentMethod, PaymentMethodAdmin)

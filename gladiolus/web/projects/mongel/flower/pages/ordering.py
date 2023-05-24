@@ -6,12 +6,11 @@ from .common_data.authorisation import Authorization
 class Ordering_page(object):
     def __init__(self, request):
         self.startBuilder(request)
-
+        
         self.header.setData(value = 'Оформление заказа')
         self.header.setData(name = 'content_style_path', value = 'flower/css/content/ordering.css')
 
         totalPrice = 0
-
         for element in self.products:
             totalPrice += element.product.price * element.count
         
@@ -19,6 +18,7 @@ class Ordering_page(object):
             'header': self.header.getData(),
             'footer': self.footer.getData(),
             'total_price': totalPrice,
+            'user': self.auth.getAuthorizedUser(),
             'form': ''
         }    
 
