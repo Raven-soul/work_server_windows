@@ -13,7 +13,6 @@ function ajaxDeleteRequest(productId, list, row){
 }
 
 function ajaxConfirmRequest(productList){
-    alert(productList[0]['count']);
     csrf_token = $('input[name="csrfmiddlewaretoken"]').val();
     $.post('../basketConfirm/', {
         csrfmiddlewaretoken: csrf_token, 
@@ -118,6 +117,5 @@ function orderConfirm(){
             'count': count
         });
     });
-    alert(result);
     ajaxConfirmRequest(result);
 }

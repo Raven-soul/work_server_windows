@@ -2,7 +2,7 @@
     margin-bottom: 20px;
 }
 
-.text-area, .date-time-area{
+.text-area, .date-time-area, .select-area{
     width: 100%;
     outline: none;
 }
@@ -65,6 +65,9 @@
     color: white;
     text-decoration: none;
     font-size: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .backward-button:hover{
@@ -74,9 +77,27 @@
 }
 
 .fa-arrow-left{
-    font-size: 20px;
+    font-size: 15px;
+    align-content: center;
 }
 
 .button-col{
     margin-top:30px;
 }
+
+.readonly-field{
+    background-color: rgb(213, 213, 213);
+}
+
+.form-error{
+    color: red;
+}
+
+.form-error li {
+    list-style-type: none;
+  }
+  
+  .form-error ul {
+    margin-left: 0;
+    padding-left: 0;
+  }

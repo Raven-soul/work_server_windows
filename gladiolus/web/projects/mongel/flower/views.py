@@ -59,7 +59,7 @@ def basket(request):
 
     data = Basket_page(request).getDict()
     if len(data['products']) == 0:
-        empty_data =  Empty_page(title='Корзина пуста').getDict()
+        empty_data =  Empty_page(request=request).getDict()
         empty_data['context'] = 'Корзина пуста'
         return render(request, 'flower/main/complex_templates/empty_page.html', context=empty_data)
     else:
@@ -72,19 +72,43 @@ def ordering(request):
     auth = Authorization(request)
     if auth.isAuthorized() == False:
         return redirect('/account/login')
+    
+    try:
+        if Order.objects.last().pk != SelectedProducts.objects.last().order_code or Order.objects.last().sender_user != auth.getAuthorizedUser():
+            pass
+        #elif Order.objects.last().pk != SelectedProducts.objects.last().order_code :
+
+    except:
+        pass
 
     data = Ordering_page(request).getDict()
     user = auth.getAuthorizedUser()
     if request.method == 'POST':
         form = Order_form(request.POST)
         if form.is_valid():
-            pass
+            order = Order(
+                sender_phone = form.cleaned_data['user_phone'],
+                sender_email = user.email_user_field,
+                sender_user = user,
+                receiver_name = form.cleaned_data['receiver_name'],
+                receiver_phone = form.cleaned_data['receiver_phone'],
+                receiver_additional_info = form.cleaned_data['receiver_additional_info'],
+                order_date = form.cleaned_data['order_date'],
+                order_time = form.cleaned_data['order_time'],
+                order_city = form.cleaned_data['order_city'],
+                order_address = form.cleaned_data['order_address'],
+            )
+            order.save()
+            orderCode = Order.objects.last().pk
+            SelectedProducts.objects.filter(user=user).update(
+                order_code = orderCode
+            )
+            return redirect('/payment')
     else:
         form = Order_form(initial={
             'user_name': user.name_user_field,
             'user_email': user.email_user_field,
             'user_phone': user.phone_user_field,
-
             'order_date': datetime.date.today,
             'order_time': datetime.time,
             'order_city': user.city_user_field})
@@ -274,7 +298,6 @@ def account(request, section_name):
         if request.method == 'POST':
             form = RegistrationPostForm(request.POST)
             if form.is_valid():
-                
                 User.objects.create(name_user_field = form.cleaned_data['name_register_field'], 
                                     email_user_field = form.cleaned_data['email_register_field'],
                                     password_user_field = form.cleaned_data['password_first_register_field'])

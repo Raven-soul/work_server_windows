@@ -6,8 +6,8 @@ from .common_data.header import Header
 import random
 
 class Empty_page(object):
-    def __init__(self, title):
-        self.startBuilder(title)
+    def __init__(self, request):
+        self.startBuilder(request)
 
         self.header.setData(value = 'Корзина пользователя')
         self.header.setData(name = 'content_style_path', value = 'flower/css/content/detail_content.css')
@@ -18,8 +18,8 @@ class Empty_page(object):
             'content': ''
         }
 
-    def startBuilder(self, prod_id):
-        self.header = Header()
+    def startBuilder(self, request):
+        self.header = Header(request)
         self.footer = Footer()
 
     def setContent(self, value = ''):

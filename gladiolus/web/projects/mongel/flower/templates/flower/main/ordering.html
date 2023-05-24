@@ -35,22 +35,23 @@
         </div>
         <hr>
         <div class="col data-col form-col">
-            <form action="#">
+            <form action="{% url 'ordering' %}" method="post">
+                {% csrf_token %}
                 <div class="row-2">
                     <div class="col data-col">
                         Отправитель
                         <div class="row">
                             <div class="col col-text-area">
                                 {{ form.user_phone }}
-                                <input hidden class="text-area" type="text" name="telephon" placeholder="Ваш телефон"/>
+                                <div class="form-error">{{ form.user_phone.errors }}</div>
                             </div>
                             <div class="col col-text-area">
                                 {{ form.user_email }}
-                                <input hidden class="text-area" type="text" name="e-mail" placeholder="Ваш E-mail"/>
+                                <div class="form-error">{{ form.order_user_emailcity.errors }}</div>
                             </div>
                             <div class="col col-text-area">
                                 {{ form.user_name }}
-                                <input hidden class="text-area" type="text" name="name" placeholder="Ваше имя"/>
+                                <div class="form-error">{{ form.user_name.errors }}</div>
                             </div>
                         </div>
                     </div>
@@ -59,15 +60,15 @@
                         <div class="row">
                             <div class="col col-text-area">
                                 {{ form.receiver_name }}
-                                <input hidden class="text-area" type="text" name="telephon" placeholder="Фамилия Имя Отчество"/>
+                                <div class="form-error">{{ form.receiver_name.errors }}</div>
                             </div>
                             <div class="col col-text-area">
                                 {{ form.receiver_phone }}
-                                <input hidden class="text-area" type="text" name="e-mail" placeholder="Телефон получателя"/>
+                                <div class="form-error">{{ form.receiver_phone.errors }}</div>
                             </div>
                             <div class="col col-text-area">
                                 {{ form.receiver_additional_info }}
-                                <input hidden class="text-area" type="text" name="name" placeholder="Уточнить время и адрес доставки"/>
+                                <div class="form-error">{{ form.receiver_additional_info.errors }}</div>
                             </div>
                         </div>
                     </div>
@@ -79,11 +80,11 @@
                         <div class="row">
                             <div class="col col-text-area">
                                 {{ form.order_date }}
-                                <input hidden class="date-time-area" type="date" id="localdate" name="date"/>
+                                <div class="form-error">{{ form.order_date.errors }}</div>
                             </div>
                             <div class="col col-text-area">
                                 {{ form.order_time }}
-                                <input hidden class="date-time-area" type="time" id="time" name="time"/>
+                                <div class="form-error">{{ form.order_time.errors }}</div>
                             </div>
                             <div class="col"></div>
                         </div>
@@ -93,19 +94,25 @@
                         <div class="row">
                             <div class="col col-text-area">
                                 {{ form.order_city }}
-                                <input hidden class="text-area" type="text" name="telephon" placeholder="Город, адрес доставки"/>
-                            </div>
+                                <div class="form-error">{{ form.order_city.errors }}</div>
+                            </div> 
                             <div class="col col-text-area">
                                 {{ form.order_address }}
-                                <input hidden class="text-area" type="text" name="telephon" placeholder="Город, адрес доставки"/>
+                                <div class="form-error">{{ form.order_address.errors }}</div>
+                            </div>                            
+                            <div class="col">
+                                <div class="form-error">{{ form.non_field_errors }}</div>
                             </div>
-                            <div class="col"></div>
                         </div>
                     </div>
                     <div class="col button-col">
                         <div class="row">
                             <div class="col">
-                                <a href="{% url 'basket' %}" class="backward-button"><i class="fa-solid fa-arrow-left"></i> Data</a>
+                                <a href="{% url 'basket' %}" class="backward-button">
+                                    <i class="fa-solid fa-arrow-left"></i>
+                                    &nbsp;
+                                    Вернуться к списку товаров
+                                </a>
                             </div>
                             <div class="col d-flex justify-content-center">
                                 <button class="button-submit" type="submit">Отправить</button>

@@ -1,5 +1,6 @@
 from django import forms
 from .models import *
+import re
 
 from django.core.exceptions import ValidationError
 
@@ -68,23 +69,32 @@ class Comment_form (forms.Form):
 
 class Order_form (forms.Form):
     #----------------отправитель------------------------------
-    user_phone = forms.CharField(required=True, label='Номер телефона отправителя', widget=forms.TextInput(attrs={'class': 'text-area'}))
-    user_email = forms.CharField(required=False, label='Email отправителя', widget=forms.TextInput(attrs={'class': 'readonly-field text-area', 'readonly': ''}))
-    user_name = forms.CharField(required=False, label='Имя отправителя', widget=forms.TextInput(attrs={'class': 'readonly-field text-area', 'readonly': ''}))
+    user_phone = forms.CharField(required=True, label='Номер телефона отправителя', widget=forms.TextInput(attrs={'class': 'text-area','placeholder': 'Номер телефона отправителя'}))
+    user_email = forms.CharField(required=False, label='Email отправителя', widget=forms.TextInput(attrs={'class': 'readonly-field text-area', 'readonly': '','placeholder': 'Email отправителя'}))
+    user_name = forms.CharField(required=False, label='Имя отправителя', widget=forms.TextInput(attrs={'class': 'readonly-field text-area', 'readonly': '','placeholder': 'Имя отправителя'}))
 
     #----------------получатель-------------------------------
-    receiver_name = forms.CharField(required=False, label='Имя получателя', widget=forms.TextInput(attrs={'class': 'text-area'}))
-    receiver_phone = forms.CharField(required=False, label='Номер телефона получателя', widget=forms.TextInput(attrs={'class': 'text-area'}))
-    receiver_additional_info = forms.CharField(required=False, label='Уточнение адреса доставки', widget=forms.TextInput(attrs={'class': 'text-area'}))
+    receiver_name = forms.CharField(required=False, label='Имя получателя', widget=forms.TextInput(attrs={'class': 'text-area', 'placeholder': 'Имя получателя'}))
+    receiver_phone = forms.CharField(required=False, label='Номер телефона получателя', widget=forms.TextInput(attrs={'class': 'text-area', 'placeholder': 'Номер телефона получателя'}))
+    receiver_additional_info = forms.CharField(required=False, label='Уточнение адреса доставки', widget=forms.TextInput(attrs={'class': 'text-area', 'placeholder': 'Уточнение адреса доставки'}))
 
     #-------------дата и время заказа-------------------------
-    order_date = forms.DateField(required=False, label='Дата заказа', widget=forms.TextInput(attrs={'class': 'input-area'}))
-    order_time = forms.TimeField(required=False, label='Время заказа', widget=forms.TextInput(attrs={'class': 'input-area'}))
+    order_date = forms.DateField(required=False, label='Дата заказа', widget=forms.DateInput(attrs={'type': 'date', 'class': 'date-time-area'}))
+    order_time = forms.TimeField(required=False, label='Время заказа', widget=forms.TimeInput(attrs={'type': 'time', 'class': 'date-time-area'}))
 
     #--------------адрес доставки-----------------------------
-    order_city = forms.ModelChoiceField(queryset = Cities.objects.all(), empty_label=None, required=False, label='Город доставки')
-    order_address = forms.CharField(required=True, label='Адрес доставки', widget=forms.TextInput(attrs={'class': 'input-area'}))
+    order_city = forms.ModelChoiceField(queryset = Cities.objects.all(), empty_label=None, required=False, label='Город доставки', widget=forms.Select(attrs={'class': 'select-area'}))
+    order_address = forms.CharField(required=False, label='Адрес доставки', widget=forms.TextInput(attrs={'class': 'text-area', 'placeholder': 'Адрес доставки'}))
     
     ## номер заказа
     ## пользователь, в данном случае отправитель
     ## товары, в списке покупок будут иметь отдельные данные о номере заказа
+
+    def clean_user_phone(self): 
+        phone = self.cleaned_data['user_phone']
+        if re.search('[a-zA-Z]', phone):
+            raise ValidationError('Использованы неверные символы, строка не должна содержать букв')
+        if len(phone) < 11:
+            raise ValidationError('Длина строки не подходящая')
+        
+        return phone
