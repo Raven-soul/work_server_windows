@@ -9,30 +9,37 @@
                 <div class="col-auto">
                     <div class="row-2">
                         <div class="col flower-name">{{ product.title }}</div>
-                        <div class="col">
-                            <img src="{{ product.photo.url }}" alt="product">
+                        <div class="col d-flex image-box">
+                            <img class="image-view" src="{{ product.photo.url }}" alt="product_image">
                         </div>
                     </div>
                 </div>
                 <div class="col border-left">
-                    <form action="#">
+                    <form action="{{ action_url }}" method="post">
+                        {% csrf_token %}
                         <div class="row-2">
                             <div class="col data-row">
                                 <div class="row">
                                     <div class="col">Коментарий от пользователя:</div>
-                                    <div class="col"><span>{{ user.name_user_field }}</span></div>
+                                    <div class="col">
+                                        {{ form.user }}
+                                    </div>
                                 </div>
                             </div>
                             <div class="col data-row">
                                 <div class="row">
                                     <div class="col">Оценка товара:</div>
-                                    <div class="col"><input type="number" class="qty-grade" value="4" max="5" min="0"></div>
+                                    <div class="col">
+                                        {{ form.grade }}
+                                    </div>
                                 </div>
                             </div>
                             <div class="col">
                                 <div class="row-2">
                                     <div class="col p-0 data-row">Комментарий пользователя:</div>
-                                    <div class="col p-0 data-row"><textarea class="description-area w-100" name="Text1" cols="40" rows="5"></textarea></div>
+                                    <div class="col p-0 data-row">
+                                        {{ form.description }}
+                                    </div>
                                 </div>
                             </div>
                             <div class="col">

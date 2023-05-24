@@ -19,7 +19,7 @@ class Detail_page(object):
             'footer': self.footer.getData(),
             'product': self.productItem,
             'reviews': self.reviews,
-            'number_reviews': Review.objects.filter(flower=self.productItem).count(),
+            'number_reviews': Review.objects.filter(product=self.productItem).count(),
             'composition': self.compositionFormer(self.productItem),
             'like_block': self.likedFormer(self.productList)
         }
@@ -37,7 +37,7 @@ class Detail_page(object):
         return self.context
             
     def getReviews(self, productItem):
-        reviews = Review.objects.filter(flower=productItem)
+        reviews = Review.objects.filter(product=productItem)
         temp_result = {'global_grade': 0, 'global_stars': '', 'number_all_reviews' : 0, 'few_reviews': ''}
         temp_reviews = []
         grades = []

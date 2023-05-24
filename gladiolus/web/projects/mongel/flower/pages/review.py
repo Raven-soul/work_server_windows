@@ -15,6 +15,7 @@ class Review_page(object):
             'footer': self.footer.getData(),
             'user': self.auth.getAuthorizedUser(),
             'product': Flower.objects.get(pk=product_id),
+            'action_url': reverse("review", kwargs={"product_id": product_id}),
             'form': ''
         }    
 

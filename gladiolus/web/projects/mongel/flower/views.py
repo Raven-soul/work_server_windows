@@ -335,28 +335,28 @@ def account(request, section_name):
     else:
         return HttpResponseNotFound('<h1>Страница не найдена</h1>')
 
-def review(request):
-    # if request.method == 'POST':
-    #         form = Account_form(request.POST)
-    #         if form.is_valid():
-    #             user = auth.getAuthorizedUser()
-    #             user.surname_user_field = form.cleaned_data['surname_user_field']
-    #             user.city_user_field = form.cleaned_data['city_user_field']
-    #             user.phone_user_field = form.cleaned_data['phone_user_field']
-    #             user.save()
-    #     else:
-    #         form = Account_form(initial={'name_user_field': user.name_user_field,
-    #                                     'surname_user_field': user.surname_user_field,
-    #                                     'email_user_field': user.email_user_field,
-    #                                     'password_user_field': user.password_user_field,
-    #                                     'city_user_field': user.city_user_field,
-    #                                     'phone_user_field': user.phone_user_field})
+def review(request, product_id):    
+    data = Review_page(request, product_id).getDict()
+    user = Authorization(request).getAuthorizedUser()
+    if request.method == 'POST':
+        form = Review_form(request.POST)
+        if form.is_valid():
+            newReview = Review(
+                grade = form.cleaned_data['grade'],
+                description = form.cleaned_data['description'],
+                author = user,
+                product = Flower.objects.get(pk=product_id)
+            )
+            newReview.save()
 
-    #     data['form'] = form
-    #     return render(request, 'flower/form_pages/account_user.html', context=data)
-
-    context = Review_page(request, 9).getDict()
-    return render(request, 'flower/main/review.html', context=context)
+            return redirect('/account/order')
+    else:
+        form = Review_form(initial={
+            'user': user.name_user_field,
+            'grade': 4
+        })
+    data['form'] = form
+    return render(request, 'flower/main/review.html', context=data)
 
 #----------------------------------- 404 ----------------------------------------
 
@@ -393,7 +393,8 @@ def delete(request):
     return HttpResponse()
 
 def setReview(request):
-    JsonData = {'redirect': '/review'}
+    stroke = '/review/' + request.POST.get('productId', '')
+    JsonData = {'redirect': stroke}
     return JsonResponse(JsonData)
 
 def accountLists(request):

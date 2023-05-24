@@ -12,7 +12,7 @@ urlpatterns = [
 
     # ----------------------- main form pages -------------------------------
     path('account/<str:section_name>', account, name='account'),
-    path('review/', review, name='review'),
+    path('review/<int:product_id>', review, name='review'),
 
     # ----------------------- information pages -------------------------------
     path('about/', about_info, name='about_info'),

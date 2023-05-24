@@ -16,9 +16,9 @@ function ajaxDeleteRequest(productId, list, row){
 
 function ajaxReviewRequest(productId){
     csrf_token = $('input[name="csrfmiddlewaretoken"]').val();
-    $.post('../startReview/', {csrfmiddlewaretoken: csrf_token, 'productId': productId}, function(data){
-        // window.location.href = data.redirect
-        alert(data.redirect) // + ' ' + window.location.href)
+    $.post('../setReview/', {csrfmiddlewaretoken: csrf_token, 'productId': productId}, function(data){
+        window.location.href = data.redirect
+        // alert(data.redirect) // + ' ' + window.location.href)
     });
 }
 
@@ -81,5 +81,5 @@ function productDelete(button){
 }
 
 function addReview(button){
-    ajaxReviewRequest(button.getAttribute('product-id'));
+    ajaxReviewRequest(document.getElementById(button.getAttribute('product-id')).getAttribute('product-id'));
 }

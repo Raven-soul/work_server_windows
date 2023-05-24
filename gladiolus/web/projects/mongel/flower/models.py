@@ -98,21 +98,6 @@ class Flower(models.Model):
         verbose_name_plural = '1. Товары'
         ordering = ['time_create', 'title']
     
-class Review(models.Model):
-    grade = models.IntegerField(verbose_name='Оценка товара')
-    description = models.TextField(blank=True, verbose_name='Описание отзыва')
-    author =  models.ForeignKey(Occasion, on_delete=models.CASCADE, null=True, verbose_name='Автор отзыва')
-    time_create = models.DateTimeField(auto_now_add=True, verbose_name='Время создания')
-    flower = models.ForeignKey(Flower, on_delete=models.CASCADE, verbose_name='Товар')
-
-    def __str__(self):
-        return str(self.grade)
-    
-    class Meta:
-        verbose_name = '2. Отзыв'
-        verbose_name_plural = '2. Отзывы'
-        ordering = ['time_create', 'grade']
-    
 class Composition(models.Model):
     flower_part_1 = models.CharField(max_length=255, verbose_name='1 часть товара')
     flower_part_2 = models.CharField(max_length=255, verbose_name='2 часть товара')
@@ -318,3 +303,18 @@ class PaymentMethod(models.Model):
         verbose_name = '7. Метод оплаты'
         verbose_name_plural = '7. Методы оплаты'
         ordering = ['id',]
+
+class Review(models.Model):
+    grade = models.IntegerField(verbose_name='Оценка товара')
+    description = models.TextField(blank=True, verbose_name='Описание отзыва')
+    author =  models.ForeignKey(User, on_delete=models.CASCADE, null=True, verbose_name='Автор отзыва')
+    product = models.ForeignKey(Flower, on_delete=models.CASCADE, verbose_name='Товар')
+    time_create = models.DateTimeField(auto_now_add=True, verbose_name='Время создания')
+
+    def __str__(self):
+        return str(self.grade)
+    
+    class Meta:
+        verbose_name = '2. Отзыв'
+        verbose_name_plural = '2. Отзывы'
+        ordering = ['time_create', 'grade']

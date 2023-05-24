@@ -100,10 +100,6 @@ class Order_form (forms.Form):
         return phone
     
 class Review_form (forms.Form):
-    grade = forms.IntegerField(label='Оценка товара')
-    description = forms.CharField(label='Описание отзыва')
-    author
-
-    author = models.CharField(max_length=255, null=True, verbose_name='Автор отзыва')
-    time_create = models.DateTimeField(auto_now_add=True, verbose_name='Время создания')
-    flower = models.ForeignKey(Flower, on_delete=models.CASCADE, verbose_name='Товар')
+    grade = forms.IntegerField(label='Оценка товара', widget=forms.NumberInput(attrs={'class': 'qty-grade','value': '4', 'max': '5', 'min': '0'}))
+    description = forms.CharField(label='Описание отзыва', widget=forms.Textarea(attrs={'class':'description-area w-100', 'cols': 40, 'rows': 5}))
+    user = forms.CharField(label='Автор отзыва', widget=forms.TextInput(attrs={'class': 'readonly-field user-name w-100', 'readonly': ''}))

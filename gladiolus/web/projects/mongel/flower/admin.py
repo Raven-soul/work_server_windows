@@ -27,9 +27,9 @@ class FlowerAdmin(admin.ModelAdmin):
     search_fields = ('title', 'description_content')
 
 class ReviewAdmin(admin.ModelAdmin):
-    list_display = ('id', 'grade', 'description', 'flower', 'author')
+    list_display = ('id', 'grade', 'description', 'product', 'author')
     list_display_links = ('id',)
-    search_fields = ('grade', 'author', 'flower',)
+    search_fields = ('grade', 'author', 'product',)
 
 class CitiesAdmin(admin.ModelAdmin):
     list_display = ('id', 'name')
