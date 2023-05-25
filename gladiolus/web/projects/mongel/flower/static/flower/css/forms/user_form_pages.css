@@ -2,7 +2,7 @@ form div {
     margin-bottom: 10px;
 }
 
-form input {
+form input , .select-area{
     width: 100%;
 }
 

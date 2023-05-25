@@ -51,6 +51,11 @@ class RegistrationPostForm (forms.Form):
             if email == user.email_user_field:
                 raise ValidationError('Пользователь с таким email уже зарегестрирован')
             
+        regexp = re.compile(r'^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$', re.IGNORECASE)
+        textArr = regexp.findall(email)
+        if not textArr:
+            raise ValidationError('введен неверный email')
+        
         return email
     
 class Account_form (forms.Form):
@@ -58,7 +63,7 @@ class Account_form (forms.Form):
     surname_user_field = forms.CharField(required=False, label='Фамилия пользователя')
     email_user_field = forms.CharField(required=True, label='Логин', widget=forms.TextInput(attrs={'class': 'readonly-field', 'readonly': ''}))
     password_user_field = forms.CharField(required=True, label='Пароль', widget=forms.TextInput(attrs={'class': 'readonly-field', 'readonly': ''}))
-    city_user_field = forms.ModelChoiceField(queryset=Cities.objects.all(), label='Город', required=False)
+    city_user_field = forms.ModelChoiceField(queryset=Cities.objects.all(), label='Город', empty_label=None, required=False, widget=forms.Select(attrs={'class': 'select-area'}))
     phone_user_field = forms.CharField(required=False, label='Номер телефона')
 
 class Comment_form (forms.Form):

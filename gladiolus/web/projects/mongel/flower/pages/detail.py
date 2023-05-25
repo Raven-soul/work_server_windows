@@ -9,7 +9,7 @@ class Detail_page(object):
     def __init__(self, prod_id, request):
         self.startBuilder(prod_id, request)
 
-        script_list = [{'script_url':'flower/js/detail.js'}]
+        script_list = [{'script_url':'flower/js/ajax/detail.js'}]
 
         self.header.setData(name = 'content_style_path', value = 'flower/css/content/detail.css')
         self.footer.setData(name = 'script_list', value = script_list)

@@ -80,12 +80,9 @@ class Order_context(object):
 class Login_context(object):
     def __init__(self, request):
         self.commonData = CommonBuild(request)
-
-        script_list = [{'script_url':'flower/js/ajax_try.js'}]
         
         self.commonData.header.setData(name = 'content_style_path', value = 'flower/css/forms/user_form_pages.css')
         self.commonData.header.setData(value = self.commonData.authenticationPages['login'].name)
-        self.commonData.footer.setData(name='script_list', value=script_list)
         
         self.context = {
             'form': '', 

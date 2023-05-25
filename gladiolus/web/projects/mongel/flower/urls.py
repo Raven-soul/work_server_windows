@@ -16,7 +16,7 @@ urlpatterns = [
 
     # ----------------------- information pages -------------------------------
     path('about/', about_info, name='about_info'),
-    path('payment/', payment_info, name='payment_info'),
+    path('payment_info/', payment_info, name='payment_info'),
     path('guarantees/', guarantees_info, name='guarantees_info'),
     path('return/', return_info, name='return_info'),
     path('contacts/', contacts_info, name='contacts_info'),

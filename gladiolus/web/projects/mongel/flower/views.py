@@ -121,6 +121,10 @@ def ordering(request):
                 order.order_city = form.cleaned_data['order_city']
                 order.order_address = form.cleaned_data['order_address']
                 order.save()
+
+            if user.phone_user_field != form.cleaned_data['user_phone']:
+                user.phone_user_field = form.cleaned_data['user_phone']
+                user.save(update_fields=["phone_user_field"])
             return redirect('/payment')
     else:
         form = Order_form(initial={
@@ -141,6 +145,9 @@ def payment(request):
     auth = Authorization(request)
     if auth.isAuthorized() == False:
         return redirect('/account/login')
+    
+    if SelectedProducts.objects.filter(user=auth.getAuthorizedUser()).exists() == False:
+        return redirect('/basket')
 
     data = Payment_main_page( request).getDict()
     return render(request, 'flower/main/payment.html', context=data)
@@ -298,7 +305,7 @@ def account(request, section_name):
             form = Login_form(request.POST)
             if form.is_valid():
                 for user in User.objects.all():
-                    if form.cleaned_data['email_user_field'] == user.name_user_field:
+                    if form.cleaned_data['email_user_field'] == user.email_user_field:
                         if form.cleaned_data['password_user_field'] == user.password_user_field:
                             User.objects.filter(pk=user.pk).update(sessionUNQid=request.COOKIES["sessionid"])
                             return redirect('/account/user')
@@ -371,7 +378,7 @@ def append(request):
         defProd = DefinitionProduct(auth.getAuthorizedUser())
         if request.POST.get('typeRequest', '') == 'addToSelectList':
             defProd.appendToSelectedList(request.POST.get("user_id", "none"))
-            if request.POST.get('isRedirect', ''):
+            if request.POST.get('isRedirect', '') != 'false':
                 JsonData['redirect'] = '/basket'
                 JsonData['isRedirect'] = True
         elif request.POST.get('typeRequest', '') == 'addToFavoriteList':
@@ -448,6 +455,10 @@ def pay(request):
             pay_method = payMethod
         )
         purchProduct.save()
+
+        stockProduct = Flower.objects.get(pk=selectProduct.product.pk)
+        stockProduct.count = stockProduct.count - selectProduct.count
+        stockProduct.save(update_fields=["count"])
 
     productList.delete()
     JsonData = {'redirect': '/'}
