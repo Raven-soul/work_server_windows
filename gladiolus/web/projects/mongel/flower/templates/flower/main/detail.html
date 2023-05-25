@@ -39,7 +39,7 @@
                     </div>
                     <div class="col detail-size-price-block p-0">
                         <div class="row-2">
-                            <div class="col p-0 js_product_size product-size-stile">
+                            <div class="col p-0 detail-text-data-stile">
                                 <i class="fa fa-maximize detail-text-data-icon" aria-hidden="true"></i>
                                 Размер:
                                 <span class="js_product__size-width" title="Ширина">{{ product.size_width }}</span>
@@ -47,11 +47,18 @@
                                 <span class="js_product__size-height" title="Высота">{{ product.size_height }}</span>
                                 см 
                             </div>
-                            <div class="col p-0 js_product-delivery-price product-delivery-price-stile">
+                            <div class="col p-0 detail-text-data-stile">
                                 <i class="fa-solid fa-car detail-text-data-icon"></i>
-                                <span id="js_product-delivery-price__address" data-trans="Доставка по адресу">Доставка в г. <span class="product-delivery-price_city">Краснодар</span>:</span>
+                                <span id="js_product-delivery-price__address" data-trans="Доставка по адресу">Доставка в г. <span class="product-delivery-price_city">{{ user.city_user_field.name }}</span>:</span>
                                 <span class="js_product-delivery-price_tooltip" aria-expanded="false">
                                     <span id="js_product-delivery-price__sum">Бесплатно</span>
+                                </span>
+                            </div>
+                            <div class="col p-0 detail-text-data-stile">
+                                <i class="fa-solid fa-cubes detail-text-data-icon"></i>
+                                <span data="Товара на складе">Товара на складе:</span>
+                                <span>
+                                    <span>{{ product.count }}</span>
                                 </span>
                             </div>
                         </div>

@@ -1,7 +1,7 @@
 from ..models import * #база данных
-from django.shortcuts import render, redirect
 from .common_data.footer import Footer
 from .common_data.header import Header
+from .common_data.authorisation import Authorization
 
 import random
 
@@ -17,6 +17,7 @@ class Detail_page(object):
         self.context = {
             'header': self.header.getData(),
             'footer': self.footer.getData(),
+            'user': self.auth.getAuthorizedUser(),
             'product': self.productItem,
             'reviews': self.reviews,
             'number_reviews': Review.objects.filter(product=self.productItem).count(),
@@ -27,11 +28,10 @@ class Detail_page(object):
     def startBuilder(self, prod_id, request):
         self.header = Header(request)
         self.footer = Footer()
-
         self.productList = Flower.objects.all()
         self.productItem = Flower.objects.get(pk=prod_id)
-
         self.reviews = self.getReviews(self.productItem)
+        self.auth = Authorization(request)
 
     def getDict(self):
         return self.context
