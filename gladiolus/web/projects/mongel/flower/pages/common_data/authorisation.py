@@ -3,7 +3,7 @@ from ...models import * #база данных
 class Authorization():
     def __init__(self, request):
         self.auth_state = False
-        self.cookiesId = request.COOKIES["sessionid"]
+        self.cookiesId = request.COOKIES["csrftoken"]
         self.request = request
 
     def isAuthorized(self):
