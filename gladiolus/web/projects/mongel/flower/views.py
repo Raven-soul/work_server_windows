@@ -39,6 +39,7 @@ class FlowerHome(DataMixin, ListView):
         c_def = self.get_user_data()
         c_def['header'] = Header(self.request).getData()
         c_def['header'] = self.setContextData(c_def['header'], diction=[{'name':'cat_selected', 'value':{'section': 0, 'order': 0}},])
+        c_def['user'] = Authorization(self.request).getAuthorizedUser()
         context = dict(list(context.items()) + list(c_def.items()))
         return context
 
@@ -164,6 +165,7 @@ class FlowerShowCategory(DataMixin, ListView):
         c_def = self.get_user_data()
         c_def['header'] = Header(self.request).getData()
         c_def['header'] = self.setContextData(c_def['header'], diction=[{'name':'cat_selected', 'value':{'section': 1, 'order': self.kwargs['cat_id']}},])
+        c_def['user'] = Authorization(self.request).getAuthorizedUser()
         context = dict(list(context.items()) + list(c_def.items()))
         return context
 
@@ -180,6 +182,7 @@ class FlowerShowOccasion(DataMixin, ListView):
         c_def = self.get_user_data()
         c_def['header'] = Header(self.request).getData()
         c_def['header'] = self.setContextData(c_def['header'], diction=[{'name':'cat_selected', 'value':{'section': 2, 'order': self.kwargs['occ_id']}},])
+        c_def['user'] = Authorization(self.request).getAuthorizedUser()
         context = dict(list(context.items()) + list(c_def.items()))
         return context
 
@@ -196,6 +199,7 @@ class FlowerShowSeason(DataMixin, ListView):
         c_def = self.get_user_data()
         c_def['header'] = Header(self.request).getData()
         c_def['header'] = self.setContextData(c_def['header'], diction=[{'name':'cat_selected', 'value':{'section': 3, 'order': self.kwargs['sea_id']}},])
+        c_def['user'] = Authorization(self.request).getAuthorizedUser()
         context = dict(list(context.items()) + list(c_def.items()))
         return context
 
@@ -212,6 +216,7 @@ class FlowerShowType(DataMixin, ListView):
         c_def = self.get_user_data()
         c_def['header'] = Header(self.request).getData()
         c_def['header'] = self.setContextData(c_def['header'], diction=[{'name':'cat_selected', 'value':{'section': 4, 'order': self.kwargs['typ_id']}},])
+        c_def['user'] = Authorization(self.request).getAuthorizedUser()
         context = dict(list(context.items()) + list(c_def.items()))
         return context
 

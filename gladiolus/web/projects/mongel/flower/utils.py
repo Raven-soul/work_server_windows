@@ -1,6 +1,7 @@
 #------------- Общие страницы сайта --------------------------
 
 from .pages.common_data.footer import Footer
+from .pages.common_data.authorisation import Authorization
 
 #------------------ common data --------------------------
 
@@ -11,6 +12,7 @@ class DataMixin:
 
         self.context['header'] = ''
         self.context['footer'] = footer.getData()
+
         return self.context
     
     def setContextData(self, context_data, diction=[{'name': '', 'value': ''},]):
