@@ -42,7 +42,7 @@
                 <div class="col">
                     <div class="row">
                         {% for method in element.methods %}
-                            <button class="data-cell-link" onclick="pay(this)" method-pay"{{ method.name }}">
+                            <button class="data-cell-link" onclick="pay(this)" method-pay="{{ method.name }}">
                                 <div class="col-auto data-cell">
                                     <img src="{{ method.photo.url }}" alt="{{ method.name }}">
                                     <div class="cell-name">{{ method.name }}</div>

@@ -307,7 +307,7 @@ def account(request, section_name):
                 for user in User.objects.all():
                     if form.cleaned_data['email_user_field'] == user.email_user_field:
                         if form.cleaned_data['password_user_field'] == user.password_user_field:
-                            User.objects.filter(pk=user.pk).update(sessionUNQid=request.COOKIES["sessionid"])
+                            User.objects.filter(pk=user.pk).update(sessionUNQid=request.COOKIES["csrftoken"])
                             return redirect('/account/user')
         else:
             form = Login_form()
@@ -337,6 +337,9 @@ def account(request, section_name):
 
     #------------------------------------------------------------------------------- logout
     elif section_name == 'logout':
+        if auth.isAuthorized() == False:
+            return redirect('/account/login')
+        
         auth.logout()
         return redirect('/account/login')
     else:
