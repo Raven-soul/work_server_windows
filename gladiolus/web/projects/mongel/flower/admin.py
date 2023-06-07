@@ -42,7 +42,7 @@ class InfoPagesAdmin(admin.ModelAdmin):
     search_fields = ('id', 'name')
 
 class UserAdmin(admin.ModelAdmin):
-    list_display = ('id', 'name_user_field', 'email_user_field', 'password_user_field')
+    list_display = ('id', 'name_user_field', 'sessionUNQid', 'email_user_field', 'password_user_field')
     list_display_links = ('id', 'name_user_field')
     search_fields = ('id', 'name_user_field')
 

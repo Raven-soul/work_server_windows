@@ -17,7 +17,7 @@ class Detail_page(object):
         self.context = {
             'header': self.header.getData(),
             'footer': self.footer.getData(),
-            'user': self.auth.getAuthorizedUser(),
+            'user': self.user,
             'product': self.productItem,
             'reviews': self.reviews,
             'number_reviews': Review.objects.filter(product=self.productItem).count(),
@@ -31,7 +31,10 @@ class Detail_page(object):
         self.productList = Flower.objects.all()
         self.productItem = Flower.objects.get(pk=prod_id)
         self.reviews = self.getReviews(self.productItem)
-        self.auth = Authorization(request)
+        if Authorization(request).isAuthorized():
+            self.user = Authorization(request).getAuthorizedUser()
+        else:
+            self.user = None
 
     def getDict(self):
         return self.context
