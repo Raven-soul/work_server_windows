@@ -57,11 +57,11 @@ class AccountlistsPages(object):
         
     def getButton(self, code):
         if code == 0:
-            return 'Cancel'
+            return 'Отмена'
         elif code == 1:
             return 'none'
         elif code == 2:
-            return 'Review'
+            return 'Отзыв'
         else:
             return ''
         

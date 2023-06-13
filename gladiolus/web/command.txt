@@ -36,3 +36,7 @@ https://stackoverflow.com/questions/33549772/django-migration-no-migrations-to-a
 
 python manage.py makemigrations
 python manage.py migrate
+
+& g:/work_server_windows/venv/Scripts/Activate.ps1
+cd gladiolus/web/projects/mongel
+python manage.py runserver

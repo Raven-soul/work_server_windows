@@ -45,7 +45,10 @@ class DefinitionProduct():
         if productId != 'none': 
             product = Flower.objects.get(pk=productId)
             if self.containst(PurchasedProducts.objects.filter(user=self.user).exists(), PurchasedProducts.objects.filter(user=self.user), product):
-                PurchasedProducts.objects.get(product=product, user= self.user).delete()
+                costProduct = PurchasedProducts.objects.get(product=product, user= self.user)
+                product.count = product.count + costProduct.count
+                product.save(update_fields=["count"])
+                costProduct.delete()
     
     #--------------------------------- LikedList ------------------------------------------------ 
 
