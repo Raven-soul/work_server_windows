@@ -1,3 +1,10 @@
+//
+// accountList.js
+// development of an online flower shop
+//
+// Created by Artem Kozyrev on 20.04.2023.
+//
+
 function collapsElement(elem, main_id){
     main_elem = document.getElementById(main_id);
 

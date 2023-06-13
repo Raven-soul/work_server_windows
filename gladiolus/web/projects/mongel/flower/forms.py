@@ -1,3 +1,10 @@
+#
+#  forms.py
+#  development of an online flower shop
+#
+#  Created by Artem Kozyrev on 28.04.2023.
+#
+
 from django import forms
 from .models import *
 import re

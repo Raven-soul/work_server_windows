@@ -1,3 +1,10 @@
+#
+#  utils.py
+#  development of an online flower shop
+#
+#  Created by Artem Kozyrev on 26.04.2023.
+#
+
 #------------- Общие страницы сайта --------------------------
 
 from .pages.common_data.footer import Footer

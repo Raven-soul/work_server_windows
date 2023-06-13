@@ -9,6 +9,12 @@ https://docs.djangoproject.com/en/3.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
+#
+#  settings.py
+#  development of an online flower shop
+#
+#  Created by Artem Kozyrev on 19.04.2023.
+#
 
 import os
 from pathlib import Path

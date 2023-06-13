@@ -1,5 +1,11 @@
+#
+#  info_pages.py
+#  development of an online flower shop
+#
+#  Created by Artem Kozyrev on 19.04.2023.
+#
+
 from ...models import * #база данных
-from django.shortcuts import render, redirect
 from ..common_data.footer import Footer
 from ..common_data.header import Header
 

@@ -1,3 +1,10 @@
+//
+// header.js
+// development of an online flower shop
+//
+// Created by Artem Kozyrev on 22.05.2023.
+//
+
 function ajaxSetSityRequest(cityId, showArea, replaceableArea){
     csrf_token = $('input[name="csrfmiddlewaretoken"]').val();
     $.post('../setSity/', {csrfmiddlewaretoken: csrf_token, 'cityId': cityId}, function(data){

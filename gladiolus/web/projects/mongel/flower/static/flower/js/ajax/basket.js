@@ -1,3 +1,10 @@
+//
+// basket.js
+// development of an online flower shop
+//
+// Created by Artem Kozyrev on 23.05.2023.
+//
+
 function ajaxGetSityRequest(showArea){
     csrf_token = $('input[name="csrfmiddlewaretoken"]').val();
     $.post('../getSity/', {csrfmiddlewaretoken: csrf_token}, function(data){

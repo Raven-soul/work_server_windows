@@ -1,5 +1,12 @@
 #!/usr/bin/env python
 """Django's command-line utility for administrative tasks."""
+#
+#  manage.py
+#  development of an online flower shop
+#
+#  Created by Artem Kozyrev on 19.04.2023.
+#
+
 import os
 import sys
 

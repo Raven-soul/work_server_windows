@@ -1,3 +1,10 @@
+#
+#  city_stroke.py
+#  development of an online flower shop
+#
+#  Created by Artem Kozyrev on 22.05.2023.
+#
+
 from ...models import * #база данных
 from ..common_data.header import Header
 from ..common_data.authorisation import Authorization

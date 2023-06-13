@@ -1,3 +1,10 @@
+//
+// accountList.js
+// development of an online flower shop
+//
+// Created by Artem Kozyrev on 17.05.2023.
+//
+
 function ajaxReplaceRequest(typeRequest, majorArea, replaceableArea){
     csrf_token = $('input[name="csrfmiddlewaretoken"]').val();
     $.post('../accountLists/', {csrfmiddlewaretoken: csrf_token, 'typeRequest': typeRequest}, function(data){

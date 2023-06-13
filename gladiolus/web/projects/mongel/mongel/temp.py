@@ -1,3 +1,10 @@
+#
+#  temp.py
+#  development of an online flower shop
+#
+#  Created by Artem Kozyrev on 19.04.2023.
+#
+
 import os
 from pathlib import Path
 

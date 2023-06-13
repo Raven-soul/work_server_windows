@@ -1,3 +1,10 @@
+#
+#  definitionProduct.py
+#  development of an online flower shop
+#
+#  Created by Artem Kozyrev on 15.05.2023.
+#
+
 from ...models import * #база данных
 
 class DefinitionProduct():
