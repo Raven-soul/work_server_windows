@@ -10,7 +10,13 @@ from ...models import * #база данных
 class Authorization():
     def __init__(self, request):
         self.auth_state = False
-        self.cookiesId = request.COOKIES["csrftoken"]
+        try:
+            self.cookiesId = request.COOKIES["csrftoken"]
+        except:
+            try:
+                self.cookiesId = request.COOKIES["sessionid"]
+            except:
+                self.cookiesId = "error"
         self.request = request
 
     def isAuthorized(self):

@@ -55,6 +55,11 @@ class FlowerHome(DataMixin, ListView):
         context = dict(list(context.items()) + list(c_def.items()))
         return context
 
+def index(request):
+    if not request.session.session_key:
+        request.session.create()
+    return redirect('/home')
+
 def product_details(request, prod_id):
     if not request.session.session_key:
         request.session.create()

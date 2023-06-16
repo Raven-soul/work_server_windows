@@ -103,14 +103,14 @@ admin.site.register(Review, ReviewAdmin)
 admin.site.register(Composition)
 admin.site.register(Wrapping) #Cities
 admin.site.register(Cities, CitiesAdmin)
-admin.site.register(InfoPages, InfoPagesAdmin)
-admin.site.register(InfoClass)
+# admin.site.register(InfoPages, InfoPagesAdmin) ## Информационные страницы
+# admin.site.register(InfoClass) ## классы информационных страниц
 admin.site.register(User, UserAdmin)
 admin.site.register(SelectedProducts, SelectedProductsAdmin)
 admin.site.register(PurchasedProducts, PurchasedProductsAdmin)
 admin.site.register(LikedProducts, LikedProductsAdmin)
-admin.site.register(UserPages, UserPagesAdmin) 
-admin.site.register(OrderStatus, OrderStatusAdmin)
+# admin.site.register(UserPages, UserPagesAdmin) ## Варианты пользовательских страниц
+# admin.site.register(OrderStatus, OrderStatusAdmin) ## Варианты статусов заказов
 admin.site.register(Order, OrderAdmin)
-admin.site.register(PaymentMethodSection, PaymentMethodSectionAdmin)
+# admin.site.register(PaymentMethodSection, PaymentMethodSectionAdmin) ## Секции методов оплаты
 admin.site.register(PaymentMethod, PaymentMethodAdmin)

@@ -1,0 +1,7 @@
+G:\work_server_windows
+
+venv\Scripts\Activate.bat
+
+cd gladiolus/web/projects/mongel
+
+python manage.py runserver

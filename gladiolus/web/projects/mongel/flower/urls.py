@@ -11,7 +11,8 @@ from .views import *
 
 urlpatterns = [
     # ----------------------- main pages -------------------------------
-    path('', FlowerHome.as_view(), name='home'),
+    path('', index, name='index'),
+    path('home/', FlowerHome.as_view(), name='home'),
     path('product/<int:prod_id>', product_details, name='product'),
     path('basket/', basket, name='basket'),
     path('ordering/', ordering, name='ordering'),
